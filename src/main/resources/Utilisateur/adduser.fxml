@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="700.0" prefWidth="1127.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.Adduser">
+   <children>
+      <AnchorPane layoutX="18.0" layoutY="18.0" prefHeight="664.0" prefWidth="1087.0" style="-fx-background-color: #ffffff; -fx-background-radius: 30; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 5);">
+         <children>
+            <TextField fx:id="emailUser" layoutX="36.0" layoutY="237.0" prefHeight="38.0" prefWidth="494.0" promptText="Email" style="-fx-background-radius: 10;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <Button layoutX="564.0" layoutY="593.0" mnemonicParsing="false" onAction="#SinscrireUser" prefHeight="46.0" prefWidth="494.0" style="-fx-background-color: #00b8bb; -fx-background-radius: 10;" text="S'inscrire" textFill="WHITE">
+               <font>
+                  <Font name="Bell MT" size="20.0" />
+               </font>
+            </Button>
+            <TextField fx:id="adresseUser" layoutX="36.0" layoutY="469.0" prefHeight="38.0" prefWidth="494.0" promptText="Adresse" style="-fx-background-radius: 10;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="nomUser" layoutX="36.0" layoutY="115.0" prefHeight="37.0" prefWidth="494.0" promptText="Nom" style="-fx-background-radius: 10;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="prenomUser" layoutX="36.0" layoutY="177.0" prefHeight="38.0" prefWidth="494.0" promptText="Prenom" style="-fx-background-radius: 10;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="telephoneUser" layoutX="37.0" layoutY="526.0" prefHeight="38.0" prefWidth="494.0" promptText="Telephone" style="-fx-background-radius: 10;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="captchaUser" layoutX="571.0" layoutY="461.0" prefHeight="38.0" prefWidth="487.0" promptText="Entrez le code CAPTCHA" style="-fx-background-radius: 10;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <Button layoutX="564.0" layoutY="526.0" mnemonicParsing="false" onAction="#imageUser" prefHeight="46.0" prefWidth="494.0" style="-fx-background-color: #00b8bb; -fx-background-radius: 10;" text="Choisir une image" textFill="WHITE">
+               <font>
+                  <Font name="Bell MT" size="20.0" />
+               </font>
+            </Button>
+            <AnchorPane layoutX="560.0" layoutY="228.0" prefHeight="165.0" prefWidth="502.0">
+               <children>
+                  <TextField fx:id="specialiteUser" layoutX="7.0" layoutY="48.0" prefHeight="38.0" prefWidth="494.0" promptText="Specialite" style="-fx-background-radius: 10;">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+                  <TextField fx:id="hopitaleUser" layoutX="7.0" layoutY="105.0" prefHeight="38.0" prefWidth="494.0" promptText="Hopital" style="-fx-background-radius: 10;">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+                  <Text layoutX="7.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Informations Médecin">
+                     <font>
+                        <Font name="Bell MT" size="20.0" />
+                     </font>
+                  </Text>
+                  <Label fx:id="validationSpecialite" layoutX="10.0" layoutY="87.0" prefHeight="18.0" prefWidth="487.0" textFill="RED" />
+                  <Label fx:id="validationHopital" layoutX="10.0" layoutY="143.0" prefHeight="18.0" prefWidth="487.0" textFill="RED" />
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="564.0" layoutY="134.0" prefHeight="98.0" prefWidth="494.0">
+               <children>
+                  <TextField fx:id="antecedentsUser" layoutY="35.0" prefHeight="38.0" prefWidth="494.0" promptText="Antecedents medicaux" style="-fx-background-radius: 10;">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+                  <Text layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Informations Patient">
+                     <font>
+                        <Font name="Bell MT" size="20.0" />
+                     </font>
+                  </Text>
+                  <Label fx:id="validationAntecedents" layoutX="1.0" layoutY="75.0" prefHeight="18.0" prefWidth="487.0" textFill="RED" />
+               </children>
+            </AnchorPane>
+            <ImageView fitHeight="67.0" fitWidth="140.0" layoutX="933.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/logo.jpg" />
+               </image>
+            </ImageView>
+            <Text fill="#00b8bb" layoutX="177.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Veuillez saisir vos informations pour créer un compte" wrappingWidth="733.253173828125">
+               <font>
+                  <Font name="Bell MT" size="33.0" />
+               </font>
+            </Text>
+            <ComboBox fx:id="roleUser" layoutX="36.0" layoutY="586.0" prefHeight="38.0" prefWidth="494.0" promptText="Role" style="-fx-background-radius: 10;" />
+            <ComboBox fx:id="sexeUser" layoutX="36.0" layoutY="414.0" prefHeight="38.0" prefWidth="494.0" promptText="Sexe" style="-fx-background-radius: 10;" />
+            <Label fx:id="validationNom" layoutX="39.0" layoutY="152.0" prefHeight="18.0" prefWidth="487.0" textFill="RED" />
+            <Label fx:id="validationPrenom" layoutX="40.0" layoutY="215.0" prefHeight="18.0" prefWidth="487.0" textFill="RED" />
+            <Label fx:id="validationEmail" layoutX="36.0" layoutY="277.0" prefHeight="18.0" prefWidth="494.0" textFill="RED" />
+            <Label fx:id="validationMotdepasse" layoutX="40.0" layoutY="338.0" prefHeight="18.0" prefWidth="487.0" textFill="RED" />
+            <Label fx:id="validationConfirmation" layoutX="38.0" layoutY="396.0" prefHeight="18.0" prefWidth="487.0" textFill="RED" />
+            <Label fx:id="validationAdresse" layoutX="36.0" layoutY="507.0" prefHeight="18.0" prefWidth="494.0" textFill="RED" />
+            <Label fx:id="validationTelephone" layoutX="36.0" layoutY="564.0" prefHeight="18.0" prefWidth="494.0" textFill="RED" />
+            <Label fx:id="validationCaptcha" layoutX="567.0" layoutY="498.0" prefHeight="18.0" prefWidth="487.0" textFill="RED" />
+            <PasswordField fx:id="motdepasseUser" layoutX="37.0" layoutY="299.0" prefHeight="38.0" prefWidth="494.0" promptText="Mot de passe" style="-fx-background-radius: 10;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </PasswordField>
+            <PasswordField fx:id="confirmationUser" layoutX="37.0" layoutY="356.0" prefHeight="38.0" prefWidth="494.0" promptText="Mot de passe confirmation" style="-fx-background-radius: 10;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </PasswordField>
+            <Label fx:id="validationImage" layoutX="566.0" layoutY="573.0" prefHeight="18.0" prefWidth="487.0" textFill="#1aac15" />
+            <Label fx:id="validationSexe" layoutX="40.0" layoutY="452.0" prefHeight="18.0" prefWidth="487.0" textFill="RED" />
+            <Label fx:id="validationRole" layoutX="40.0" layoutY="624.0" prefHeight="18.0" prefWidth="487.0" textFill="RED" />
+            <ImageView fx:id="captchaImage" fitHeight="53.0" fitWidth="170.0" layoutX="606.0" layoutY="396.0" pickOnBounds="true" preserveRatio="true" />
+            <Button layoutX="858.0" layoutY="407.0" mnemonicParsing="false" onAction="#refreshCaptcha" prefHeight="30.0" prefWidth="83.0" style="-fx-background-color: #00b8bb;" text="Rafraîchir" textFill="WHITE">
+               <font>
+                  <Font name="Bell MT" size="14.0" />
+               </font></Button>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="701.0" prefWidth="582.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.login">
+   <children>
+      <AnchorPane layoutX="14.0" layoutY="9.0" prefHeight="682.0" prefWidth="555.0" style="-fx-background-color: #ffffff; -fx-background-radius: 30; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 5);">
+         <children>
+            <ImageView fitHeight="198.0" fitWidth="386.0" layoutX="84.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/logo.jpg" />
+               </image>
+            </ImageView>
+            <TextField fx:id="emailLogin" layoutX="34.0" layoutY="231.0" prefHeight="46.0" prefWidth="493.0" promptText="Email" style="-fx-background-radius: 10;">
+               <font>
+                  <Font size="14.0" />
+               </font></TextField>
+            <Button layoutX="34.0" layoutY="375.0" mnemonicParsing="false" onAction="#SeConnecter" prefHeight="46.0" prefWidth="494.0" style="-fx-background-color: #00b8bb; -fx-background-radius: 10;" text="Se Connecter" textFill="WHITE">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Button>
+            <Button layoutX="34.0" layoutY="428.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="486.0" style="-fx-background-color: #ffffff;" text="Mot de passe oublié?" textFill="#00b8bb">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Button>
+            <Button layoutX="34.0" layoutY="455.0" mnemonicParsing="false" onAction="#Sinscrire" prefHeight="11.0" prefWidth="486.0" style="-fx-background-color: #ffffff;" text="S'inscrire" textFill="#00b8bb">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Button>
+            <Button layoutX="34.0" layoutY="597.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="494.0" style="-fx-background-color: #000000; -fx-background-radius: 10;" text="Se connecter avec GitHub" textFill="#fffefe" />
+            <Button layoutX="33.0" layoutY="529.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="494.0" style="-fx-background-color: #ffffff; -fx-border-color: #000000;" text="Se connecter avec Google" />
+            <ImageView fitHeight="40.0" fitWidth="45.0" layoutX="150.0" layoutY="532.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/3.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="40.0" fitWidth="45.0" layoutX="150.0" layoutY="600.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/9.jpg" />
+               </image>
+            </ImageView>
+            <Line endX="111.79997253417969" layoutX="137.0" layoutY="496.0" startX="-100.0" stroke="#cfcccc" />
+            <Line endX="111.79997253417969" layoutX="406.0" layoutY="495.0" startX="-100.0" stroke="#cfcccc" />
+            <Text layoutX="266.0" layoutY="499.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ou">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <PasswordField fx:id="motdepasseLogin" layoutX="33.0" layoutY="304.0" prefHeight="46.0" prefWidth="494.0" promptText="Mot de passe" style="-fx-background-radius: 10;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </PasswordField>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="698.0" prefWidth="1269.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.Home">
+   <children>
+      <ImageView fx:id="imageProfil" fitHeight="700.0" fitWidth="1524.0" layoutY="106.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/1.jpg" />
+         </image>
+      </ImageView>
+      <AnchorPane prefHeight="105.0" prefWidth="1524.0" style="-fx-background-color: #080c71;">
+         <children>
+            <Label fx:id="userConnecteH" layoutX="1166.0" layoutY="26.0" prefHeight="31.0" prefWidth="241.0" textFill="WHITE">
+               <font>
+                  <Font name="Bodoni MT" size="25.0" />
+               </font>
+            </Label>
+            <Button layoutX="309.0" layoutY="29.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="123.0" style="-fx-background-color: #00b8bb;" text="SERVICES" textFill="WHITE">
+               <font>
+                  <Font name="Bodoni MT" size="18.0" />
+               </font>
+            </Button>
+            <Button layoutX="445.0" layoutY="29.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="138.0" style="-fx-background-color: #00b8bb;" text="DIAGNOSTIC" textFill="WHITE">
+               <font>
+                  <Font name="Bell MT" size="18.0" />
+               </font>
+            </Button>
+            <Button layoutX="596.0" layoutY="29.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="154.0" style="-fx-background-color: #00b8bb;" text="MEDICAMENT" textFill="WHITE">
+               <font>
+                  <Font name="Bell MT" size="18.0" />
+               </font>
+            </Button>
+            <Button layoutX="763.0" layoutY="29.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="138.0" style="-fx-background-color: #00b8bb;" text="COMPAGNE" textFill="WHITE">
+               <font>
+                  <Font name="Bell MT" size="18.0" />
+               </font>
+            </Button>
+            <Button layoutX="911.0" layoutY="29.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="186.0" style="-fx-background-color: #00b8bb;" text="SUBMIT A TICKET" textFill="WHITE">
+               <font>
+                  <Font name="Bell MT" size="18.0" />
+               </font>
+            </Button>
+            <Button alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="1414.0" layoutY="6.0" mnemonicParsing="false" onAction="#monProfilH" prefHeight="94.0" prefWidth="103.0" style="-fx-background-color: #080c71;" textFill="WHITE">
+               <font>
+                  <Font name="Bell MT" size="18.0" />
+               </font>
+            </Button>
+            <ImageView fx:id="imageProfil" cache="true" depthTest="DISABLE" fitHeight="75.0" fitWidth="67.0" layoutX="1421.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/user.jpg" />
+               </image>
+            </ImageView>
+            <Button alignment="CENTER" contentDisplay="CENTER" layoutX="1203.0" layoutY="60.0" mnemonicParsing="false" onAction="#logOut" prefHeight="18.0" prefWidth="163.0" style="-fx-background-color: #080c71;" text="Se déconnecter" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Bell MT" size="19.0" />
+               </font>
+            </Button>
+            <Button layoutX="8.0" layoutY="11.0" mnemonicParsing="false" onAction="#refreshPage" prefHeight="82.0" prefWidth="282.0" style="-fx-background-color: #080c71;" />
+            <ImageView fitHeight="82.0" fitWidth="200.0" layoutX="31.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/logohome.jpg" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <Button layoutX="539.0" layoutY="486.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="411.0" style="-fx-background-color: #00b8bb;" text="PARLER AU CHATBOOT" textFill="WHITE">
+         <font>
+            <Font name="Bodoni MT" size="20.0" />
+         </font>
+      </Button>
+      <AnchorPane fx:id="contentArea" layoutX="23.0" layoutY="127.0" prefHeight="181.0" prefWidth="228.0" />
+   </children>
+</AnchorPane>
