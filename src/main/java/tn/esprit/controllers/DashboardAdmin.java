@@ -155,4 +155,16 @@ public class DashboardAdmin {
             loadDefaultImage();
         }
     }
+    @FXML
+    void showListPost(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Compagne/ListPost.fxml"));
+            Parent root = loader.load();
+            // Remplacer le contenu actuel par celui de la liste des utilisateurs
+            contentArea.getChildren().clear();  // Supprimer tout contenu existant dans contentArea
+            contentArea.getChildren().add(root);  // Ajouter la nouvelle vue (Liste des utilisateurs)
+        } catch (IOException e) {
+            e.printStackTrace();  // Afficher une erreur si le chargement échoue
+        }
+    }
 }

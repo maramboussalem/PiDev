@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="617.0" prefWidth="881.0" style="-fx-background-color: #fff;" stylesheets="@styles/listPost.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.ListPost">
+    <children>
+        <StackPane layoutX="34.0" prefHeight="576.0" prefWidth="1018.0" style="-fx-background-color: #fff;">
+            <children>
+                <Pane fx:id="pnlOverview" prefHeight="576.0" prefWidth="1071.0">
+                    <children>
+                        <TextField layoutX="774.0" layoutY="47.0" prefHeight="27.0" prefWidth="183.0" promptText="search" style="-fx-background-color: #fff; -fx-border-color: #02030A; -fx-border-radius: 2em;" />
+                        <Label layoutX="57.0" layoutY="25.0" text="Postes" textFill="#02030a">
+                            <font>
+                                <Font size="24.0" />
+                            </font>
+                        </Label>
+                        <HBox alignment="CENTER_LEFT" layoutX="41.0" layoutY="109.0" prefHeight="42.0" prefWidth="824.0" spacing="80.0" style="-fx-background-color: #02030A;">
+                            <children>
+                                <Label text="id" textFill="#e7e5e5">
+                                    <HBox.margin>
+                                        <Insets left="50.0" />
+                                    </HBox.margin>
+                                </Label>
+                                <Label text="Titre" textFill="#e7e5e5">
+                                    <HBox.margin>
+                                        <Insets />
+                                    </HBox.margin>
+                                </Label>
+                                <Label text="Contenu" textFill="#e7e5e5">
+                                    <HBox.margin>
+                                        <Insets />
+                                    </HBox.margin>
+                                </Label>
+                                <Label text="Date" textFill="#e7e5e5">
+                                    <HBox.margin>
+                                        <Insets />
+                                    </HBox.margin>
+                                </Label>
+                                <Label text="Vues" textFill="#e7e5e5">
+                                    <HBox.margin>
+                                        <Insets />
+                                    </HBox.margin>
+                                </Label>
+                                <Label text="Image" textFill="#e7e5e5" />
+                            </children>
+                        </HBox>
+                        <ScrollPane layoutX="41.0" layoutY="172.0" prefHeight="320.0" prefWidth="824.0">
+                            <content>
+                                <VBox fx:id="pnItems" prefHeight="318.0" prefWidth="848.0" spacing="5.0" style="-fx-background-color: #02030A;">
+                                    <padding>
+                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                    </padding>
+                                </VBox>
+                            </content>
+                        </ScrollPane>
+                        <ImageView fitHeight="17.0" fitWidth="16.0" layoutX="933.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@images/icons8_Search_52px.png" />
+                            </image>
+                        </ImageView>
+                    </children>
+                </Pane>
+            </children>
+        </StackPane>
+    </children>
+</AnchorPane>
