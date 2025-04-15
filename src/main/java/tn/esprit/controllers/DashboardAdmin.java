@@ -34,7 +34,6 @@ public class DashboardAdmin {
         }
     }
 
-    // Méthode pour définir l'utilisateur connecté
     public void setUtilisateurConnecte(Utilisateur utilisateur) {
         this.utilisateurConnecte = utilisateur;
         System.out.println("Utilisateur connecté : " + utilisateur); // Vérification
@@ -69,7 +68,7 @@ public class DashboardAdmin {
             loadDefaultImage();
         }
     }
-    // Méthode pour charger l'image par défaut
+
     private void loadDefaultImage() {
         try {
             // Charger l'image par défaut depuis les ressources
@@ -94,7 +93,6 @@ public class DashboardAdmin {
                 return;
             }
 
-            // Vérifier les valeurs des attributs avant d'ouvrir la fenêtre
             System.out.println("Utilisateur connecté : " + utilisateurConnecte);
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Utilisateur/DetailsUser.fxml"));
@@ -125,26 +123,22 @@ public class DashboardAdmin {
     @FXML
     void logOut(ActionEvent event) {
         try {
-            // Fermer la fenêtre actuelle
             Stage currentStage = (Stage) contentArea.getScene().getWindow();
             currentStage.close();
 
-            // Charger la page de connexion (login.fxml)
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Utilisateur/login.fxml"));
             Parent root = loader.load();
 
-            // Créer une nouvelle scène et une nouvelle fenêtre
             Stage stage = new Stage();
             stage.setTitle("Connexion");
             stage.setScene(new Scene(root));
-
-            // Afficher la nouvelle fenêtre
             stage.show();
 
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
     @FXML
     void refreshPage(ActionEvent event) {
         if (utilisateurConnecte != null) {

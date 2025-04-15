@@ -12,7 +12,7 @@ public class Main {
         ServiceUtilisateur serviceUtilisateur = new ServiceUtilisateur();
 
         try {
-            // ✅ Ajouter un utilisateur
+            // Ajouter un utilisateur
             Utilisateur newUser = new Utilisateur();
             newUser.setNom("Dupont");
             newUser.setPrenom("Jean");
@@ -20,8 +20,8 @@ public class Main {
             newUser.setSexe("M");
             newUser.setAdresse("123 Rue de Paris");
             newUser.setTelephone("0123456789");
-            newUser.setRole("patient");  // ✅ Role unique
-            newUser.setRoles(Arrays.asList("patient"));  // ✅ Liste des rôles au format JSON
+            newUser.setRole("patient");
+            newUser.setRoles(Arrays.asList("patient"));
             newUser.setAntecedents_medicaux("Aucun");
             newUser.setSpecialite(null);
             newUser.setHopital(null);
@@ -33,26 +33,26 @@ public class Main {
             newUser.setIs_active(true);
 
             serviceUtilisateur.ajouter(newUser);
-            System.out.println("✅ Utilisateur ajouté avec succès !");
+            System.out.println(" Utilisateur ajouté avec succès !");
 
-            // ✅ Modifier un utilisateur
+            // Modifier un utilisateur
             newUser.setNom("Martin");  // Modification du nom
             serviceUtilisateur.modifier(newUser);
-            System.out.println("✅ Utilisateur modifié avec succès !");
+            System.out.println(" Utilisateur modifié avec succès !");
 
-            // ✅ Afficher tous les utilisateurs
+            // Afficher tous les utilisateurs
             List<Utilisateur> utilisateurs = serviceUtilisateur.afficher();
-            System.out.println("✅ Liste des utilisateurs :");
+            System.out.println(" Liste des utilisateurs :");
             for (Utilisateur u : utilisateurs) {
                 System.out.println(u);
             }
 
-            // ✅ Supprimer un utilisateur
-           /* if (!utilisateurs.isEmpty()) {
+            //  Supprimer un utilisateur
+            if (!utilisateurs.isEmpty()) {
                 int idToDelete = utilisateurs.get(0).getId();
                 serviceUtilisateur.supprimer(idToDelete);
-                System.out.println("✅ Utilisateur supprimé avec succès !");
-            }*/
+                System.out.println(" Utilisateur supprimé avec succès !");
+            }
 
         } catch (SQLException e) {
             e.printStackTrace();

@@ -136,13 +136,11 @@ public class Adduser implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         sexeUser.setItems(FXCollections.observableArrayList("Femme", "Homme"));
         roleUser.setItems(FXCollections.observableArrayList("patient", "medecin"));
-        // Gérer le rôle sélectionné dès l'initialisation
         roleUser.setOnAction(e -> manageRoleFields());
-        // Gérer les champs au cas où il y aurait un rôle sélectionné au début
         manageRoleFields();
         generateCaptcha();
     }
-    // Méthode pour générer un CAPTCHA
+
     private void generateCaptcha() {
         try {
             // Générer un texte aléatoire
@@ -156,7 +154,7 @@ public class Adduser implements Initializable {
             g2d.setColor(java.awt.Color.WHITE);
             g2d.fillRect(0, 0, 150, 50);
 
-            // Ajouter du bruit
+            // Ajouter du bruit :points aléatoires
             Random random = new Random();
             for (int i = 0; i < 50; i++) {
                 int x = random.nextInt(150);
@@ -206,13 +204,13 @@ public class Adduser implements Initializable {
         return sb.toString();
     }
 
-    // Action pour rafraîchir le CAPTCHA
     @FXML
     private void refreshCaptcha(ActionEvent event) {
         generateCaptcha();
         captchaUser.clear();
         validationCaptcha.setText("");
     }
+
     private void manageRoleFields() {
         String selectedRole = roleUser.getValue();
         if ("patient".equals(selectedRole)) {
@@ -220,7 +218,7 @@ public class Adduser implements Initializable {
             hopitaleUser.setDisable(true);
             specialiteUser.setDisable(true);
             antecedentsUser.setPromptText("Entrez vos antécédents médicaux");
-            // Informer l'utilisateur
+
             validationAntecedents.setText("Champs disponibles pour le patient");
             validationHopital.setText("Champ désactivé pour le patient");
             validationSpecialite.setText("Champ désactivé pour le patient");

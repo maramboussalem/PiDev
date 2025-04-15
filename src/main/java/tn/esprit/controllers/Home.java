@@ -28,9 +28,6 @@ public class Home {
 
     private Utilisateur utilisateurConnecte;
 
-
-
-
     @FXML
     public void initialize() {
         if (utilisateurConnecte != null) {
@@ -46,7 +43,7 @@ public class Home {
             loadProfileImage();
         }
     }
-    // Méthode pour charger l'image de profil
+
     private void loadProfileImage() {
         if (utilisateurConnecte != null && utilisateurConnecte.getImg_url() != null && !utilisateurConnecte.getImg_url().isEmpty() && !"null".equals(utilisateurConnecte.getImg_url()) && !"default.png".equals(utilisateurConnecte.getImg_url())) {
             try {
@@ -72,7 +69,6 @@ public class Home {
         }
     }
 
-    // Méthode pour charger l'image par défaut
     private void loadDefaultImage() {
         try {
             // Charger l'image par défaut depuis les ressources
@@ -89,6 +85,7 @@ public class Home {
             imageProfil.setImage(null);
         }
     }
+
     @FXML
     void monProfilH(ActionEvent event) {
         try {
@@ -100,11 +97,9 @@ public class Home {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Utilisateur/DetailsUser.fxml"));
             Parent root = loader.load();
 
-            // Récupérer le contrôleur et passer l'utilisateur connecté
             DetailsUser controller = loader.getController();
             controller.setUtilisateur(utilisateurConnecte);
 
-            // Création d'une nouvelle fenêtre (Stage)
             Stage stage = new Stage();
             stage.setTitle("Détails de l'utilisateur");
             stage.setScene(new Scene(root));
@@ -117,26 +112,23 @@ public class Home {
     @FXML
     void logOut(ActionEvent event) {
         try {
-            // Fermer la fenêtre actuelle
             Stage currentStage = (Stage) contentArea.getScene().getWindow();
             currentStage.close();
 
-            // Charger la page de connexion (login.fxml)
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Utilisateur/login.fxml"));
             Parent root = loader.load();
 
-            // Créer une nouvelle scène et une nouvelle fenêtre
             Stage stage = new Stage();
             stage.setTitle("Connexion");
             stage.setScene(new Scene(root));
 
-            // Afficher la nouvelle fenêtre
             stage.show();
 
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
     @FXML
     void refreshPage(ActionEvent event) {
         if (utilisateurConnecte != null) {

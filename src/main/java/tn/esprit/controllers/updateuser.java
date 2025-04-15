@@ -102,14 +102,13 @@ public class updateuser implements Initializable {
     @FXML
     private Label validationImageM;
 
-    // Ajouter ces nouveaux champs
     @FXML
     private ImageView captchaImageM;
 
     @FXML
     private Label validationCaptchaM;
 
-    private String captchaText; // P
+    private String captchaText;
 
     private Utilisateur utilisateur;
     private ServiceUtilisateur serviceUtilisateur = new ServiceUtilisateur();
@@ -125,22 +124,51 @@ public class updateuser implements Initializable {
         roleUserM.getItems().addAll("patient", "medecin");
         sexeUserM.getItems().addAll("Homme", "Femme");
 
-        // Ajouter un écouteur de changement sur le rôle
         roleUserM.valueProperty().addListener((observable, oldValue, newValue) -> {
             mettreAJourChampsRole(newValue);
         });
 
-        // Initialiser imagePath avec la valeur actuelle de l'utilisateur
         if (utilisateur != null && utilisateur.getImg_url() != null) {
             imagePath = utilisateur.getImg_url();
         }
 
-        // Initialiser les champs en fonction du rôle actuel
         if (utilisateur != null && utilisateur.getRole() != null) {
             mettreAJourChampsRole(utilisateur.getRole());
         }
         generateCaptcha();
     }
+
+    // Méthode pour passer l'utilisateur dans ce contrôleur
+    public void setUtilisateur(Utilisateur utilisateur) {
+        this.utilisateur = utilisateur;
+        this.imagePath = utilisateur.getImg_url();
+        if (utilisateur.getMotdepasse() == null) {
+            System.err.println("Warning: The utilisateur object's motdepasse is null!");
+        }
+        remplirChamps();
+    }
+
+    private void remplirChamps() {
+        if (utilisateur != null) {
+            nomUserM.setText(utilisateur.getNom());
+            prenomUserM.setText(utilisateur.getPrenom());
+            emailUserM.setText(utilisateur.getEmail());
+            adresseUserM.setText(utilisateur.getAdresse());
+            telephoneUserM.setText(utilisateur.getTelephone());
+            roleUserM.setValue(utilisateur.getRole());
+            sexeUserM.setValue(utilisateur.getSexe());
+            antecedentsUserM.setText(utilisateur.getAntecedents_medicaux());
+            specialiteUserM.setText(utilisateur.getSpecialite());
+            hopitaleUserM.setText(utilisateur.getHopital());
+            // Gestion de l'image : vérifier si imagePath est null
+            if (imagePath == null) {
+                validationImageM.setText("Aucune image sélectionnée");
+            } else {
+                validationImageM.setText(imagePath.equals("default.png") ? "Aucune image sélectionnée" : "Image actuelle : " + imagePath);
+            }
+        }
+    }
+
     private void generateCaptcha() {
         try {
             // Générer un texte aléatoire
@@ -193,8 +221,6 @@ public class updateuser implements Initializable {
         }
     }
 
-
-    // Générer un texte aléatoire pour le CAPTCHA
     private String generateRandomText(int length) {
         String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
         Random random = new Random();
@@ -204,37 +230,34 @@ public class updateuser implements Initializable {
         }
         return sb.toString();
     }
-    // Action pour rafraîchir le CAPTCHA
+
     @FXML
     private void refreshCaptchaM(ActionEvent event) {
         generateCaptcha();
         captchaUserM.clear();
         validationCaptchaM.setText("");
     }
-    // Méthode pour mettre à jour les champs en fonction du rôle
+
     private void mettreAJourChampsRole(String role) {
         if (role != null) {
             switch (role) {
                 case "patient":
-                    // Si le rôle est "patient", afficher uniquement les champs spécifiques au patient
-                    antecedentsUserM.setDisable(false);  // Activer ce champ
-                    antecedentsUserM.setText("");  // Initialiser le champ
-                    specialiteUserM.setDisable(true);  // Désactiver ce champ
-                    specialiteUserM.setText("");  // Initialiser le champ
-                    hopitaleUserM.setDisable(true);  // Désactiver ce champ
-                    hopitaleUserM.setText("");  // Initialiser le champ
+                    antecedentsUserM.setDisable(false);
+                    antecedentsUserM.setText("");
+                    specialiteUserM.setDisable(true);
+                    specialiteUserM.setText("");
+                    hopitaleUserM.setDisable(true);
+                    hopitaleUserM.setText("");
                     break;
 
                 case "medecin":
-                    // Si le rôle est "medecin", afficher les champs pour médecin
-                    antecedentsUserM.setDisable(true);  // Désactiver ce champ
-                    antecedentsUserM.setText("");  // Initialiser le champ
-                    specialiteUserM.setDisable(false);  // Activer ce champ
-                    hopitaleUserM.setDisable(false);  // Activer ce champ
+                    antecedentsUserM.setDisable(true);
+                    antecedentsUserM.setText("");
+                    specialiteUserM.setDisable(false);
+                    hopitaleUserM.setDisable(false);
                     break;
 
                 default:
-                    // Par défaut, désactiver tous les champs
                     antecedentsUserM.setDisable(true);
                     antecedentsUserM.setText("");
                     specialiteUserM.setDisable(true);
@@ -245,6 +268,7 @@ public class updateuser implements Initializable {
             }
         }
     }
+
     @FXML
     public void imageUserM(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
@@ -284,8 +308,6 @@ public class updateuser implements Initializable {
         if (!validerChamps()) {
             return;
         }
-
-        // Mettre à jour les données de l'utilisateur
         utilisateur.setNom(nomUserM.getText());
         utilisateur.setPrenom(prenomUserM.getText());
         utilisateur.setEmail(emailUserM.getText());
@@ -296,12 +318,10 @@ public class updateuser implements Initializable {
         utilisateur.setAntecedents_medicaux(antecedentsUserM.getText());
         utilisateur.setSpecialite(specialiteUserM.getText());
         utilisateur.setHopital(hopitaleUserM.getText());
-        //utilisateur.setImg_url(imagePath);
-
         // Gestion de l'image : utiliser imagePath si modifié, sinon conserver l'image actuelle
         if (imagePath != null) {
             utilisateur.setImg_url(imagePath);
-        } //
+        }
         // Mettre à jour la liste des roles
         List<String> rolesList = new ArrayList<>();
         rolesList.add(roleUserM.getValue());
@@ -314,14 +334,11 @@ public class updateuser implements Initializable {
             }
             utilisateur.setMotdepasse(hashPassword(motdepasseUserM.getText()));
         } else {
-            // Conserver l'ancien mot de passe si aucun nouveau n'est saisi
             utilisateur.setMotdepasse(utilisateur.getMotdepasse());
         }
-
-
         try {
             serviceUtilisateur.modifier(utilisateur);
-            showAlert("Succès", "Utilisateur mis à jour avec succès !");
+            showAlert("Succès", "Les informations de votre compte ont été modifiées avec succès.");
 
             // Actualiser les détails dans DetailsUser si le contrôleur est disponible
             if (detailsUserController != null) {
@@ -344,24 +361,18 @@ public class updateuser implements Initializable {
 
     private boolean validerChamps() {
         boolean isValid = true;
-
-        // Validation du nom
         if (nomUserM.getText().isEmpty()) {
             validationNomM.setText("Le nom est requis.");
             isValid = false;
         } else {
             validationNomM.setText("");
         }
-
-        // Validation du prénom
         if (prenomUserM.getText().isEmpty()) {
             validationPrenomM.setText("Le prénom est requis.");
             isValid = false;
         } else {
             validationPrenomM.setText("");
         }
-
-        // Validation de l'email
         if (emailUserM.getText().isEmpty()) {
             validationEmailM.setText("L'email est requis.");
             isValid = false;
@@ -371,42 +382,29 @@ public class updateuser implements Initializable {
         } else {
             validationEmailM.setText("");
         }
-
-        // Validation du mot de passe
         if (!motdepasseUserM.getText().isEmpty()) {  // On vérifie uniquement si l'utilisateur a saisi un nouveau mot de passe
             String password = motdepasseUserM.getText();
             StringBuilder errorMessage = new StringBuilder();
-
-            // Vérification de la longueur minimale
             if (password.length() < 8) {
                 errorMessage.append("Le mot de passe doit contenir au moins 8 caractères.\n");
                 isValid = false;
             }
-
-            // Vérification d'au moins une lettre minuscule
             if (!password.matches(".*[a-z].*")) {
                 errorMessage.append("Le mot de passe doit contenir au moins une lettre minuscule.\n");
                 isValid = false;
             }
-
-            // Vérification d'au moins une lettre majuscule
             if (!password.matches(".*[A-Z].*")) {
                 errorMessage.append("Le mot de passe doit contenir au moins une lettre majuscule.\n");
                 isValid = false;
             }
-
-            // Vérification d'au moins un chiffre
             if (!password.matches(".*\\d.*")) {
                 errorMessage.append("Le mot de passe doit contenir au moins un chiffre.\n");
                 isValid = false;
             }
-
-            // Vérification d'au moins un caractère spécial
-            if (!password.matches(".*[@$!%*?&].*")) {
-                errorMessage.append("Le mot de passe doit contenir au moins un caractère spécial (@$!%*?&).\n");
+            if (!password.matches(".*[!@#$%^&*(),.?\":{}|<>].*")) {
+                errorMessage.append("Le mot de passe doit contenir au moins un caractère spécial .\n");
                 isValid = false;
             }
-
             // Affichage du message d'erreur combiné
             if (errorMessage.length() > 0) {
                 validationMotdepasseM.setText(errorMessage.toString().trim());
@@ -417,39 +415,30 @@ public class updateuser implements Initializable {
             validationMotdepasseM.setText(""); // Pas de message si le champ est vide (on conserve l'ancien mot de passe)
         }
 
-        // Validation de l'adresse
         if (adresseUserM.getText().isEmpty()) {
             validationAdresseM.setText("L'adresse est requise.");
             isValid = false;
         } else {
             validationAdresseM.setText("");
         }
-
-        // Validation du téléphone
         if (telephoneUserM.getText().isEmpty()) {
             validationTelephoneM.setText("Le numéro de téléphone est requis.");
             isValid = false;
         } else {
             validationTelephoneM.setText("");
         }
-
-        // Validation des antécédents médicaux pour un patient
         if (roleUserM.getValue() != null && roleUserM.getValue().equals("patient") && antecedentsUserM.getText().isEmpty()) {
             validationAntecedents.setText("Les antécédents médicaux sont requis pour un patient.");
             isValid = false;
         } else {
             validationAntecedents.setText("");
         }
-
-        // Validation de la spécialité pour un médecin
         if (roleUserM.getValue() != null && roleUserM.getValue().equals("medecin") && specialiteUserM.getText().isEmpty()) {
             validationSpecialite.setText("La spécialité est requise pour un médecin.");
             isValid = false;
         } else {
             validationSpecialite.setText("");
         }
-
-        // Validation de l'hôpital pour un médecin
         if (roleUserM.getValue() != null && roleUserM.getValue().equals("medecin") && hopitaleUserM.getText().isEmpty()) {
             validationHopital.setText("L'hôpital est requis pour un médecin.");
             isValid = false;
@@ -466,40 +455,6 @@ public class updateuser implements Initializable {
         return isValid;
     }
 
-    // Méthode pour passer l'utilisateur dans ce contrôleur
-    public void setUtilisateur(Utilisateur utilisateur) {
-        this.utilisateur = utilisateur;
-        this.imagePath = utilisateur.getImg_url();
-        if (utilisateur.getMotdepasse() == null) {
-            System.err.println("Warning: The utilisateur object's motdepasse is null!");
-        }
-        remplirChamps();
-    }
-
-    // Méthode pour remplir les champs avec les données de l'utilisateur
-    private void remplirChamps() {
-        if (utilisateur != null) {
-            nomUserM.setText(utilisateur.getNom());
-            prenomUserM.setText(utilisateur.getPrenom());
-            emailUserM.setText(utilisateur.getEmail());
-            adresseUserM.setText(utilisateur.getAdresse());
-            telephoneUserM.setText(utilisateur.getTelephone());
-            roleUserM.setValue(utilisateur.getRole());
-            sexeUserM.setValue(utilisateur.getSexe());
-            antecedentsUserM.setText(utilisateur.getAntecedents_medicaux());
-            specialiteUserM.setText(utilisateur.getSpecialite());
-            hopitaleUserM.setText(utilisateur.getHopital());
-            // Gestion de l'image : vérifier si imagePath est null
-            if (imagePath == null) {
-                validationImageM.setText("Aucune image sélectionnée");
-            } else {
-                validationImageM.setText(imagePath.equals("default.png") ? "Aucune image sélectionnée" : "Image actuelle : " + imagePath);
-            }
-            // validationImageM.setText(imagePath.equals("default.png") ? "Aucune image sélectionnée" : "Image actuelle : " + imagePath);
-        }
-    }
-
-    // Méthode pour hacher le mot de passe
     private String hashPassword(String password) {
         return org.mindrot.jbcrypt.BCrypt.hashpw(password, org.mindrot.jbcrypt.BCrypt.gensalt());
     }

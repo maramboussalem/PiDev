@@ -8,12 +8,13 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ServiceUtilisateur {
+public class ServiceUtilisateur implements IService<Utilisateur> {
 
     private Connection connection = MyDataBase.getInstance().getMyConnection();
 
     public ServiceUtilisateur() {
     }
+
     public void ajouter(Utilisateur utilisateur) throws SQLException {
         String sql = "INSERT INTO `utilisateur`(`nom`, `prenom`, `email`, `sexe`, `adresse`, `telephone`, `role`, `roles`, `antecedents_medicaux`, `specialite`, `hopital`, `motdepasse`, `verification_code`, `captcha`, `img_url`, `activation_token`, `is_active`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement pst = connection.prepareStatement(sql);
@@ -85,7 +86,7 @@ public class ServiceUtilisateur {
         pst.setString(9, antecedents_medicaux);
         pst.setString(10, specialite);
         pst.setString(11, hopital);
-        pst.setString(12, utilisateur.getMotdepasse()); // On utilise directement le mot de passe existant
+        pst.setString(12, utilisateur.getMotdepasse());
         pst.setString(13, utilisateur.getVerification_code());
         pst.setString(14, utilisateur.getCaptcha());
         pst.setString(15, utilisateur.getImg_url());
@@ -195,7 +196,8 @@ public class ServiceUtilisateur {
             throw new SQLException("Email non trouvé.");
         }
     }
-    // Dans ServiceUtilisateur.java
+
+
     public Utilisateur getUserById(int id) throws SQLException {
         String sql = "SELECT * FROM utilisateur WHERE id = ?";
         PreparedStatement pst = connection.prepareStatement(sql);

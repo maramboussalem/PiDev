@@ -33,13 +33,11 @@ public class login {
         String motDePasse = motdepasseLogin.getText();
 
         try {
-            // Appel à la méthode login de ServiceUtilisateur
             Utilisateur utilisateur = serviceUtilisateur.login(email, motDePasse);
 
             Stage stage = (Stage) emailLogin.getScene().getWindow();
-            // Vérification du rôle et redirection
+
             if ("patient".equals(utilisateur.getRole())) {
-                // Rediriger vers la page 'Home' pour le patient
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/Home.fxml"));
                 AnchorPane root = loader.load();
                 Home homeController = loader.getController();
@@ -47,6 +45,7 @@ public class login {
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
                 stage.setTitle("Page d'Accueil du Patient");
+
             } else if ("medecin".equals(utilisateur.getRole())) {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/DashboardMedecin.fxml"));
                 AnchorPane root = loader.load();
@@ -55,8 +54,8 @@ public class login {
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
                 stage.setTitle("Tableau de Bord du Médecin");
+
             } else if ("admin".equals(utilisateur.getRole())) {
-                // Rediriger vers la page 'Dashboard Admin' pour l'admin
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/DashboardAdmin.fxml"));
                 AnchorPane root = loader.load();
                 DashboardAdmin dashboardController = loader.getController();
@@ -66,7 +65,6 @@ public class login {
                 stage.setTitle("Tableau de Bord de l'Admin");
             }
         } catch (Exception e) {
-            // Si une erreur survient, afficher un message d'erreur
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Erreur de Connexion");
             alert.setHeaderText("Échec de la connexion");
@@ -81,7 +79,6 @@ public class login {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Utilisateur/adduser.fxml"));
             AnchorPane root = loader.load();
 
-            // Obtenir la scène actuelle et changer son contenu
             Stage stage = (Stage) emailLogin.getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);

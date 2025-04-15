@@ -33,7 +33,6 @@ public class ListeUser implements Initializable {
     @FXML
     private ComboBox<String> sortComboBox;
 
-
     private ServiceUtilisateur serviceUtilisateur;
 
     public ListeUser() {
@@ -44,14 +43,12 @@ public class ListeUser implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         afficherUtilisateurs();
 
-        // Ajout d'un écouteur pour le champ de recherche
         searchField.textProperty().addListener((observable, oldValue, newValue) -> {
             filtrerUtilisateurs(newValue);
         });
 
         sortComboBox.getItems().addAll("Nom", "Prénom", "Email");
         sortComboBox.setOnAction(event -> trierUtilisateurs(sortComboBox.getValue()));
-
     }
 
     private void filtrerUtilisateurs(String critere) {
@@ -67,18 +64,17 @@ public class ListeUser implements Initializable {
                     utilisateursFiltres.add(utilisateur);
                 }
             }
-
             listeUser.setItems(utilisateursFiltres);
         } catch (SQLException e) {
             System.err.println("Erreur lors du filtrage des utilisateurs : " + e.getMessage());
         }
     }
+
     private void trierUtilisateurs(String critere) {
         try {
             List<Utilisateur> utilisateurs = serviceUtilisateur.afficher();
             ObservableList<Utilisateur> utilisateursObservable = FXCollections.observableArrayList(utilisateurs);
 
-            // Appliquer le tri en fonction du critère sélectionné
             utilisateursObservable.sort((u1, u2) -> {
                 switch (critere) {
                     case "Nom":
@@ -91,7 +87,6 @@ public class ListeUser implements Initializable {
                         return 0;
                 }
             });
-
             // Mettre à jour la liste affichée
             listeUser.setItems(utilisateursObservable);
         } catch (SQLException e) {
@@ -161,16 +156,11 @@ public class ListeUser implements Initializable {
         afficherInterface("/Utilisateur/DetailsUser.fxml", utilisateur);
     }
 
-    private void modifierUtilisateur(Utilisateur utilisateur) {
-        afficherInterface("/Utilisateur/update.fxml", utilisateur);
-    }
-
     private void afficherInterface(String cheminFXML, Utilisateur utilisateur) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(cheminFXML));
             Parent root = loader.load();
 
-            // Passer l'utilisateur au contrôleur de la nouvelle fenêtre
             Object controller = loader.getController();
             if (controller instanceof DetailsUser) {
                 ((DetailsUser) controller).setUtilisateur(utilisateur);

@@ -29,20 +29,15 @@ public class DashboardMedecin {
     @FXML
     void logOut(ActionEvent event) {
         try {
-            // Fermer la fenêtre actuelle
             Stage currentStage = (Stage) contentArea.getScene().getWindow();
             currentStage.close();
 
-            // Charger la page de connexion (login.fxml)
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Utilisateur/login.fxml"));
             Parent root = loader.load();
 
-            // Créer une nouvelle scène et une nouvelle fenêtre
             Stage stage = new Stage();
             stage.setTitle("Connexion");
             stage.setScene(new Scene(root));
-
-            // Afficher la nouvelle fenêtre
             stage.show();
 
         } catch (IOException e) {
@@ -69,7 +64,7 @@ public class DashboardMedecin {
             loadProfileImage();
         }
     }
-    // Méthode pour charger l'image de profil
+
     private void loadProfileImage() {
         if (utilisateurConnecte != null && utilisateurConnecte.getImg_url() != null && !utilisateurConnecte.getImg_url().isEmpty() && !"null".equals(utilisateurConnecte.getImg_url()) && !"default.png".equals(utilisateurConnecte.getImg_url())) {
             try {
@@ -95,7 +90,6 @@ public class DashboardMedecin {
         }
     }
 
-    // Méthode pour charger l'image par défaut
     private void loadDefaultImage() {
         try {
             // Charger l'image par défaut depuis les ressources
