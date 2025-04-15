@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: #ffffff; -fx-background-radius: 30; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 5);" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.showDetailsConsultation">
+
+    <children>
+        <!-- Title -->
+        <Text fill="#00b8bb" layoutX="50.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Détails Consultation">
+            <font>
+                <Font name="Bell MT" size="33.0" />
+            </font>
+        </Text>
+
+        <!-- VBox for content -->
+        <VBox spacing="15" AnchorPane.bottomAnchor="150" AnchorPane.leftAnchor="50" AnchorPane.rightAnchor="50" AnchorPane.topAnchor="80">
+
+            <!-- Labels for Consultation Details -->
+            <Label fx:id="nomLabel" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #333333;" />
+            <Label fx:id="dateLabel" style="-fx-font-size: 16px; -fx-text-fill: #666666;" />
+            <Label fx:id="diagnosticLabel" style="-fx-font-size: 16px; -fx-text-fill: #666666;" />
+
+            <!-- User Information Labels -->
+            <!-- <Label fx:id="firstNameLabel" style="-fx-font-size: 16px;" />
+            <Label fx:id="lastNameLabel" style="-fx-font-size: 16px;" /> -->
+            <Label fx:id="emailLabel" style="-fx-font-size: 16px; -fx-text-fill: #666666;" />
+            <Label fx:id="sexeLabel" style="-fx-font-size: 16px; -fx-text-fill: #666666;" />
+            <Label fx:id="adresseLabel" style="-fx-font-size: 16px; -fx-text-fill: #666666;" />
+            <Label fx:id="telephoneLabel" style="-fx-font-size: 16px; -fx-text-fill: #666666;" />
+        </VBox>
+
+        <!-- Cancel Button -->
+        <Button fx:id="cancelButton" layoutX="240.0" layoutY="520.0" mnemonicParsing="false" onAction="#closeWindow" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: #ff4d4d; -fx-background-radius: 10; -fx-text-fill: white;" text="Annuler">
+            <font>
+                <Font name="Bell MT" size="18.0" />
+            </font>
+        </Button>
+    </children>
+</AnchorPane>

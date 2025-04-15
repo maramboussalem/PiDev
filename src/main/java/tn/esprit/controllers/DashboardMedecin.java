@@ -29,15 +29,20 @@ public class DashboardMedecin {
     @FXML
     void logOut(ActionEvent event) {
         try {
+            // Fermer la fenêtre actuelle
             Stage currentStage = (Stage) contentArea.getScene().getWindow();
             currentStage.close();
 
+            // Charger la page de connexion (login.fxml)
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Utilisateur/login.fxml"));
             Parent root = loader.load();
 
+            // Créer une nouvelle scène et une nouvelle fenêtre
             Stage stage = new Stage();
             stage.setTitle("Connexion");
             stage.setScene(new Scene(root));
+
+            // Afficher la nouvelle fenêtre
             stage.show();
 
         } catch (IOException e) {
@@ -64,7 +69,7 @@ public class DashboardMedecin {
             loadProfileImage();
         }
     }
-
+    // Méthode pour charger l'image de profil
     private void loadProfileImage() {
         if (utilisateurConnecte != null && utilisateurConnecte.getImg_url() != null && !utilisateurConnecte.getImg_url().isEmpty() && !"null".equals(utilisateurConnecte.getImg_url()) && !"default.png".equals(utilisateurConnecte.getImg_url())) {
             try {
@@ -90,6 +95,7 @@ public class DashboardMedecin {
         }
     }
 
+    // Méthode pour charger l'image par défaut
     private void loadDefaultImage() {
         try {
             // Charger l'image par défaut depuis les ressources
@@ -134,6 +140,40 @@ public class DashboardMedecin {
         } else {
             nomuserConnecte.setText("Utilisateur non connecté");
             loadDefaultImage();
+        }
+    }
+    @FXML
+    void listConsultation(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/consultation/indexConsultation.fxml"));
+            Parent root = loader.load();
+
+            // If indexConsultationController needs the utilisateurConnecte, you can do:
+            // IndexConsultationController controller = loader.getController();
+            // controller.setUtilisateur(utilisateurConnecte);
+
+            contentArea.getChildren().clear();
+            contentArea.getChildren().add(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Navigate to the Add Consultation page
+    @FXML
+    void addConsultation(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/consultation/AddConsultation.fxml"));
+            Parent root = loader.load();
+
+            // If AddConsultationController needs the utilisateurConnecte, you can do:
+            // AddConsultationController controller = loader.getController();
+            // controller.setUtilisateur(utilisateurConnecte);
+
+            contentArea.getChildren().clear();
+            contentArea.getChildren().add(root);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

@@ -55,7 +55,7 @@
                      </image>
                   </ImageView>
                   <Line endX="220.20001220703125" layoutX="106.0" layoutY="259.0" startX="-82.19999694824219" stroke="#f7f7f7" />
-                  <Button alignment="TOP_LEFT" layoutX="57.0" layoutY="325.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="280.0" style="-fx-background-color: #00b8bb;" text="Consultation" textFill="WHITE">
+                  <Button alignment="TOP_LEFT" layoutX="57.0" layoutY="325.0" mnemonicParsing="false" onAction="#listConsultation" prefHeight="46.0" prefWidth="280.0" style="-fx-background-color: #00b8bb;" text="Consultation" textFill="WHITE">
                      <font>
                         <Font name="Bell MT" size="20.0" />
                      </font>
