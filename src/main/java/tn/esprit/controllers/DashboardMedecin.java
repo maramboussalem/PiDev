@@ -26,23 +26,26 @@ public class DashboardMedecin {
     @FXML
     private ImageView imageProfil;
 
+    private Utilisateur utilisateurConnecte;
+
+    // Log out method - closes the current stage and opens the login page
     @FXML
     void logOut(ActionEvent event) {
         try {
-            // Fermer la fenêtre actuelle
+            // Close the current window
             Stage currentStage = (Stage) contentArea.getScene().getWindow();
             currentStage.close();
 
-            // Charger la page de connexion (login.fxml)
+            // Load the login page (login.fxml)
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Utilisateur/login.fxml"));
             Parent root = loader.load();
 
-            // Créer une nouvelle scène et une nouvelle fenêtre
+            // Create a new stage and show the login page
             Stage stage = new Stage();
             stage.setTitle("Connexion");
             stage.setScene(new Scene(root));
 
-            // Afficher la nouvelle fenêtre
+            // Display the login window
             stage.show();
 
         } catch (IOException e) {
@@ -50,8 +53,7 @@ public class DashboardMedecin {
         }
     }
 
-    private Utilisateur utilisateurConnecte;
-
+    // Initialize method to set the connected user's info
     @FXML
     public void initialize() {
         if (utilisateurConnecte != null) {
@@ -60,20 +62,24 @@ public class DashboardMedecin {
         }
     }
 
+    // Set the connected user and update the profile information
     public void setUtilisateurConnecte(Utilisateur utilisateur) {
         this.utilisateurConnecte = utilisateur;
-        System.out.println("Utilisateur connecté : " + utilisateur); // Vérification
+        System.out.println("Utilisateur connecté : " + utilisateur); // Debugging
 
         if (utilisateur != null) {
             nomuserConnecte.setText(utilisateur.getNom() + " " + utilisateur.getPrenom());
             loadProfileImage();
         }
     }
-    // Méthode pour charger l'image de profil
+
+    // Load the user's profile image
     private void loadProfileImage() {
-        if (utilisateurConnecte != null && utilisateurConnecte.getImg_url() != null && !utilisateurConnecte.getImg_url().isEmpty() && !"null".equals(utilisateurConnecte.getImg_url()) && !"default.png".equals(utilisateurConnecte.getImg_url())) {
+        if (utilisateurConnecte != null && utilisateurConnecte.getImg_url() != null
+                && !utilisateurConnecte.getImg_url().isEmpty() && !"null".equals(utilisateurConnecte.getImg_url())
+                && !"default.png".equals(utilisateurConnecte.getImg_url())) {
             try {
-                // Chemin vers le répertoire des images
+                // Path to the user's profile image
                 String imagePath = "src/main/resources/images/profiles/" + utilisateurConnecte.getImg_url();
                 File imageFile = new File(imagePath);
 
@@ -95,10 +101,10 @@ public class DashboardMedecin {
         }
     }
 
-    // Méthode pour charger l'image par défaut
+    // Load the default image if the user's image is not found
     private void loadDefaultImage() {
         try {
-            // Charger l'image par défaut depuis les ressources
+            // Load the default image from resources
             Image defaultImage = new Image(getClass().getResourceAsStream("/images/default.png"));
             if (defaultImage != null) {
                 imageProfil.setImage(defaultImage);
@@ -112,6 +118,8 @@ public class DashboardMedecin {
             imageProfil.setImage(null);
         }
     }
+
+    // Navigate to the user's profile page
     @FXML
     void monProfil(ActionEvent event) {
         try {
@@ -132,6 +140,8 @@ public class DashboardMedecin {
             e.printStackTrace();
         }
     }
+
+    // Refresh the page to update the profile information
     @FXML
     void refreshPage(ActionEvent event) {
         if (utilisateurConnecte != null) {
@@ -140,6 +150,42 @@ public class DashboardMedecin {
         } else {
             nomuserConnecte.setText("Utilisateur non connecté");
             loadDefaultImage();
+        }
+    }
+
+    // Navigate to the list of consultations
+    @FXML
+    void listConsultation(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/consultation/indexConsultation.fxml"));
+            Parent root = loader.load();
+
+            // If indexConsultationController needs the utilisateurConnecte, you can do:
+            // IndexConsultationController controller = loader.getController();
+            // controller.setUtilisateur(utilisateurConnecte);
+
+            contentArea.getChildren().clear();
+            contentArea.getChildren().add(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Navigate to the Add Consultation page
+    @FXML
+    void addConsultation(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/consultation/AddConsultation.fxml"));
+            Parent root = loader.load();
+
+            // If AddConsultationController needs the utilisateurConnecte, you can do:
+            // AddConsultationController controller = loader.getController();
+            // controller.setUtilisateur(utilisateurConnecte);
+
+            contentArea.getChildren().clear();
+            contentArea.getChildren().add(root);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
