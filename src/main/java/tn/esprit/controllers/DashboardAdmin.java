@@ -155,4 +155,41 @@ public class DashboardAdmin {
             loadDefaultImage();
         }
     }
+    @FXML
+    void medicament(ActionEvent event) {
+
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/medicament/IndexMedicament.fxml"));
+            Parent root = loader.load();
+
+            // If AddConsultationController needs the utilisateurConnecte, you can do:
+            // AddConsultationController controller = loader.getController();
+            // controller.setUtilisateur(utilisateurConnecte);
+
+            contentArea.getChildren().clear();
+            contentArea.getChildren().add(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void Fournisseur(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fournisseur/index.fxml"));
+            Parent root = loader.load();
+
+            // If AddConsultationController needs the utilisateurConnecte, you can do:
+            // AddConsultationController controller = loader.getController();
+            // controller.setUtilisateur(utilisateurConnecte);
+
+            contentArea.getChildren().clear();
+            contentArea.getChildren().add(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
 }

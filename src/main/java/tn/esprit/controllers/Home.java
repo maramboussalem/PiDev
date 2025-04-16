@@ -147,4 +147,22 @@ public class Home {
             loadDefaultImage();
         }
     }
-}
+    @FXML
+    void medicament(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/client/IndexMedicaments.fxml"));
+            Parent root = loader.load();
+
+            // If AddConsultationController needs the utilisateurConnecte, you can do:
+            // AddConsultationController controller = loader.getController();
+            // controller.setUtilisateur(utilisateurConnecte);
+
+            contentArea.getChildren().clear();
+            contentArea.getChildren().add(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+    }
+

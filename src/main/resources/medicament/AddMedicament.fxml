@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<VBox prefWidth="500" spacing="20" style="-fx-padding: 20;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.AddMedicament">
+
+   <Text style="-fx-font-size: 24; -fx-font-weight: bold;" text="Ajouter un nouveau médicament" />
+
+   <GridPane hgap="10" vgap="10">
+      <columnConstraints>
+         <ColumnConstraints hgrow="NEVER" minWidth="100" />
+         <ColumnConstraints hgrow="ALWAYS" minWidth="200" />
+      </columnConstraints>
+
+      <!-- Name -->
+      <Label text="Nom :" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+      <TextField fx:id="nomField" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+      <!-- Description -->
+      <Label text="Description :" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+      <TextArea fx:id="descriptionArea" prefRowCount="3" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+      <!-- Quantity -->
+      <Label text="Quantite :" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+      <TextField fx:id="quantiteField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+      <!-- Price -->
+      <Label text="Prix :" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+      <TextField fx:id="prixField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+
+      <!-- Type -->
+      <Label text="Type :" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+      <ComboBox fx:id="typeCombo" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+
+      <!-- Fournisseur -->
+      <Label text="Fournisseur :" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+      <ComboBox fx:id="fournisseurCombo" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+
+      <!-- Expiration Date -->
+      <Label text="Date expiration :" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+      <DatePicker fx:id="expireAtPicker" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+
+      <!-- Image Upload -->
+      <Label text="Image :" GridPane.columnIndex="0" GridPane.rowIndex="7" />
+      <HBox spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="7">
+         <VBox>
+            <ImageView fx:id="imagePreview" fitHeight="150" fitWidth="150" />
+            <Button fx:id="browseBtn" onAction="#handleBrowse" text="Choisir une image" />
+            <Label fx:id="imageLabel" text="Aucune image selectionnee" />
+         </VBox>
+      </HBox>
+      <rowConstraints>
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
+      </rowConstraints>
+   </GridPane>
+
+   <!-- Action Buttons -->
+   <HBox alignment="CENTER_RIGHT" spacing="20">
+      <Button fx:id="saveBtn" onAction="#handleSave" style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8 20;" text="save" />
+   </HBox>
+</VBox>

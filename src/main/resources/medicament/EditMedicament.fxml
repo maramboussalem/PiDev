@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="600.0" prefWidth="700.0" style="-fx-background-color: #f5f5f5;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.EditMedicament">
+    <children>
+        <VBox alignment="TOP_CENTER" spacing="20" style="-fx-background-color: white; -fx-background-radius: 10; -fx-padding: 30; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 0);" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+            <children>
+                <Text style="-fx-font-size: 24; -fx-font-weight: bold; -fx-fill: #2c3e50;" text="Modifier un medicament" />
+
+                <HBox alignment="CENTER" spacing="20">
+                    <VBox>
+                        <ImageView fx:id="imagePreview" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" />
+                        <Button fx:id="uploadImageBtn" onAction="#handleImageUpload" style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-weight: bold;" text="Telecharger une image" />
+                    </VBox>
+
+                    <GridPane hgap="10" vgap="15">
+                        <columnConstraints>
+                            <ColumnConstraints hgrow="NEVER" minWidth="100.0" />
+                            <ColumnConstraints hgrow="ALWAYS" minWidth="200.0" />
+                        </columnConstraints>
+
+                        <children>
+                            <Label style="-fx-font-weight: bold;" text="Nom :" />
+                            <TextField fx:id="nomField" GridPane.columnIndex="1" />
+
+                            <Label style="-fx-font-weight: bold;" text="Description :" GridPane.rowIndex="1" />
+                            <TextField fx:id="descriptionField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+                            <Label style="-fx-font-weight: bold;" text="Quantite :" GridPane.rowIndex="2" />
+                            <TextField fx:id="quantiteField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+                            <Label style="-fx-font-weight: bold;" text="Prix :" GridPane.rowIndex="3" />
+                            <TextField fx:id="prixField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+
+                            <Label style="-fx-font-weight: bold;" text="Type :" GridPane.rowIndex="4" />
+                            <ComboBox fx:id="typeCombo" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+
+                            <Label style="-fx-font-weight: bold;" text="Date expiration :" GridPane.rowIndex="5" />
+                            <DatePicker fx:id="expireAtPicker" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        </children>
+                        <rowConstraints>
+                            <RowConstraints />
+                            <RowConstraints />
+                            <RowConstraints />
+                            <RowConstraints />
+                            <RowConstraints />
+                            <RowConstraints />
+                        </rowConstraints>
+                    </GridPane>
+                </HBox>
+
+                <HBox alignment="CENTER" spacing="20">
+                    <Button fx:id="saveBtn" onAction="#handleSubmit" style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8 20; -fx-background-radius: 5;" text="Enregistrer les modifications" />
+                </HBox>
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>

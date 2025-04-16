@@ -8,7 +8,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ServiceUtilisateur {
+public class ServiceUtilisateur implements IService< Utilisateur>{
 
     private Connection connection = MyDataBase.getInstance().getMyConnection();
 
