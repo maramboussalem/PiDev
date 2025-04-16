@@ -139,4 +139,21 @@ public class Home {
             loadDefaultImage();
         }
     }
+    @FXML
+    void diagnostic(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ParametresVitaux/AddParametresVitaux.fxml"));
+            Parent root = loader.load();
+
+            // If AddConsultationController needs the utilisateurConnecte, you can do:
+            // AddConsultationController controller = loader.getController();
+            // controller.setUtilisateur(utilisateurConnecte);
+
+            contentArea.getChildren().clear();
+            contentArea.getChildren().add(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

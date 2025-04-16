@@ -26,7 +26,7 @@
                   <Font name="Bodoni MT" size="18.0" />
                </font>
             </Button>
-            <Button layoutX="445.0" layoutY="29.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="138.0" style="-fx-background-color: #00b8bb;" text="DIAGNOSTIC" textFill="WHITE">
+            <Button layoutX="445.0" layoutY="29.0" mnemonicParsing="false" onAction="#diagnostic" prefHeight="46.0" prefWidth="138.0" style="-fx-background-color: #00b8bb;" text="DIAGNOSTIC" textFill="WHITE">
                <font>
                   <Font name="Bell MT" size="18.0" />
                </font>
