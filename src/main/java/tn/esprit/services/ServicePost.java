@@ -30,11 +30,22 @@ public class ServicePost implements IService<Post> {
     }
     @Override
     public void modifier(Post post) throws SQLException {
+        String req = "UPDATE post SET title = ?, content = ?, image_url = ? WHERE id = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(req);
+        preparedStatement.setString(1, post.getTitle());
+        preparedStatement.setString(2, post.getContent());
+        preparedStatement.setString(3, post.getImageUrl());
+        preparedStatement.setInt(4, post.getId());
 
+        preparedStatement.executeUpdate();
     }
+
     @Override
     public void supprimer(int id) throws SQLException {
-
+        String req = "DELETE FROM post WHERE id = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(req);
+        preparedStatement.setInt(1, id);
+        preparedStatement.executeUpdate();
     }
     @Override
     public List<Post> afficher() throws SQLException {

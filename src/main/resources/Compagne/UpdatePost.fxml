@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.Compagne.UpdatePost">
+    <children>
+        <!-- Background container with shadow and rounded corners -->
+        <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="380.0" prefWidth="580.0" style="-fx-background-color: #ffffff; -fx-background-radius: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 5);">
+            <children>
+
+                <!-- Title text -->
+                <Text fill="#00b8bb" layoutX="160.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Modifier la publication">
+                    <font>
+                        <Font name="Bell MT" size="24.0" />
+                    </font>
+                </Text>
+
+                <!-- Title input -->
+                <TextField fx:id="titre" layoutX="50.0" layoutY="60.0" prefWidth="250.0" promptText="Titre" style="-fx-background-radius: 10; -fx-border-color: #00b8bb; -fx-border-radius: 10;">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </TextField>
+
+                <!-- Content input -->
+                <TextArea fx:id="contenu" layoutX="40.0" layoutY="121.0" prefHeight="100.0" prefWidth="275.0" promptText="Contenu" style="-fx-background-radius: 10; -fx-border-color: #00b8bb; -fx-border-radius: 10;" wrapText="true">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </TextArea>
+
+                <!-- Image preview -->
+                <ImageView fx:id="imageView" fitHeight="191.0" fitWidth="220.0" layoutX="340.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../../../images/placeholder.jpg" />
+                    </image>
+                </ImageView>
+
+                <!-- Upload image button -->
+                <Button fx:id="uploadButton" layoutX="50.0" layoutY="260.0" mnemonicParsing="false" style="-fx-background-color: #00b8bb; -fx-background-radius: 10;" text="Choisir une image" textFill="WHITE">
+                    <font>
+                        <Font name="Bell MT" size="14.0" />
+                    </font>
+                </Button>
+
+                <!-- Update button -->
+                <Button layoutX="190.0" layoutY="312.0" mnemonicParsing="false" onAction="#modifierPost" prefHeight="40.0" prefWidth="220.0" style="-fx-background-color: #00b8bb; -fx-background-radius: 10;" text="Mettre à jour" textFill="WHITE">
+                    <font>
+                        <Font name="Bell MT" size="16.0" />
+                    </font>
+                </Button>
+
+            </children>
+        </AnchorPane>
+    </children>
+</AnchorPane>
