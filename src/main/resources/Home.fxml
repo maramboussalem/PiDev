@@ -31,7 +31,7 @@
                   <Font name="Bell MT" size="18.0" />
                </font>
             </Button>
-            <Button layoutX="596.0" layoutY="29.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="154.0" style="-fx-background-color: #00b8bb;" text="MEDICAMENT" textFill="WHITE">
+            <Button layoutX="596.0" layoutY="29.0" mnemonicParsing="false" onAction="#medicament" prefHeight="46.0" prefWidth="154.0" style="-fx-background-color: #00b8bb;" text="MEDICAMENT" textFill="WHITE">
                <font>
                   <Font name="Bell MT" size="18.0" />
                </font>
