@@ -129,6 +129,12 @@
                <font>
                   <Font name="Bell MT" size="14.0" />
                </font></Button>
+            <Button layoutX="51.0" layoutY="51.0" mnemonicParsing="false" onAction="#login" prefHeight="26.0" prefWidth="48.0" style="-fx-background-color: #00b8bb; -fx-background-radius: 10;" />
+            <ImageView fitHeight="18.0" fitWidth="28.0" layoutX="63.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/FF.jpg" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
    </children>

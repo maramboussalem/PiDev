@@ -110,13 +110,13 @@ public class ListeUser implements Initializable {
                     } else {
                         Text userInfo = new Text( utilisateur.getId() + " - " + utilisateur.getNom() + " " + utilisateur.getPrenom() + " - " + utilisateur.getEmail() + " - " + utilisateur.getTelephone() + " - " + utilisateur.getAdresse() + " - " + utilisateur.getSexe() + " - " + utilisateur.getRole() + " - " + utilisateur.getAntecedents_medicaux() + " - " + utilisateur.getHopital() + " - " + utilisateur.getSpecialite() + "-" + (utilisateur.isIs_active() ? "Actif" : "Inactif"));
 
-                        Button btnSupprimer = new Button("Supprimer");
+                        /*Button btnSupprimer = new Button("Supprimer");
                         btnSupprimer.setStyle("-fx-background-color: #ff8800; -fx-text-fill: white;");
                         btnSupprimer.setOnAction(event -> supprimerUtilisateur(utilisateur));
 
                         Button btnDetails = new Button("Détails");
                         btnDetails.setStyle("-fx-background-color: blue; -fx-text-fill: white;");
-                        btnDetails.setOnAction(event -> afficherDetailsUtilisateur(utilisateur));
+                        btnDetails.setOnAction(event -> afficherDetailsUtilisateur(utilisateur));*/
 
                         // Nouveau bouton Activer/Désactiver
                         Button btnToggleStatus = new Button(utilisateur.isIs_active() ? "Désactiver" : "Activer");
@@ -131,7 +131,7 @@ public class ListeUser implements Initializable {
                             }
                         });
 
-                        HBox hbox = new HBox(10, userInfo, btnToggleStatus, btnDetails, btnSupprimer );
+                        HBox hbox = new HBox(10, userInfo, btnToggleStatus/*, btnDetails, btnSupprimer*/ );
                         hbox.setStyle("-fx-padding: 5; -fx-alignment: center-left;");
 
                         setGraphic(hbox);
@@ -143,7 +143,7 @@ public class ListeUser implements Initializable {
         }
     }
 
-    private void supprimerUtilisateur(Utilisateur utilisateur) {
+   /* private void supprimerUtilisateur(Utilisateur utilisateur) {
         try {
             serviceUtilisateur.supprimer(utilisateur.getId());
             listeUser.getItems().remove(utilisateur);
@@ -154,7 +154,7 @@ public class ListeUser implements Initializable {
 
     private void afficherDetailsUtilisateur(Utilisateur utilisateur) {
         afficherInterface("/Utilisateur/DetailsUser.fxml", utilisateur);
-    }
+    }*/
 
     private void afficherInterface(String cheminFXML, Utilisateur utilisateur) {
         try {

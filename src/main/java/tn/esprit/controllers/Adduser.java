@@ -3,6 +3,7 @@ package tn.esprit.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -494,4 +495,21 @@ public class Adduser implements Initializable {
         return Pattern.matches("^\\d{8}$", phone);
     }
 
+
+    @FXML
+    void login(ActionEvent event) {
+        try {
+            // Chargement du fichier login.fxml
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Utilisateur/login.fxml"));
+            Parent root = loader.load();
+
+            // Récupérer la scène actuelle et changer son contenu
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
