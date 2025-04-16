@@ -1,0 +1,47 @@
+.table-view {
+    -fx-background-color: #1a1a1a;
+    -fx-table-cell-border-color: transparent;
+    -fx-padding: 10;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+}
+
+.table-column {
+    -fx-alignment: CENTER-LEFT;
+    -fx-font-size: 14px;
+    -fx-font-family: 'Segoe UI', sans-serif;
+    -fx-text-fill: white;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: #111;
+    -fx-border-radius: 10 10 0 0;
+}
+
+.table-view .column-header,
+.table-view .filler {
+    -fx-size: 40px;
+    -fx-background-color: #111;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.table-row-cell {
+    -fx-background-color: #222;
+    -fx-border-color: transparent;
+    -fx-padding: 8px;
+}
+
+.table-row-cell:hover {
+    -fx-background-color: #333;
+}
+
+.scroll-bar:vertical, .scroll-bar:horizontal {
+    -fx-background-color: #111;
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: #4f46e5;
+    -fx-background-insets: 0;
+    -fx-background-radius: 10;
+}
