@@ -22,7 +22,7 @@
                   <Font name="Bell MT" size="20.0" />
                </font>
             </Button>
-            <Button alignment="TOP_LEFT" layoutX="57.0" layoutY="413.0" mnemonicParsing="false" onAction="#medicament" prefHeight="35.0" prefWidth="75.0" style="-fx-background-color: #00b8bb;" text="Stock" textFill="WHITE">
+            <Button alignment="TOP_LEFT" layoutX="48.0" layoutY="409.0" mnemonicParsing="false" onAction="#medicament" prefHeight="38.0" prefWidth="267.0" style="-fx-background-color: #00b8bb;" text="Stock" textFill="WHITE">
                <font>
                   <Font name="Bell MT" size="20.0" />
                </font>
@@ -37,7 +37,7 @@
                   <Font name="Bell MT" size="20.0" />
                </font>
             </Button>
-            <Button alignment="TOP_LEFT" layoutX="53.0" layoutY="617.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="280.0" style="-fx-background-color: #00b8bb;" text="Compagne" textFill="WHITE">
+            <Button alignment="TOP_LEFT" layoutX="53.0" layoutY="605.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="280.0" style="-fx-background-color: #00b8bb;" text="Compagne" textFill="WHITE">
                <font>
                   <Font name="Bell MT" size="20.0" />
                </font>
@@ -67,17 +67,17 @@
                   <Image url="@images/stock.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="36.0" fitWidth="32.0" layoutX="13.0" layoutY="531.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="36.0" fitWidth="32.0" layoutX="13.0" layoutY="514.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/reclamation.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="30.0" fitWidth="34.0" layoutX="8.0" layoutY="580.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="30.0" fitWidth="34.0" layoutX="14.0" layoutY="565.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/service.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="30.0" fitWidth="34.0" layoutX="12.0" layoutY="626.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="30.0" fitWidth="34.0" layoutX="14.0" layoutY="609.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/comm.jpg" />
                </image>
@@ -93,12 +93,12 @@
                   <Font name="Bell MT" size="24.0" />
                </font>
             </Label>
-            <Button alignment="TOP_LEFT" layoutX="53.0" layoutY="267.0" mnemonicParsing="false" onAction="#monProfil" prefHeight="46.0" prefWidth="280.0" style="-fx-background-color: #00b8bb;" text="Mon Profil" textFill="WHITE">
+            <Button alignment="TOP_LEFT" layoutX="48.0" layoutY="267.0" mnemonicParsing="false" onAction="#monProfil" prefHeight="46.0" prefWidth="280.0" style="-fx-background-color: #00b8bb;" text="Mon Profil" textFill="WHITE">
                <font>
                   <Font name="Bell MT" size="20.0" />
                </font>
             </Button>
-            <ImageView fitHeight="30.0" fitWidth="34.0" layoutX="18.0" layoutY="275.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="30.0" fitWidth="34.0" layoutX="15.0" layoutY="275.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/profil.jpg" />
                </image>
@@ -109,11 +109,16 @@
                   <Image url="@images/logodach.jpg" />
                </image>
             </ImageView>
-            <Button alignment="TOP_LEFT" layoutX="57.0" layoutY="461.0" mnemonicParsing="false" onAction="#Fournisseur" prefHeight="35.0" prefWidth="92.0" style="-fx-background-color: #00b8bb;" text="Fournisseur" textFill="WHITE">
+            <Button alignment="TOP_LEFT" layoutX="48.0" layoutY="454.0" mnemonicParsing="false" onAction="#Fournisseur" prefHeight="38.0" prefWidth="267.0" style="-fx-background-color: #00b8bb;" text="Fournisseur" textFill="WHITE">
                <font>
                   <Font name="Bell MT" size="20.0" />
                </font>
             </Button>
+            <ImageView fitHeight="30.0" fitWidth="34.0" layoutX="18.0" layoutY="458.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/stock.jpg" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="contentArea" layoutX="367.0" layoutY="25.0" prefHeight="728.0" prefWidth="903.0" />

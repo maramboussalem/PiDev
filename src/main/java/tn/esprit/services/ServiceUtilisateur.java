@@ -251,7 +251,7 @@ public class ServiceUtilisateur implements IService<Utilisateur> {
             throw new SQLException("Utilisateur non trouvé avec l'ID : " + id);
         }
     }
-    
+
     public List<Utilisateur> getPatients() throws SQLException {
         List<Utilisateur> patients = new ArrayList<>();
         String sql = "SELECT * FROM utilisateur WHERE role = 'patient'";
