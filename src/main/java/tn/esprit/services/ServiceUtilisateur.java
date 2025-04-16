@@ -293,6 +293,48 @@ public class ServiceUtilisateur implements IService<Utilisateur> {
         return patients;
     }
 
+    public List<Utilisateur> getMedecins() throws SQLException {
+        List<Utilisateur> medecins = new ArrayList<>();
+        String sql = "SELECT * FROM utilisateur WHERE role = 'medecin'";
+        Statement statement = connection.createStatement();
+        ResultSet rs = statement.executeQuery(sql);
+
+        while (rs.next()) {
+            Utilisateur utilisateur = new Utilisateur();
+            utilisateur.setId(rs.getInt("id"));
+            utilisateur.setNom(rs.getString("nom"));
+            utilisateur.setPrenom(rs.getString("prenom"));
+            utilisateur.setEmail(rs.getString("email"));
+            utilisateur.setSexe(rs.getString("sexe"));
+            utilisateur.setAdresse(rs.getString("adresse"));
+            utilisateur.setTelephone(rs.getString("telephone"));
+            utilisateur.setRole(rs.getString("role"));
+            utilisateur.setSpecialite(rs.getString("specialite"));
+            utilisateur.setHopital(rs.getString("hopital"));
+            utilisateur.setMotdepasse(rs.getString("motdepasse"));
+            utilisateur.setIs_active(rs.getBoolean("is_active"));
+            utilisateur.setImg_url(rs.getString("img_url"));
+
+            // Récupérer les rôles
+            String rolesString = rs.getString("roles");
+            if (rolesString != null && !rolesString.isEmpty()) {
+                JSONArray rolesArray = new JSONArray(rolesString);
+                List<String> rolesList = new ArrayList<>();
+                for (int i = 0; i < rolesArray.length(); i++) {
+                    rolesList.add(rolesArray.getString(i));
+                }
+                utilisateur.setRoles(rolesList);
+            } else {
+                utilisateur.setRoles(new ArrayList<>());
+            }
+
+            medecins.add(utilisateur);
+        }
+
+        return medecins;
+    }
+
+
 
 
 

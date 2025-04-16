@@ -176,4 +176,21 @@ public class DashboardMedecin {
             e.printStackTrace();
         }
     }
+    @FXML
+    void diagnostic(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Diagnostic/ListeDiagnostic.fxml"));
+            Parent root = loader.load();
+
+            // If AddConsultationController needs the utilisateurConnecte, you can do:
+            // AddConsultationController controller = loader.getController();
+            // controller.setUtilisateur(utilisateurConnecte);
+
+            contentArea.getChildren().clear();
+            contentArea.getChildren().add(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
 }

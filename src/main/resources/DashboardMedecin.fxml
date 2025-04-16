@@ -14,7 +14,7 @@
          <children>
             <AnchorPane layoutX="-10.0" layoutY="-9.0" prefHeight="819.0" prefWidth="346.0" style="-fx-background-color: #00b8bb;">
                <children>
-                  <Button alignment="TOP_LEFT" layoutX="57.0" layoutY="369.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="280.0" style="-fx-background-color: #00b8bb;" text="Diagnostic" textFill="WHITE">
+                  <Button alignment="TOP_LEFT" layoutX="57.0" layoutY="369.0" mnemonicParsing="false" onAction="#diagnostic" prefHeight="46.0" prefWidth="280.0" style="-fx-background-color: #00b8bb;" text="Diagnostic" textFill="WHITE">
                      <font>
                         <Font name="Bell MT" size="20.0" />
                      </font>
