@@ -111,7 +111,6 @@ public class ListPost {
 
     @FXML
     private void handleEdit(Post post) {
-        System.out.println("Editing post: " + post.getId());
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Compagne/UpdatePost.fxml"));
             Parent root = loader.load();
@@ -142,11 +141,11 @@ public class ListPost {
         confirmationAlert.showAndWait().ifPresent(response -> {
             if (response == ButtonType.OK) {
                 try {
-                    // Delete from DB using your service class
-                    ServicePost servicePost = new ServicePost();
-                    servicePost.supprimer(post.getId()); // Make sure postService is initialized
 
-                    // Optionally, refresh the UI list
+                    ServicePost servicePost = new ServicePost();
+                    servicePost.supprimer(post.getId());
+
+
                     refreshPostList();
 
                     showAlert(Alert.AlertType.INFORMATION, "Success", "Post deleted successfully.");
@@ -165,8 +164,8 @@ public class ListPost {
     }
     private void refreshPostList() throws SQLException {
         ServicePost servicePost = new ServicePost();
-        List<Post> posts = servicePost.afficher(); // Re-fetch from DB
-        pnItems.getChildren().clear(); // VBox or ListView
+        List<Post> posts = servicePost.afficher();
+        pnItems.getChildren().clear();
         for (Post post : posts) {
             Node postCard = createPostHBox(post);
             pnItems.getChildren().add(postCard);
@@ -180,7 +179,7 @@ public class ListPost {
             ServicePost postService = new ServicePost();
             List<Post> posts = postService.afficher();
 
-            pnItems.getChildren().clear(); // Clear previous items
+            pnItems.getChildren().clear();
             for (Post post : posts) {
                 HBox postBox = createPostHBox(post);
                 pnItems.getChildren().add(postBox);
@@ -197,19 +196,19 @@ public class ListPost {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Compagne/AddPost.fxml"));
             Parent root = loader.load();
 
-            // Get the controller of AddPost.fxml
+
             AddPost addPostController = loader.getController();
 
-            // Set the callback to refresh the post list
+
             addPostController.setOnPostAdded(() -> {
                 try {
-                    refreshPostList(); // ⬅️ This is already defined and works
+                    refreshPostList();
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
             });
 
-            // Open the new window
+
             Stage stage = new Stage();
             stage.setTitle("Ajouter un Post");
             stage.setScene(new Scene(root));
