@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ResourceBundle;
 
 public class UpdateParametresVitaux implements Initializable {
@@ -129,7 +130,8 @@ public class UpdateParametresVitaux implements Initializable {
         ecg.setText(String.valueOf(pv.getEcg()));
         spo2.setText(String.valueOf(pv.getSpo2()));
         gsc.setText(String.valueOf(pv.getGsc()));
-        created_at.setValue(pv.getCreated_at().toLocalDate());
+        created_at.setValue(pv.getCreated_at().toLocalDateTime().toLocalDate());
+
     }
 
     @FXML
@@ -142,10 +144,11 @@ public class UpdateParametresVitaux implements Initializable {
                 selectedParametres.setTas((int) Double.parseDouble(tas.getText()));
                 selectedParametres.setTad((int) Double.parseDouble(tad.getText()));
                 selectedParametres.setGad((float) Double.parseDouble(gad.getText()));
-                selectedParametres.setEcg((int) Double.parseDouble(ecg.getText()));
+                selectedParametres.setEcg(ecg.getText());
                 selectedParametres.setSpo2((int) Double.parseDouble(spo2.getText()));
                 selectedParametres.setGsc((int) Double.parseDouble(gsc.getText()));
-                selectedParametres.setCreated_at(Date.valueOf(created_at.getValue()));
+                selectedParametres.setCreated_at(Timestamp.valueOf(created_at.getValue().atStartOfDay()));
+
 
                 pvService.modifier(selectedParametres);
 

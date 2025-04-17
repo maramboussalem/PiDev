@@ -32,7 +32,7 @@ public class Home {
     public void initialize() {
         if (utilisateurConnecte != null) {
             userConnecteH.setText(utilisateurConnecte.getNom() + " " + utilisateurConnecte.getPrenom());
-        loadProfileImage();
+            loadProfileImage();
         }
     }
 
@@ -138,5 +138,38 @@ public class Home {
             userConnecteH.setText("Utilisateur non connecté");
             loadDefaultImage();
         }
+    }
+    @FXML
+    void diagnostic(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ParametresVitaux/AddParametresVitaux.fxml"));
+            Parent root = loader.load();
+
+            // If AddConsultationController needs the utilisateurConnecte, you can do:
+            // AddConsultationController controller = loader.getController();
+            // controller.setUtilisateur(utilisateurConnecte);
+
+            contentArea.getChildren().clear();
+            contentArea.getChildren().add(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    void medicament(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/client/IndexMedicaments.fxml"));
+            Parent root = loader.load();
+
+            // If AddConsultationController needs the utilisateurConnecte, you can do:
+            // AddConsultationController controller = loader.getController();
+            // controller.setUtilisateur(utilisateurConnecte);
+
+            contentArea.getChildren().clear();
+            contentArea.getChildren().add(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 }

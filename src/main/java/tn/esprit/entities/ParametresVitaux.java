@@ -1,26 +1,25 @@
 package tn.esprit.entities;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 public class ParametresVitaux {
     private int id;
     private String name;
     private int fc;
     private int fr;
-    private int ecg;
+    private String ecg; // Changed to String
     private int tas;
     private int tad;
     private int age;
     private int spo2;
     private int gsc;
-    private float gad;
-    private Date created_at; // ✅ Renamed from dateSaisie
+    private double gad;
+    private int userId;
+    private Timestamp created_at;
 
-    // ✅ Default constructor
     public ParametresVitaux() {}
 
-    // ✅ Full constructor with ID and created_at
-    public ParametresVitaux(int id, String name, int fc, int fr, int ecg, int tas, int tad, int age, int spo2, int gsc, float gad, Date created_at) {
+    public ParametresVitaux(int id, String name, int fc, int fr, String ecg, int tas, int tad, int age, int spo2, int gsc, double gad, int userId, Timestamp created_at) {
         this.id = id;
         this.name = name;
         this.fc = fc;
@@ -32,11 +31,11 @@ public class ParametresVitaux {
         this.spo2 = spo2;
         this.gsc = gsc;
         this.gad = gad;
+        this.userId = userId;
         this.created_at = created_at;
     }
 
-    // ✅ Constructor without ID (for insertion)
-    public ParametresVitaux(String name, int fc, int fr, int ecg, int tas, int tad, int age, int spo2, int gsc, float gad, Date created_at) {
+    public ParametresVitaux(String name, int fc, int fr, String ecg, int tas, int tad, int age, int spo2, int gsc, double gad, int userId, Timestamp created_at) {
         this.name = name;
         this.fc = fc;
         this.fr = fr;
@@ -47,107 +46,51 @@ public class ParametresVitaux {
         this.spo2 = spo2;
         this.gsc = gsc;
         this.gad = gad;
+        this.userId = userId;
         this.created_at = created_at;
     }
 
-    // ✅ Getters and Setters
-    public int getId() {
-        return id;
-    }
+    // Getters and Setters
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
 
-    public String getName() {
-        return name;
-    }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    public int getFc() { return fc; }
+    public void setFc(int fc) { this.fc = fc; }
 
-    public int getFc() {
-        return fc;
-    }
+    public int getFr() { return fr; }
+    public void setFr(int fr) { this.fr = fr; }
 
-    public void setFc(int fc) {
-        this.fc = fc;
-    }
+    public String getEcg() { return ecg; }
+    public void setEcg(String ecg) { this.ecg = ecg; }
 
-    public int getFr() {
-        return fr;
-    }
+    public int getTas() { return tas; }
+    public void setTas(int tas) { this.tas = tas; }
 
-    public void setFr(int fr) {
-        this.fr = fr;
-    }
+    public int getTad() { return tad; }
+    public void setTad(int tad) { this.tad = tad; }
 
-    public int getEcg() {
-        return ecg;
-    }
+    public int getAge() { return age; }
+    public void setAge(int age) { this.age = age; }
 
-    public void setEcg(int ecg) {
-        this.ecg = ecg;
-    }
+    public int getSpo2() { return spo2; }
+    public void setSpo2(int spo2) { this.spo2 = spo2; }
 
-    public int getTas() {
-        return tas;
-    }
+    public int getGsc() { return gsc; }
+    public void setGsc(int gsc) { this.gsc = gsc; }
 
-    public void setTas(int tas) {
-        this.tas = tas;
-    }
+    public double getGad() { return gad; }
+    public void setGad(double gad) { this.gad = gad; }
 
-    public int getTad() {
-        return tad;
-    }
+    public int getUserId() { return userId; }
+    public void setUserId(int userId) { this.userId = userId; }
 
-    public void setTad(int tad) {
-        this.tad = tad;
-    }
+    public Timestamp getCreated_at() { return created_at; }
+    public void setCreated_at(Timestamp created_at) { this.created_at = created_at; }
 
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public int getSpo2() {
-        return spo2;
-    }
-
-    public void setSpo2(int spo2) {
-        this.spo2 = spo2;
-    }
-
-    public int getGsc() {
-        return gsc;
-    }
-
-    public void setGsc(int gsc) {
-        this.gsc = gsc;
-    }
-
-    public float getGad() {
-        return gad;
-    }
-
-    public void setGad(float gad) {
-        this.gad = gad;
-    }
-
-    public Date getCreated_at() {
-        return created_at;
-    }
-
-    public void setCreated_at(Date created_at) {
-        this.created_at = created_at;
-    }
-
-    // ✅ Updated toString
     @Override
     public String toString() {
         return "ParametresVitaux{" +
@@ -155,13 +98,14 @@ public class ParametresVitaux {
                 ", name='" + name + '\'' +
                 ", fc=" + fc +
                 ", fr=" + fr +
-                ", ecg=" + ecg +
+                ", ecg='" + ecg + '\'' +
                 ", tas=" + tas +
                 ", tad=" + tad +
                 ", age=" + age +
                 ", spo2=" + spo2 +
                 ", gsc=" + gsc +
                 ", gad=" + gad +
+                ", userId=" + userId +
                 ", created_at=" + created_at +
                 '}';
     }

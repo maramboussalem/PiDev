@@ -23,6 +23,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.ResourceBundle;
 
 public class AddParametresVitaux implements Initializable {
@@ -72,13 +73,14 @@ public class AddParametresVitaux implements Initializable {
                 pv.setName(name.getText());
                 pv.setFc(Integer.parseInt(fc.getText()));
                 pv.setFr(Integer.parseInt(fr.getText()));
-                pv.setEcg(Integer.parseInt(ecg.getText()));
+                pv.setEcg(ecg.getText());
                 pv.setTas(Integer.parseInt(tas.getText()));
                 pv.setTad(Integer.parseInt(tad.getText()));
                 pv.setSpo2(Integer.parseInt(spo2.getText()));
                 pv.setGsc(Integer.parseInt(gsc.getText()));
                 pv.setGad(Integer.parseInt(gad.getText()));
-                pv.setCreated_at(Date.valueOf(created_at.getValue()));
+                pv.setCreated_at(Timestamp.valueOf(created_at.getValue().atStartOfDay()));
+
 
                 ParametresVitauxService service = new ParametresVitauxService();
                 service.ajouter(pv);

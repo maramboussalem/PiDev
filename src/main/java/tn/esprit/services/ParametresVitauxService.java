@@ -20,21 +20,23 @@ public class ParametresVitauxService implements IService<ParametresVitaux> {
 
     @Override
     public void ajouter(ParametresVitaux pv) throws SQLException {
-        String req = "INSERT INTO parametres_vitaux (name, fc, fr, ecg, tas, tad, age, spo2, gsc, gad, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        // Modify the SQL query to exclude user_id
+        String req = "INSERT INTO parametres_viteaux (name, fc, fr, ecg, tas, tad, age, spo2, gsc, gad, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement pstmt = cnx.prepareStatement(req)) {
             pstmt.setString(1, pv.getName());
             pstmt.setInt(2, pv.getFc());
             pstmt.setInt(3, pv.getFr());
-            pstmt.setInt(4, pv.getEcg());
+            pstmt.setString(4, pv.getEcg()); // String
             pstmt.setInt(5, pv.getTas());
             pstmt.setInt(6, pv.getTad());
             pstmt.setInt(7, pv.getAge());
             pstmt.setInt(8, pv.getSpo2());
             pstmt.setInt(9, pv.getGsc());
-            pstmt.setFloat(10, pv.getGad());
-            pstmt.setDate(11, pv.getCreated_at());
+            pstmt.setFloat(10, (float) pv.getGad());
+            pstmt.setTimestamp(11, pv.getCreated_at()); // Timestamp
 
+            // Execute the update
             int rowsInserted = pstmt.executeUpdate();
             if (rowsInserted > 0) {
                 System.out.println("Paramètres vitaux ajoutés avec succès !");
@@ -47,10 +49,12 @@ public class ParametresVitauxService implements IService<ParametresVitaux> {
         }
     }
 
+
+
     @Override
     public List<ParametresVitaux> afficher() throws SQLException {
         List<ParametresVitaux> liste = new ArrayList<>();
-        String req = "SELECT * FROM parametres_vitaux";
+        String req = "SELECT * FROM parametres_viteaux";
 
         try (PreparedStatement ps = cnx.prepareStatement(req)) {
             ResultSet rs = ps.executeQuery();
@@ -60,14 +64,15 @@ public class ParametresVitauxService implements IService<ParametresVitaux> {
                         rs.getString("name"),
                         rs.getInt("fc"),
                         rs.getInt("fr"),
-                        rs.getInt("ecg"),
+                        rs.getString("ecg"), // String
                         rs.getInt("tas"),
                         rs.getInt("tad"),
                         rs.getInt("age"),
                         rs.getInt("spo2"),
                         rs.getInt("gsc"),
                         rs.getFloat("gad"),
-                        rs.getDate("created_at") // ✅ Include created_at
+                        rs.getInt("user_id"),
+                        rs.getTimestamp("created_at") // Timestamp
                 );
                 liste.add(pv);
             }
@@ -81,7 +86,7 @@ public class ParametresVitauxService implements IService<ParametresVitaux> {
 
     @Override
     public void supprimer(int id) throws SQLException {
-        String req = "DELETE FROM parametres_vitaux WHERE id = ?";
+        String req = "DELETE FROM parametres_viteaux WHERE id = ?";
 
         try (PreparedStatement pstmt = cnx.prepareStatement(req)) {
             pstmt.setInt(1, id);
@@ -99,21 +104,22 @@ public class ParametresVitauxService implements IService<ParametresVitaux> {
 
     @Override
     public void modifier(ParametresVitaux pv) throws SQLException {
-        String req = "UPDATE parametres_vitaux SET name = ?, fc = ?, fr = ?, ecg = ?, tas = ?, tad = ?, age = ?, spo2 = ?, gsc = ?, gad = ?, created_at = ? WHERE id = ?";
+        String req = "UPDATE parametres_viteaux SET name = ?, fc = ?, fr = ?, ecg = ?, tas = ?, tad = ?, age = ?, spo2 = ?, gsc = ?, gad = ?, user_id = ?, created_at = ? WHERE id = ?";
 
         try (PreparedStatement pstmt = cnx.prepareStatement(req)) {
             pstmt.setString(1, pv.getName());
             pstmt.setInt(2, pv.getFc());
             pstmt.setInt(3, pv.getFr());
-            pstmt.setInt(4, pv.getEcg());
+            pstmt.setString(4, pv.getEcg()); // String
             pstmt.setInt(5, pv.getTas());
             pstmt.setInt(6, pv.getTad());
             pstmt.setInt(7, pv.getAge());
             pstmt.setInt(8, pv.getSpo2());
             pstmt.setInt(9, pv.getGsc());
-            pstmt.setFloat(10, pv.getGad());
-            pstmt.setDate(11, pv.getCreated_at());
-            pstmt.setInt(12, pv.getId());
+            pstmt.setFloat(10, (float) pv.getGad());
+            pstmt.setInt(11, pv.getUserId());
+            pstmt.setTimestamp(12, pv.getCreated_at()); // Timestamp
+            pstmt.setInt(13, pv.getId());
 
             int rowsUpdated = pstmt.executeUpdate();
             if (rowsUpdated > 0) {
