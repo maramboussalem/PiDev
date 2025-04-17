@@ -332,4 +332,13 @@ public class ServiceUtilisateur implements IService<Utilisateur> {
 
         return medecins;
     }
+    public void updateStatus(int id, boolean isActive) throws SQLException {
+        String sql = "UPDATE `utilisateur` SET `is_active`=? WHERE `id`=?";
+        PreparedStatement pst = connection.prepareStatement(sql);
+        pst.setBoolean(1, isActive);
+        pst.setInt(2, id);
+        pst.executeUpdate();
+    }
+
+
 }

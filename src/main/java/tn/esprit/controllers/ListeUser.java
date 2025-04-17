@@ -8,11 +8,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import tn.esprit.services.ServiceUtilisateur;
 import tn.esprit.entities.Utilisateur;
+
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -33,6 +36,37 @@ public class ListeUser implements Initializable {
     @FXML
     private ComboBox<String> sortComboBox;
 
+    @FXML
+    private Label adresse;
+
+    @FXML
+    private Label email;
+
+    @FXML
+    private ImageView image;
+
+    @FXML
+    private Label nom;
+
+    @FXML
+    private Label prenom;
+
+    @FXML
+    private Label role;
+
+    @FXML
+    private Label sexe;
+
+    @FXML
+    private Label tel;
+
+    @FXML
+    private Button btnToggleStatus; // Le bouton global
+    @FXML
+    private Label statutLabel; // Le label qui affiche le statut de l'utilisateur
+
+    private Utilisateur utilisateurSelectionne;
+
     private ServiceUtilisateur serviceUtilisateur;
 
     public ListeUser() {
@@ -49,7 +83,29 @@ public class ListeUser implements Initializable {
 
         sortComboBox.getItems().addAll("Nom", "Prénom", "Email");
         sortComboBox.setOnAction(event -> trierUtilisateurs(sortComboBox.getValue()));
+
     }
+    @FXML
+    private void btnToggleStatus(ActionEvent event) {
+        // Code pour activer ou désactiver un utilisateur
+        Utilisateur selectedUser = listeUser.getSelectionModel().getSelectedItem();
+        if (selectedUser != null) {
+            try {
+                boolean newStatus = !selectedUser.isIs_active(); // Inverser le statut
+                serviceUtilisateur.updateStatus(selectedUser.getId(), newStatus); // Mettre à jour dans la base de données
+                selectedUser.setIs_active(newStatus); // Mettre à jour localement l'objet sélectionné
+
+                // Rafraîchir l'affichage des utilisateurs (utile pour les autres vues)
+                afficherUtilisateurs(); // Rafraîchir l'affichage pour refléter le changement de statut
+
+                // Mettre à jour l'affichage du bouton et du label
+                updateStatusLabel(); // Mettre à jour le label et le bouton du statut
+            } catch (SQLException e) {
+                System.err.println("Erreur lors de la mise à jour du statut : " + e.getMessage());
+            }
+        }
+    }
+
 
     private void filtrerUtilisateurs(String critere) {
         try {
@@ -87,7 +143,6 @@ public class ListeUser implements Initializable {
                         return 0;
                 }
             });
-            // Mettre à jour la liste affichée
             listeUser.setItems(utilisateursObservable);
         } catch (SQLException e) {
             System.err.println("Erreur lors du tri des utilisateurs : " + e.getMessage());
@@ -104,80 +159,70 @@ public class ListeUser implements Initializable {
                 @Override
                 protected void updateItem(Utilisateur utilisateur, boolean empty) {
                     super.updateItem(utilisateur, empty);
-                    if (empty || utilisateur == null) {
-                        setText(null);
-                        setGraphic(null);
-                    } else {
-                        Text userInfo = new Text( utilisateur.getId() + " - " + utilisateur.getNom() + " " + utilisateur.getPrenom() + " - " + utilisateur.getEmail() + " - " + utilisateur.getTelephone() + " - " + utilisateur.getAdresse() + " - " + utilisateur.getSexe() + " - " + utilisateur.getRole() + " - " + utilisateur.getAntecedents_medicaux() + " - " + utilisateur.getHopital() + " - " + utilisateur.getSpecialite() + "-" + (utilisateur.isIs_active() ? "Actif" : "Inactif"));
+                    if (utilisateur != null && !empty) {
+                        // Créer une nouvelle ImageView pour chaque utilisateur dans la cellule
+                        ImageView imageView = new ImageView();
 
-                        /*Button btnSupprimer = new Button("Supprimer");
-                        btnSupprimer.setStyle("-fx-background-color: #ff8800; -fx-text-fill: white;");
-                        btnSupprimer.setOnAction(event -> supprimerUtilisateur(utilisateur));
+                        String cheminImage = utilisateur.getImg_url();  // Récupère le chemin de l'image
+                        URL imageUrl = getClass().getResource("/images/profiles/" + cheminImage);
 
-                        Button btnDetails = new Button("Détails");
-                        btnDetails.setStyle("-fx-background-color: blue; -fx-text-fill: white;");
-                        btnDetails.setOnAction(event -> afficherDetailsUtilisateur(utilisateur));*/
+                        if (imageUrl != null) {
+                            // Si l'image existe, la charger
+                            imageView.setImage(new Image(imageUrl.toExternalForm()));
+                        } else {
+                            // Si l'image n'existe pas, utiliser une image par défaut
+                            imageView.setImage(new Image("file:src/main/resources/images/default.png"));
+                        }
 
-                        // Nouveau bouton Activer/Désactiver
-                        Button btnToggleStatus = new Button(utilisateur.isIs_active() ? "Désactiver" : "Activer");
-                        btnToggleStatus.setStyle("-fx-background-color: " + (utilisateur.isIs_active() ? "#f62424" : "#189830") + "; -fx-text-fill: white;");
-                        btnToggleStatus.setOnAction(event -> {
-                            try {
-                                serviceUtilisateur.toggleAccountStatus(utilisateur.getId());
-                                // Rafraîchir la liste après modification
-                                afficherUtilisateurs();
-                            } catch (SQLException e) {
-                                System.err.println("Erreur lors de la modification du statut : " + e.getMessage());
-                            }
+
+                        imageView.setFitHeight(80);
+                        imageView.setFitWidth(80);
+                        imageView.setPreserveRatio(true);
+
+                        // Infos texte
+                        VBox infoBox = new VBox(
+                                new Label("Nom: " + utilisateur.getNom()),
+                                new Label("Prénom: " + utilisateur.getPrenom()),
+                                new Label("Email: " + utilisateur.getEmail()),
+                                new Label("Téléphone: " + utilisateur.getTelephone()),
+                                new Label("Adresse: " + utilisateur.getAdresse()),
+                                new Label("Sexe: " + utilisateur.getSexe()),
+                                new Label("Rôle: " + utilisateur.getRole()),
+                                new Label("Statut: " + (utilisateur.isIs_active() ? "Actif" : "Désactivé")) // Afficher le statut
+                        );
+                        infoBox.setSpacing(2);
+
+
+
+                        // Action de sélection
+                        setOnMouseClicked(event -> {
+                            utilisateurSelectionne = utilisateur;
+                            updateStatusLabel(); // Mettre à jour le statut
                         });
 
-                        HBox hbox = new HBox(10, userInfo, btnToggleStatus/*, btnDetails, btnSupprimer*/ );
-                        hbox.setStyle("-fx-padding: 5; -fx-alignment: center-left;");
+                        HBox hbox = new HBox(10, imageView, infoBox);
+                        hbox.setStyle("-fx-padding: 10; -fx-background-radius: 8; -fx-border-color: lightgray; -fx-border-radius: 8;");
+                        hbox.setAlignment(javafx.geometry.Pos.CENTER_LEFT);
 
                         setGraphic(hbox);
+                    } else {
+                        setGraphic(null);
                     }
                 }
             });
+
         } catch (SQLException e) {
             System.err.println("Erreur lors de l'affichage des utilisateurs : " + e.getMessage());
         }
     }
 
-   /* private void supprimerUtilisateur(Utilisateur utilisateur) {
-        try {
-            serviceUtilisateur.supprimer(utilisateur.getId());
-            listeUser.getItems().remove(utilisateur);
-        } catch (SQLException e) {
-            System.err.println("Erreur lors de la suppression de l'utilisateur : " + e.getMessage());
+    private void updateStatusLabel() {
+        if (utilisateurSelectionne != null) {
+            statutLabel.setText(utilisateurSelectionne.isIs_active() ? "Statut: Actif" : "Statut: Désactivé");
+            btnToggleStatus.setText(utilisateurSelectionne.isIs_active() ? "Désactiver" : "Activer");
+            btnToggleStatus.setStyle("-fx-background-color: " + (utilisateurSelectionne.isIs_active() ? "#f62424" : "#189830") + "; -fx-text-fill: white;");
         }
     }
-
-    private void afficherDetailsUtilisateur(Utilisateur utilisateur) {
-        afficherInterface("/Utilisateur/DetailsUser.fxml", utilisateur);
-    }*/
-
-    private void afficherInterface(String cheminFXML, Utilisateur utilisateur) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(cheminFXML));
-            Parent root = loader.load();
-
-            Object controller = loader.getController();
-            if (controller instanceof DetailsUser) {
-                ((DetailsUser) controller).setUtilisateur(utilisateur);
-            } else if (controller instanceof updateuser) {
-                ((updateuser) controller).setUtilisateur(utilisateur);
-            } else {
-                System.err.println("Le contrôleur ne possède pas de méthode setUtilisateur : " + controller.getClass().getName());
-            }
-
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch (IOException e) {
-            System.err.println("Erreur lors de l'ouverture de l'interface : " + e.getMessage());
-        }
-    }
-
     @FXML
     void btnStats(ActionEvent event) {
         try {
