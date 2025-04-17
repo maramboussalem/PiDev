@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+
+<VBox xmlns="http://javafx.com/javafx/8"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="tn.esprit.controllers.AddDisponibilite"
+      alignment="CENTER" spacing="15" prefWidth="450" prefHeight="350"
+      style="-fx-background-color: #f9f9f9; -fx-padding: 30;
+             -fx-border-radius: 12; -fx-background-radius: 12;
+             -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 8, 0.3, 0, 4);">
+
+    <Label text="Ajouter une Disponibilité"
+           style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #1e3a8a;" />
+
+    <DatePicker fx:id="dpDate" promptText="Date de disponibilité"
+                style="-fx-background-radius: 8; -fx-padding: 8;" />
+
+    <HBox spacing="10" alignment="CENTER">
+        <ComboBox fx:id="cbHeure" promptText="Heure"
+                  style="-fx-background-radius: 8; -fx-padding: 6;" />
+        <ComboBox fx:id="cbMinute" promptText="Minute"
+                  style="-fx-background-radius: 8; -fx-padding: 6;" />
+    </HBox>
+
+    <CheckBox fx:id="cbReserve" text="Est réservée"
+              style="-fx-font-size: 14px;" />
+
+    <ComboBox fx:id="cbServiceMed" promptText="Service médical"
+              style="-fx-background-radius: 8; -fx-padding: 6;" />
+
+    <Button text="Ajouter" onAction="#ajouterDisponibilite"
+            style="-fx-background-color: #10B981; -fx-text-fill: white;
+                   -fx-font-weight: bold; -fx-background-radius: 10;
+                   -fx-padding: 8 16;" />
+
+</VBox>

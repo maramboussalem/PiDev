@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/8.0.171"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="tn.esprit.controllers.IndexServiceMed"
+      spacing="20" alignment="CENTER"
+      style="-fx-padding: 30; -fx-background-color: #f0f4f8;
+             -fx-border-radius: 15; -fx-background-radius: 15;">
+
+    <Label text="📋 Liste des Services Médicaux"
+           style="-fx-font-size: 20px; -fx-font-weight: bold;
+                  -fx-text-fill: #1e3a8a;" />
+
+    <ListView fx:id="listViewServiceMed" prefHeight="200"
+              style="-fx-background-color: white; -fx-border-color: #cbd5e1;
+                     -fx-border-width: 1.5; -fx-border-radius: 10;
+                     -fx-background-radius: 10;" />
+
+    <Label text="🕒 Disponibilités du service sélectionné"
+           style="-fx-font-size: 16px; -fx-font-weight: bold;
+                  -fx-text-fill: #475569;" />
+
+    <ListView fx:id="listViewDisponibilites" prefHeight="200"
+              style="-fx-background-color: white; -fx-border-color: #cbd5e1;
+                     -fx-border-width: 1.5; -fx-border-radius: 10;
+                     -fx-background-radius: 10;" />
+
+    <HBox spacing="15" alignment="CENTER">
+        <Button text="🗑 Supprimer" onAction="#supprimerServiceMed"
+                style="-fx-background-color: #ef4444; -fx-text-fill: white;
+                       -fx-font-weight: bold; -fx-background-radius: 8;
+                       -fx-padding: 8 16;"/>
+
+        <Button text="✏️ Modifier" onAction="#modifierServiceMed"
+                style="-fx-background-color: #3b82f6; -fx-text-fill: white;
+                       -fx-font-weight: bold; -fx-background-radius: 8;
+                       -fx-padding: 8 16;"/>
+    </HBox>
+
+</VBox>

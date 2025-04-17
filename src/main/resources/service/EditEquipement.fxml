@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml"
+            fx:controller="tn.esprit.controllers.EditEquipement"
+            prefHeight="450.0" prefWidth="600.0"
+            style="-fx-background-color: #f5f5f5;">
+
+    <VBox spacing="15" layoutX="100" layoutY="30" prefWidth="400"
+          style="-fx-background-color: white; -fx-padding: 20;
+                 -fx-background-radius: 10; -fx-border-radius: 10;
+                 -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0.3, 0, 4);">
+
+        <Label text="Modifier l’équipement"
+               style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+
+        <TextField fx:id="tfNom" promptText="Nom de l'équipement"
+                   style="-fx-background-radius: 8; -fx-padding: 10;"/>
+
+        <TextField fx:id="tfDescription" promptText="Description"
+                   style="-fx-background-radius: 8; -fx-padding: 10;"/>
+
+        <TextField fx:id="tfQuantite" promptText="Quantité en stock"
+                   style="-fx-background-radius: 8; -fx-padding: 10;"/>
+
+        <TextField fx:id="tfPrix" promptText="Prix unitaire"
+                   style="-fx-background-radius: 8; -fx-padding: 10;"/>
+
+        <TextField fx:id="tfEtat" promptText="État"
+                   style="-fx-background-radius: 8; -fx-padding: 10;"/>
+
+        <DatePicker fx:id="dpDateAchat"
+                    style="-fx-background-radius: 8;"/>
+
+        <TextField fx:id="tfImg" promptText="Chemin de l'image"
+                   style="-fx-background-radius: 8; -fx-padding: 10;"/>
+
+        <Button text="Enregistrer" onAction="#handleUpdateEquipement"
+                style="-fx-background-color: #2196F3; -fx-text-fill: white;
+                       -fx-background-radius: 10; -fx-font-weight: bold;
+                       -fx-padding: 10 20;"/>
+
+    </VBox>
+
+</AnchorPane>

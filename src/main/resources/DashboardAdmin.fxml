@@ -32,7 +32,7 @@
                   <Font name="Bell MT" size="20.0" />
                </font>
             </Button>
-            <Button alignment="TOP_LEFT" layoutX="53.0" layoutY="557.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="280.0" style="-fx-background-color: #00b8bb;" text="Service Medicale" textFill="WHITE">
+            <Button alignment="TOP_LEFT" layoutX="53.0" layoutY="557.0" mnemonicParsing="false" onAction="#service" prefHeight="46.0" prefWidth="280.0" style="-fx-background-color: #00b8bb;" text="Service Medicale" textFill="WHITE">
                <font>
                   <Font name="Bell MT" size="20.0" />
                </font>

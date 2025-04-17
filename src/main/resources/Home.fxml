@@ -21,7 +21,7 @@
                   <Font name="Bodoni MT" size="25.0" />
                </font>
             </Label>
-            <Button layoutX="309.0" layoutY="29.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="123.0" style="-fx-background-color: #00b8bb;" text="SERVICES" textFill="WHITE">
+            <Button layoutX="309.0" layoutY="29.0" mnemonicParsing="false" onAction="#services" prefHeight="46.0" prefWidth="123.0" style="-fx-background-color: #00b8bb;" text="SERVICES" textFill="WHITE">
                <font>
                   <Font name="Bodoni MT" size="18.0" />
                </font>

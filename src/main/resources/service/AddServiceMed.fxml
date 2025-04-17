@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/8"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="tn.esprit.controllers.AddServiceMed"
+      spacing="15" alignment="CENTER"
+      style="-fx-background-color: #f9f9f9; -fx-padding: 30;
+             -fx-border-radius: 12; -fx-background-radius: 12;
+             -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 8, 0.3, 0, 4);"
+      prefWidth="500" prefHeight="300">
+
+    <Label text="Ajouter un service médical"
+           style="-fx-font-size: 18px; -fx-font-weight: bold;
+                  -fx-text-fill: #1e3a8a;" />
+
+    <TextField fx:id="tfNomService" promptText="Nom du service"
+               style="-fx-background-radius: 8; -fx-padding: 10;" />
+
+    <TextField fx:id="tfDescriptionMed" promptText="Prix consultation"
+               style="-fx-background-radius: 8; -fx-padding: 10;" />
+
+    <TextField fx:id="tfImageM" promptText="Chemin de l'image"
+               style="-fx-background-radius: 8; -fx-padding: 10;" />
+
+    <Button text="Ajouter" onAction="#handleAjouterServiceMed"
+            style="-fx-background-color: #4CAF50; -fx-text-fill: white;
+                   -fx-font-weight: bold; -fx-background-radius: 10;
+                   -fx-padding: 8 16;" />
+
+</VBox>
