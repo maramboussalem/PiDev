@@ -5,24 +5,20 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import tn.esprit.entities.ParametresVitaux;
 import tn.esprit.services.ParametresVitauxService;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -37,7 +33,6 @@ public class IndexParametresVitaux implements Initializable {
     @FXML
     private ImageView image;
 
-
     @FXML
     private ListView<ParametresVitaux> listview;
 
@@ -47,8 +42,8 @@ public class IndexParametresVitaux implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         loadParametres();
         loadImage();
+        setupDoubleClick();
     }
-
 
     private void loadImage() {
         URL imageUrl = getClass().getResource("/images/historiqueParmetres.jpg");
@@ -62,64 +57,18 @@ public class IndexParametresVitaux implements Initializable {
                 System.out.println("Image par défaut chargée avec succès");
             }
         }
-
     }
 
     private void loadParametres() {
         try {
-            List<ParametresVitaux> parametres = service.afficher();  // La méthode afficher() peut lancer SQLException
+            List<ParametresVitaux> parametres = service.afficher();
             listview.getItems().setAll(parametres);
         } catch (SQLException e) {
-            e.printStackTrace();  // Gérer l'exception si elle se produit
+            e.printStackTrace();
             System.out.println("Erreur lors du chargement des paramètres vitaux : " + e.getMessage());
         }
 
         listview.setCellFactory(lv -> new ListCell<>() {
-            private final Button deleteBtn = new Button("Supprimer");
-            private final Button editBtn = new Button("Modifier");
-            private final HBox buttons = new HBox(10, editBtn, deleteBtn);
-
-            {
-                deleteBtn.setStyle("-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-cursor: hand;");
-                editBtn.setStyle("-fx-background-color: #3498db; -fx-text-fill: white; -fx-cursor: hand;");
-
-                deleteBtn.setOnAction(event -> {
-                    ParametresVitaux pv = getItem();
-                    if (pv != null) {
-                        try {
-                            service.supprimer(pv.getId());  // La méthode supprimer() peut aussi lancer SQLException
-                            listview.getItems().remove(pv);
-                            System.out.println("Paramètre supprimé : " + pv.getName());
-                        } catch (SQLException e) {
-                            e.printStackTrace();  // Gérer l'exception de suppression
-                            System.out.println("Erreur lors de la suppression : " + e.getMessage());
-                        }
-                    }
-                });
-
-                editBtn.setOnAction(event -> {
-                    ParametresVitaux pv = getItem();
-                    if (pv != null) {
-                        try {
-                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ParametresVitaux/UpdateParametresVitaux.fxml"));
-                            Parent root = loader.load();
-
-                            // Inject the selected ParametresVitaux
-                            UpdateParametresVitaux controller = loader.getController();
-                            controller.initialize(pv);
-
-                            // Find the contentArea from current scene (assumes the button is inside the same scene)
-                            AnchorPane contentArea = (AnchorPane) editBtn.getScene().lookup("#contentArea");
-                            contentArea.getChildren().clear();
-                            contentArea.getChildren().add(root);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                });
-
-            }
-
             @Override
             protected void updateItem(ParametresVitaux pv, boolean empty) {
                 super.updateItem(pv, empty);
@@ -127,17 +76,64 @@ public class IndexParametresVitaux implements Initializable {
                     setText(null);
                     setGraphic(null);
                 } else {
-                    setText("👤 " + pv.getName() + " | ❤️ FC: " + pv.getFc() +
-                            " | 🫁 FR: " + pv.getFr() + " | ❤️ ECG: " + pv.getEcg() +
-                            " | 📈 TAS: " + pv.getTas() + " / TAD: " + pv.getTad() +
-                            " | 🧠 GSC: " + pv.getGsc() + " | 🎯 GAD: " + pv.getGad() +
-                            " | 📅 " + pv.getCreated_at());
-                    setGraphic(buttons);
+                    // Create a custom layout for each list item
+                    AnchorPane cellPane = new AnchorPane();
+
+                    // Create and style name label
+                    Label nameLabel = new Label("👤 " + pv.getName());
+                    nameLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: #00b8bb;");
+
+                    // Create and style date label
+                    Label dateLabel = new Label("📅 " + pv.getCreated_at());
+                    dateLabel.setStyle("-fx-font-size: 12px; -fx-text-fill: #4c4c4c;");
+
+                    // Create a separator for design
+                    Separator separator = new Separator();
+                    separator.setStyle("-fx-background-color: #00b8bb; -fx-background-width: 2;");
+
+                    // Position elements inside the AnchorPane
+                    AnchorPane.setTopAnchor(nameLabel, 10.0);
+                    AnchorPane.setLeftAnchor(nameLabel, 10.0);
+
+                    AnchorPane.setTopAnchor(dateLabel, 35.0);
+                    AnchorPane.setLeftAnchor(dateLabel, 10.0);
+
+                    AnchorPane.setTopAnchor(separator, 60.0);
+                    AnchorPane.setLeftAnchor(separator, 10.0);
+                    AnchorPane.setRightAnchor(separator, 10.0);
+
+                    // Add elements to the cell pane
+                    cellPane.getChildren().addAll(nameLabel, dateLabel, separator);
+
+                    // Set the custom graphic for the cell
+                    setGraphic(cellPane);
                 }
             }
         });
     }
 
+
+    private void setupDoubleClick() {
+        listview.setOnMouseClicked(event -> {
+            if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2) {
+                ParametresVitaux selected = listview.getSelectionModel().getSelectedItem();
+                if (selected != null) {
+                    try {
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ParametresVitaux/DetaillesParametresVitaux.fxml"));
+                        Parent root = loader.load();
+
+                        DetaillesParametresVitaux controller = loader.getController();
+                        controller.setParametresVitaux(selected);
+
+                        contentArea.getChildren().clear();
+                        contentArea.getChildren().add(root);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+    }
 
     @FXML
     void actualiserButton(ActionEvent event) {
@@ -149,11 +145,6 @@ public class IndexParametresVitaux implements Initializable {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/ParametresVitaux/AddParametresVitaux.fxml"));
             Parent root = loader.load();
-
-            // If AddConsultationController needs the utilisateurConnecte, you can do:
-            // AddConsultationController controller = loader.getController();
-            // controller.setUtilisateur(utilisateurConnecte);
-
             contentArea.getChildren().clear();
             contentArea.getChildren().add(root);
         } catch (IOException e) {
