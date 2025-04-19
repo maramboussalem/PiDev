@@ -20,7 +20,6 @@ public class ParametresVitauxService implements IService<ParametresVitaux> {
 
     @Override
     public void ajouter(ParametresVitaux pv) throws SQLException {
-        // Modify the SQL query to exclude user_id
         String req = "INSERT INTO parametres_viteaux (name, fc, fr, ecg, tas, tad, age, spo2, gsc, gad, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement pstmt = cnx.prepareStatement(req)) {
@@ -71,7 +70,6 @@ public class ParametresVitauxService implements IService<ParametresVitaux> {
                         rs.getInt("spo2"),
                         rs.getInt("gsc"),
                         rs.getFloat("gad"),
-                        rs.getInt("user_id"),
                         rs.getTimestamp("created_at") // Timestamp
                 );
                 liste.add(pv);
@@ -104,7 +102,7 @@ public class ParametresVitauxService implements IService<ParametresVitaux> {
 
     @Override
     public void modifier(ParametresVitaux pv) throws SQLException {
-        String req = "UPDATE parametres_viteaux SET name = ?, fc = ?, fr = ?, ecg = ?, tas = ?, tad = ?, age = ?, spo2 = ?, gsc = ?, gad = ?, user_id = ?, created_at = ? WHERE id = ?";
+        String req = "UPDATE parametres_viteaux SET name = ?, fc = ?, fr = ?, ecg = ?, tas = ?, tad = ?, age = ?, spo2 = ?, gsc = ?, gad = ?, created_at = ? WHERE id = ?";
 
         try (PreparedStatement pstmt = cnx.prepareStatement(req)) {
             pstmt.setString(1, pv.getName());
@@ -117,9 +115,8 @@ public class ParametresVitauxService implements IService<ParametresVitaux> {
             pstmt.setInt(8, pv.getSpo2());
             pstmt.setInt(9, pv.getGsc());
             pstmt.setFloat(10, (float) pv.getGad());
-            pstmt.setInt(11, pv.getUserId());
-            pstmt.setTimestamp(12, pv.getCreated_at()); // Timestamp
-            pstmt.setInt(13, pv.getId());
+            pstmt.setTimestamp(11, pv.getCreated_at()); // Timestamp
+            pstmt.setInt(12, pv.getId());
 
             int rowsUpdated = pstmt.executeUpdate();
             if (rowsUpdated > 0) {
