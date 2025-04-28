@@ -109,6 +109,7 @@ public class Home {
             e.printStackTrace();
         }
     }
+    
     @FXML
     void logOut(ActionEvent event) {
         try {
