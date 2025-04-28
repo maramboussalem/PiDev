@@ -280,7 +280,7 @@ public class ListeUser implements Initializable {
             );
         }
     }
-    
+
     @FXML
     void btnStats(ActionEvent event) {
         try {
