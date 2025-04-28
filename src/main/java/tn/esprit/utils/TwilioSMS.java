@@ -15,7 +15,7 @@ public class TwilioSMS {
     static {
         Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
     }
-    
+
     public static void sendSMS(String to, String messageBody) {
         // Vérification et formatage du numéro de téléphone
         String formattedTo = formatPhoneNumber(to);
