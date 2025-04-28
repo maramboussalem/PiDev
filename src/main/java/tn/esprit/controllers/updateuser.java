@@ -291,7 +291,6 @@ public class updateuser implements Initializable {
             return;
         }
 
-        // Vérifier si le rôle a été modifié
         boolean roleChanged = !roleUserM.getValue().equalsIgnoreCase(utilisateur.getRole());
 
         utilisateur.setNom(nomUserM.getText());
@@ -351,7 +350,6 @@ public class updateuser implements Initializable {
                     ((Stage) window).close();
                 }
             }
-            // Ouvrir la fenêtre de connexion
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Utilisateur/login.fxml"));
             Parent root = loader.load();
             Stage loginStage = new Stage();
