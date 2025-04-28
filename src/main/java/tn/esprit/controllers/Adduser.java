@@ -295,7 +295,7 @@ public class Adduser implements Initializable {
             showAlert("Erreur", "Échec de l'envoi de l'e-mail de désactivation : " + e.getMessage());
         }
     }
-    
+
     private Utilisateur createUserFromForm() {
         List<String> roles = new ArrayList<>();
         roles.add(roleUser.getValue()); // Ajouter le rôle sélectionné

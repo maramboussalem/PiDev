@@ -11,7 +11,6 @@ import javafx.stage.Stage;
 import tn.esprit.entities.Utilisateur;
 import tn.esprit.services.ServiceUtilisateur;
 import tn.esprit.utils.TwilioSMS;
-
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
@@ -21,8 +20,7 @@ import java.util.logging.Logger;
 
 public class ChoixMethode {
 
-    @FXML
-    private Label errorLabel;
+    @FXML private Label errorLabel;
 
     private String email;
     private final ServiceUtilisateur service = new ServiceUtilisateur();
@@ -40,7 +38,6 @@ public class ChoixMethode {
                 errorLabel.setText("Utilisateur non trouvé pour cet email.");
                 return;
             }
-
             String code = TwilioSMS.generateVerificationCode();
             user.setVerification_code(code);
             service.modifier(user);
@@ -122,7 +119,6 @@ public class ChoixMethode {
         message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(mailTo));
         message.setSubject("Code de vérification pour réinitialisation du mot de passe");
 
-        // Corps HTML avec carreau + bouton blanc
         String htmlContent = "<!DOCTYPE html>" +
                 "<html lang='fr'>" +
                 "<head>" +
@@ -162,7 +158,6 @@ public class ChoixMethode {
                 "</body>" +
                 "</html>";
 
-        // Utiliser du HTML
         message.setContent(htmlContent, "text/html; charset=UTF-8");
 
         LOGGER.info("Tentative d'envoi de l'email à : " + mailTo);
@@ -173,11 +168,9 @@ public class ChoixMethode {
     @FXML
     void login(ActionEvent event) {
         try {
-            // Chargement du fichier login.fxml
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Utilisateur/login.fxml"));
             Parent root = loader.load();
 
-            // Récupérer la scène actuelle et changer son contenu
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();
