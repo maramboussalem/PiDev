@@ -58,11 +58,9 @@ public class MotdepasseOublie {
     @FXML
     void login(ActionEvent event) {
         try {
-            // Chargement du fichier login.fxml
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Utilisateur/login.fxml"));
             Parent root = loader.load();
 
-            // Récupérer la scène actuelle et changer son contenu
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();

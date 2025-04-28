@@ -31,14 +31,12 @@ public class VerificationCode {
 
     @FXML
     void verifierCode(ActionEvent event) {
-        // Récupération du code saisi par l'utilisateur
         String codeSaisi = codeVerification.getText();
 
         if (codeSaisi == null || codeSaisi.trim().isEmpty()) {
             errorLabel.setText("Veuillez entrer un code de vérification.");
             return;
         }
-
         try {
             // Récupération de l'utilisateur à partir de l'email
             Utilisateur user = service.getUserByEmail(email);
@@ -75,11 +73,9 @@ public class VerificationCode {
     @FXML
     void login(ActionEvent event) {
         try {
-            // Chargement du fichier login.fxml
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Utilisateur/login.fxml"));
             Parent root = loader.load();
-
-            // Récupérer la scène actuelle et changer son contenu
+            
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();
