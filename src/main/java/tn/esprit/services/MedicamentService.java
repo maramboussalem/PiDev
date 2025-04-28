@@ -97,16 +97,17 @@ public class MedicamentService implements IService<Medicament> {
             Files.createDirectories(uploadDir);
         }
 
-        // Check if image already exists in target directory
-        Path targetPath = uploadDir.resolve(imageName);
-        if (!Files.exists(targetPath)) {
-            // If this is a new image (shouldn't happen with current flow)
-            Files.copy(Paths.get(IMAGE_UPLOAD_DIR + imageName), targetPath, StandardCopyOption.REPLACE_EXISTING);
+        // Check if image is already in the target directory
+        Path sourcePath = Paths.get(imageName);
+        Path targetPath = uploadDir.resolve(sourcePath.getFileName().toString());
+
+        // Only copy if the source is different from target
+        if (!sourcePath.equals(targetPath) && Files.exists(sourcePath)) {
+            Files.copy(sourcePath, targetPath, StandardCopyOption.REPLACE_EXISTING);
         }
 
-        return imageName;
+        return targetPath.getFileName().toString();
     }
-
     @Override
     public void modifier(Medicament medicament) {
         String req = "UPDATE medicament SET fournisseur_id=?, nom_medicament=?, description=?, quantite=?, prix=?, type=?, expireat=?, image=?, isshown=? WHERE id=?";

@@ -62,9 +62,9 @@ public class AddMedicament {
     private void loadDefaultImage() {
         try {
             // Try multiple possible locations for the default image
-            InputStream defaultStream = getClass().getResourceAsStream("/images/medicaments.png");
+            InputStream defaultStream = getClass().getResourceAsStream("/tn/esprit/images/default-medicament.png");
             if (defaultStream == null) {
-                defaultStream = getClass().getResourceAsStream("/images/medicaments.png");
+                defaultStream = getClass().getResourceAsStream("/images/default-medicament.png");
             }
             if (defaultStream != null) {
                 imagePreview.setImage(new Image(defaultStream));
@@ -94,7 +94,7 @@ public class AddMedicament {
                 String imageName = saveImageFile(selectedImageFile);
                 medicament.setImage(imageName);
             } else {
-                medicament.setImage("medicament.png");
+                medicament.setImage("default-medicament.png");
             }
 
             medicamentService.ajouter(medicament);
@@ -112,7 +112,7 @@ public class AddMedicament {
 
     private String saveImageFile(File imageFile) throws IOException {
         // Create target directory if it doesn't exist
-        Path targetDir = Paths.get("src/main/resources/images/medicaments/");
+        Path targetDir = Paths.get("src/main/resources/tn/esprit/images/medicaments/");
         if (!Files.exists(targetDir)) {
             Files.createDirectories(targetDir);
         }
@@ -235,8 +235,12 @@ public class AddMedicament {
 
 
     private void closeWindow() {
-        Stage stage = (Stage) cancelBtn.getScene().getWindow();
-        stage.close();
+        if (cancelBtn != null && cancelBtn.getScene() != null) {
+            Stage stage = (Stage) cancelBtn.getScene().getWindow();
+            if (stage != null) {
+                stage.close();
+            }
+        }
     }
 
     private void showAlert(String title, String message, Alert.AlertType type) {
