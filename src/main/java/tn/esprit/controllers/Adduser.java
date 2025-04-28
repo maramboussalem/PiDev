@@ -211,8 +211,6 @@ public class Adduser implements Initializable {
         }
     }
 
-
-    // Nouvelle méthode : Envoyer un e-mail de désactivation au médecin
     private void sendDeactivationEmail(Utilisateur utilisateur) {
         // Paramètres du serveur SMTP (identiques à ceux de ListeUser)
         String host = "smtp.gmail.com";
@@ -297,8 +295,7 @@ public class Adduser implements Initializable {
             showAlert("Erreur", "Échec de l'envoi de l'e-mail de désactivation : " + e.getMessage());
         }
     }
-
-
+    
     private Utilisateur createUserFromForm() {
         List<String> roles = new ArrayList<>();
         roles.add(roleUser.getValue()); // Ajouter le rôle sélectionné
