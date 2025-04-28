@@ -51,7 +51,7 @@ public class ShowMedicamentController {
     private void loadMedicamentImage(String imageName) {
         try {
             if (imageName == null || imageName.isEmpty()) {
-                imageName = "default-medicament.png";
+                imageName = "medic.png";
             }
 
             // Try multiple possible locations
@@ -74,8 +74,8 @@ public class ShowMedicamentController {
         String[] possiblePaths = {
                 "/tn/esprit/images/medicaments/" + imageName,
                 "/images/medicaments/" + imageName,
-                "/tn/esprit/images/default-medicament.png",
-                "/images/default-medicament.png"
+                "/tn/esprit/images/medic.png",
+                "/images/medic.png"
         };
 
         for (String path : possiblePaths) {
@@ -89,9 +89,9 @@ public class ShowMedicamentController {
 
     private void loadDefaultImage() {
         try {
-            InputStream defaultStream = getClass().getResourceAsStream("/tn/esprit/images/default-medicament.png");
+            InputStream defaultStream = getClass().getResourceAsStream("/tn/esprit/images/medic.png");
             if (defaultStream == null) {
-                defaultStream = getClass().getResourceAsStream("/images/default-medicament.png");
+                defaultStream = getClass().getResourceAsStream("/images/medic.png");
             }
             if (defaultStream != null) {
                 medicamentImage.setImage(new Image(defaultStream));

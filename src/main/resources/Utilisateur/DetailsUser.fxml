@@ -119,11 +119,20 @@
                               <Font name="Bell MT" size="20.0" />
                            </font>
                         </Button>
-                        <Button layoutX="551.0" layoutY="587.0" mnemonicParsing="false" onAction="#supprimerUserD" prefHeight="46.0" prefWidth="482.0" style="-fx-background-color: #00b8bb; -fx-background-radius: 10;" text="Supprimer" textFill="WHITE">
+                        <Button layoutX="551.0" layoutY="587.0" mnemonicParsing="false" onAction="#supprimerUserD" prefHeight="46.0" prefWidth="482.0" style="-fx-background-color: #ff0000; -fx-background-radius: 10;" text="Supprimer" textFill="WHITE">
                            <font>
                               <Font name="Bell MT" size="20.0" />
                            </font>
                         </Button>
+                        <Label fx:id="editProfilePrompt" layoutX="313.0" layoutY="75.0" prefHeight="26.0" prefWidth="670.0">
+                           <font>
+                              <Font name="Bell MT" size="14.0" />
+                           </font>
+                        </Label>
+                        <Button layoutX="818.0" layoutY="21.0" mnemonicParsing="false" onAction="#afficherHistorique" prefHeight="35.0" prefWidth="230.0" style="-fx-background-color: #00b8bb;" text="Consulter l'historique" textFill="WHITE">
+                           <font>
+                              <Font name="Bell MT" size="18.0" />
+                           </font></Button>
                      </children>
                   </AnchorPane>
                </children>

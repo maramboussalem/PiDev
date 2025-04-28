@@ -298,19 +298,6 @@ public class IndexMedicament implements Initializable {
             cardsContainer.getChildren().add(card);
         }
     }
-    @FXML
-    private void gotopage(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fournisseur/index.fxml"));
-            Parent root = loader.load();
 
-            Stage currentStage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-            currentStage.setScene(new Scene(root));
-            currentStage.setTitle("Fournisseur Management");
-        } catch (IOException e) {
-            e.printStackTrace();
-            showAlert("Error", "Failed to open fournisseur page: " + e.getMessage(), Alert.AlertType.ERROR);
-        }
-    }
 
 }

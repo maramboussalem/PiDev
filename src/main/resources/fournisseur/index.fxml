@@ -28,7 +28,7 @@
 
     <center>
         <ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefHeight="650.0" prefWidth="1050.0" style="-fx-background: transparent;">
-            <FlowPane fx:id="cardsContainer" alignment="TOP_CENTER" hgap="20" style="-fx-padding: 20; -fx-background-color: transparent;" vgap="20" />
+            <FlowPane fx:id="cardsContainer" alignment="TOP_CENTER" hgap="20" prefHeight="81.0" prefWidth="1049.0" style="-fx-padding: 20; -fx-background-color: transparent;" vgap="20" />
         </ScrollPane>
     </center>
 </BorderPane>

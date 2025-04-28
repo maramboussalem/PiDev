@@ -12,7 +12,7 @@ public class AddFournisseurController {
     @FXML private TextField emailField;
     @FXML private TextField addressField;
     @FXML private TextField phoneField;
-    @FXML private Button saveBtn;
+    @FXML private Button ajouter;
     @FXML private Button cancelBtn;
 
     private final FournisseurService service = new FournisseurService();
@@ -63,10 +63,7 @@ public class AddFournisseurController {
         return true;
     }
 
-    @FXML
-    private void handleCancel() {
-        closeWindow();
-    }
+
 
     private void closeWindow() {
         Stage stage = (Stage) cancelBtn.getScene().getWindow();

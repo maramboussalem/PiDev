@@ -14,6 +14,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.SQLException;
@@ -53,11 +54,13 @@ public class DetailsUser {
     private Label telephoneD;
 
     @FXML
+    private Label editProfilePrompt;
+
+    @FXML
     private ImageView profileImage;
 
     private Utilisateur utilisateur;
     private ServiceUtilisateur serviceUtilisateur = new ServiceUtilisateur();
-
 
     public void setUtilisateur(Utilisateur utilisateur) {
         this.utilisateur = utilisateur;
@@ -69,13 +72,37 @@ public class DetailsUser {
 
         nomPrenonUserD.setText(utilisateur.getNom() + " " + utilisateur.getPrenom());
         emailD.setText(utilisateur.getEmail());
-        adresseD.setText(utilisateur.getAdresse() != null ? utilisateur.getAdresse() : "Non renseigné");
+        adresseD.setText(utilisateur.getAdresse() != null && !utilisateur.getAdresse().equals("Non Rempli") ? utilisateur.getAdresse() : "Non renseigné");
         telephoneD.setText(utilisateur.getTelephone() != null ? utilisateur.getTelephone() : "Non renseigné");
         roleUserD.setText(utilisateur.getRole());
-        sexeD.setText(utilisateur. getSexe());
-        AntecedentsD.setText(utilisateur.getAntecedents_medicaux() != null ? utilisateur.getAntecedents_medicaux() : "Non renseigné");
-        specialiteD.setText(utilisateur.getSpecialite() != null ? utilisateur.getSpecialite() : "Non renseigné");
-        hopitalD.setText(utilisateur.getHopital() != null ? utilisateur.getHopital() : "Non renseigné");
+        sexeD.setText(utilisateur.getSexe() != null && !utilisateur.getSexe().equals("Non Rempli") ? utilisateur.getSexe() : "Non renseigné");
+        AntecedentsD.setText(utilisateur.getAntecedents_medicaux() != null && !utilisateur.getAntecedents_medicaux().equals("Non Rempli") ? utilisateur.getAntecedents_medicaux() : "Non renseigné");
+        specialiteD.setText(utilisateur.getSpecialite() != null && !utilisateur.getSpecialite().equals("Non Rempli") ? utilisateur.getSpecialite() : "Non renseigné");
+        hopitalD.setText(utilisateur.getHopital() != null && !utilisateur.getHopital().equals("Non Rempli") ? utilisateur.getHopital() : "Non renseigné");
+
+        // Vérifier les champs incomplets en fonction du rôle
+        boolean hasIncompleteFields = false;
+        if ("patient".equalsIgnoreCase(utilisateur.getRole())) {
+            // Pour un patient, vérifier uniquement les antécédents médicaux
+            hasIncompleteFields = utilisateur.getAntecedents_medicaux() == null ||
+                    utilisateur.getAntecedents_medicaux().equals("Non Rempli");
+        } else if ("medecin".equalsIgnoreCase(utilisateur.getRole())) {
+            // Pour un médecin, vérifier la spécialité et l'hôpital
+            hasIncompleteFields = utilisateur.getSpecialite() == null ||
+                    utilisateur.getSpecialite().equals("Non Rempli") ||
+                    utilisateur.getHopital() == null ||
+                    utilisateur.getHopital().equals("Non Rempli");
+        }
+
+        // Afficher le message approprié
+        if (hasIncompleteFields) {
+            editProfilePrompt.setText("Certaines informations sont incomplètes. Cliquez sur 'Modifier' pour compléter votre profil.");
+            editProfilePrompt.setStyle("-fx-text-fill: orange; -fx-font-size: 14px;");
+        } else {
+            editProfilePrompt.setText("Profil complet ! Vous pouvez toujours modifier vos informations.");
+            editProfilePrompt.setStyle("-fx-text-fill: green; -fx-font-size: 14px;");
+        }
+
         loadProfileImage();
     }
 
@@ -105,7 +132,7 @@ public class DetailsUser {
 
     private void loadDefaultImage() {
         try {
-            InputStream defaultImageStream = getClass().getResourceAsStream("/images/default.png");
+            InputStream defaultImageStream = getClass().getResourceAsStream("/images/default.jpg");
             if (defaultImageStream != null) {
                 Image defaultImage = new Image(defaultImageStream);
                 profileImage.setImage(defaultImage);
@@ -118,23 +145,6 @@ public class DetailsUser {
             profileImage.setImage(null);
         }
     }
-
-   /* private void afficherDetails() {
-        if (utilisateur != null) {
-            System.out.println("Affichage des détails de l'utilisateur : " + utilisateur);
-            nomPrenonUserD.setText(utilisateur.getNom() + " " + utilisateur.getPrenom());
-            emailD.setText(utilisateur.getEmail());
-            adresseD.setText(utilisateur.getAdresse());
-            telephoneD.setText(utilisateur.getTelephone());
-            roleUserD.setText(utilisateur.getRole());
-            sexeD.setText(utilisateur.getSexe());
-            specialiteD.setText(utilisateur.getSpecialite());
-            AntecedentsD.setText(utilisateur.getAntecedents_medicaux());
-            hopitalD.setText(utilisateur.getHopital());
-        } else {
-            System.out.println("Aucun utilisateur trouvé !");
-        }
-    }*/
 
     @FXML
     void ModifierUserD(ActionEvent event) {
@@ -165,7 +175,6 @@ public class DetailsUser {
                 System.err.println("Erreur lors de la suppression de l'utilisateur : " + e.getMessage());
             }
         } else {
-            // Si l'utilisateur annule, ne rien faire
             System.out.println("Suppression annulée par l'utilisateur.");
         }
     }
@@ -179,7 +188,7 @@ public class DetailsUser {
             if (controller instanceof updateuser) {
                 updateuser updateController = (updateuser) controller;
                 updateController.setUtilisateur(utilisateur);
-                updateController.setDetailsUserController(this); // Passer la référence de DetailsUser
+                updateController.setDetailsUserController(this);
             } else {
                 System.err.println("Le contrôleur ne possède pas de méthode setUtilisateur : " + controller.getClass().getName());
             }
@@ -228,6 +237,29 @@ public class DetailsUser {
             }
         } catch (SQLException e) {
             System.err.println("Erreur lors du rechargement des données de l'utilisateur : " + e.getMessage());
+        }
+    }
+
+    @FXML
+    void afficherHistorique(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Utilisateur/historique.fxml"));
+            Parent root = loader.load();
+
+            HistoriqueController historiqueController = loader.getController();
+            historiqueController.setUtilisateur(utilisateur);
+
+            Stage stage = new Stage();
+            stage.setTitle("Historique des activités");
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            System.err.println("Erreur lors de l'ouverture de l'interface historique : " + e.getMessage());
+            Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+            errorAlert.setTitle("Erreur");
+            errorAlert.setHeaderText(null);
+            errorAlert.setContentText("Impossible d'ouvrir l'historique : " + e.getMessage());
+            errorAlert.showAndWait();
         }
     }
 }

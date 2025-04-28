@@ -26,30 +26,6 @@ public class DashboardMedecin {
     @FXML
     private ImageView imageProfil;
 
-    @FXML
-    void logOut(ActionEvent event) {
-        try {
-            // Fermer la fenêtre actuelle
-            Stage currentStage = (Stage) contentArea.getScene().getWindow();
-            currentStage.close();
-
-            // Charger la page de connexion (login.fxml)
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Utilisateur/login.fxml"));
-            Parent root = loader.load();
-
-            // Créer une nouvelle scène et une nouvelle fenêtre
-            Stage stage = new Stage();
-            stage.setTitle("Connexion");
-            stage.setScene(new Scene(root));
-
-            // Afficher la nouvelle fenêtre
-            stage.show();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     private Utilisateur utilisateurConnecte;
 
     @FXML
@@ -71,9 +47,8 @@ public class DashboardMedecin {
     }
     // Méthode pour charger l'image de profil
     private void loadProfileImage() {
-        if (utilisateurConnecte != null && utilisateurConnecte.getImg_url() != null && !utilisateurConnecte.getImg_url().isEmpty() && !"null".equals(utilisateurConnecte.getImg_url()) && !"default.png".equals(utilisateurConnecte.getImg_url())) {
+        if (utilisateurConnecte != null && utilisateurConnecte.getImg_url() != null && !utilisateurConnecte.getImg_url().isEmpty() && !"null".equals(utilisateurConnecte.getImg_url()) && !"default.jpg".equals(utilisateurConnecte.getImg_url())) {
             try {
-                // Chemin vers le répertoire des images
                 String imagePath = "src/main/resources/images/profiles/" + utilisateurConnecte.getImg_url();
                 File imageFile = new File(imagePath);
 
@@ -95,11 +70,10 @@ public class DashboardMedecin {
         }
     }
 
-    // Méthode pour charger l'image par défaut
     private void loadDefaultImage() {
         try {
             // Charger l'image par défaut depuis les ressources
-            Image defaultImage = new Image(getClass().getResourceAsStream("/images/default.png"));
+            Image defaultImage = new Image(getClass().getResourceAsStream("/images/default.jpg"));
             if (defaultImage != null) {
                 imageProfil.setImage(defaultImage);
                 System.out.println("Image par défaut chargée avec succès");
@@ -119,7 +93,6 @@ public class DashboardMedecin {
                 System.out.println("Aucun utilisateur connecté !");
                 return;
             }
-
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Utilisateur/DetailsUser.fxml"));
             Parent root = loader.load();
 
@@ -132,6 +105,7 @@ public class DashboardMedecin {
             e.printStackTrace();
         }
     }
+
     @FXML
     void refreshPage(ActionEvent event) {
         if (utilisateurConnecte != null) {
@@ -142,6 +116,7 @@ public class DashboardMedecin {
             loadDefaultImage();
         }
     }
+
     @FXML
     void listConsultation(ActionEvent event) {
         try {
@@ -192,5 +167,25 @@ public class DashboardMedecin {
             e.printStackTrace();
         }
 
+    }
+
+    @FXML
+    void logOut(ActionEvent event) {
+        try {
+            Stage currentStage = (Stage) contentArea.getScene().getWindow();
+            currentStage.close();
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Utilisateur/login.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = new Stage();
+            stage.setTitle("Connexion");
+            stage.setScene(new Scene(root));
+
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
