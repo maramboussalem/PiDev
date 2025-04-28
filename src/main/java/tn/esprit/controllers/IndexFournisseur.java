@@ -134,8 +134,8 @@ public class IndexFournisseur implements Initializable {
 
         // Details
         Label emailLabel = new Label("Email: " + supplier.getEmail());
-        Label addressLabel = new Label("Address: " + supplier.getAdresse());
-        Label phoneLabel = new Label("Phone: " + supplier.getTelephone());
+        Label addressLabel = new Label("Adresse: " + supplier.getAdresse());
+        Label phoneLabel = new Label("Telephone: " + supplier.getTelephone());
         emailLabel.setStyle("-fx-text-fill: black;");
         addressLabel.setStyle("-fx-text-fill: black;");
         phoneLabel.setStyle("-fx-text-fill: black;");
@@ -163,7 +163,7 @@ public class IndexFournisseur implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fournisseur/AddFournisseur.fxml"));
             Parent root = loader.load();
 
-            AddFournisseurController controller = loader.getController();
+            tn.esprit.controllers.AddFournisseurController controller = loader.getController();
             controller.setRefreshCallback(this::refreshCards);
 
             Stage stage = new Stage();
@@ -181,7 +181,7 @@ public class IndexFournisseur implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fournisseur/EditFournisseur.fxml"));
             Parent root = loader.load();
 
-            EditFournisseurController controller = loader.getController();
+            tn.esprit.controllers.EditFournisseurController controller = loader.getController();
             controller.setSupplierData(supplier);
             controller.setRefreshCallback(this::refreshCards);
 

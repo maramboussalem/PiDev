@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
@@ -9,37 +9,24 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane prefWidth="1200.0" prefHeight="800.0"
-            maxWidth="Infinity" maxHeight="Infinity"
-            style="-fx-background-color: #ffffff; -fx-background-radius: 30; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 5);"
-            xmlns="http://javafx.com/javafx/22"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="tn.esprit.controllers.IndexMedicaments">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="800" prefWidth="1200" style="-fx-background-color:#fff;-fx-background-radius:30;-fx-effect:dropshadow(gaussian,rgba(0,0,0,0.1),10,0,0,5);" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.IndexMedicaments">
 
     <top>
-        <VBox style="-fx-background-color: #00b8bb; -fx-padding: 15;">
-            <HBox alignment="CENTER" spacing="20">
-                <Label style="-fx-text-fill: white; -fx-font-size: 24; -fx-font-weight: bold;" text="Liste des Medicaments" />
+        <VBox style="-fx-background-color:#00b8bb;-fx-padding:15">
+            <HBox alignment="CENTER_RIGHT" spacing="20">
+                <Button fx:id="panierButton" style="-fx-background-color:white;-fx-text-fill:#00b8bb;-fx-font-weight:bold;-fx-background-radius:10;-fx-padding:5 15" text="Panier (0)" />
             </HBox>
-
-            <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-padding: 15 0 0 0;">
-                <TextField fx:id="searchField" promptText="Rechercher par nom..."
-                           style="-fx-pref-width: 300; -fx-padding: 5; -fx-background-radius: 10;" />
-                <ComboBox fx:id="sortComboBox" promptText="Trier par..."
-                          style="-fx-pref-width: 200; -fx-background-radius: 10; -fx-background-color: #00b8bb;" />
-                <ComboBox fx:id="filterComboBox" promptText="Filtrer par..."
-                          style="-fx-pref-width: 200; -fx-background-radius: 10; -fx-background-color: #00b8bb;" />
+            <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-padding:15 0 0 0">
+                <TextField fx:id="searchField" promptText="Rechercher par nom..." style="-fx-pref-width:300;-fx-padding:5;-fx-background-radius:10" />
+                <ComboBox fx:id="sortComboBox" promptText="Trier par..." style="-fx-pref-width:200;-fx-background-radius:10;-fx-background-color:#00b8bb" />
+                <ComboBox fx:id="filterComboBox" promptText="Filtrer par..." style="-fx-pref-width:200;-fx-background-radius:10;-fx-background-color:#00b8bb" />
             </HBox>
         </VBox>
     </top>
 
     <center>
-        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefHeight="700.0"
-                    style="-fx-background: transparent;">
-            <FlowPane fx:id="cardsContainer"
-                      alignment="TOP_CENTER"
-                      hgap="20" vgap="20"
-                      style="-fx-padding: 20; -fx-background-color: transparent;" />
+        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" maxHeight="400" style="-fx-background-color:transparent">
+            <FlowPane fx:id="cardsContainer" alignment="TOP_CENTER" columnHalignment="CENTER" hgap="20" prefHeight="153.0" prefWidth="1198.0" rowValignment="TOP" style="-fx-padding:20;-fx-background-color:transparent" vgap="20" />
         </ScrollPane>
     </center>
 </BorderPane>

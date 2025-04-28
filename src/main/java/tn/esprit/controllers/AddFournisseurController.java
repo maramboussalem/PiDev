@@ -66,9 +66,14 @@ public class AddFournisseurController {
 
 
     private void closeWindow() {
-        Stage stage = (Stage) cancelBtn.getScene().getWindow();
-        stage.close();
+        if (cancelBtn != null && cancelBtn.getScene() != null) {
+            Stage stage = (Stage) cancelBtn.getScene().getWindow();
+            if (stage != null) {
+                stage.close();
+            }
+        }
     }
+
 
     private void showAlert(String title, String message, Alert.AlertType type) {
         Alert alert = new Alert(type);

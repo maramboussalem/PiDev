@@ -1,6 +1,8 @@
 package tn.esprit.controllers;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -59,79 +61,33 @@ public class EditMedicament {
     }
 
     private void loadMedicamentImage(String imageName) {
-        try {
-            if (imageName == null || imageName.isEmpty()) {
-                imageName = "default-medicament.png";
-            }
+        Path imagePath = Paths.get("src/main/resources/images/medicaments/" + imageName);
+        imagePreview.setImage(new Image(imagePath.toUri().toString()));
 
-            InputStream imageStream = tryImageLocations(imageName);
 
-            if (imageStream != null) {
-                imagePreview.setImage(new Image(imageStream));
-            } else {
-                System.err.println("Could not load image: " + imageName);
-                loadDefaultImage();
-            }
-        } catch (Exception e) {
-            System.err.println("Error loading image: " + e.getMessage());
-            loadDefaultImage();
-        }
+
     }
 
-    private InputStream tryImageLocations(String imageName) {
-        String[] possiblePaths = {
-                "/tn/esprit/images/medicaments/" + imageName,
-                "/images/medicaments/" + imageName,
-                "/tn/esprit/images/default-medicament.png",
-                "/images/default-medicament.png"
-        };
 
-        for (String path : possiblePaths) {
-            InputStream stream = getClass().getResourceAsStream(path);
-            if (stream != null) {
-                return stream;
-            }
-        }
-        return null;
-    }
-
-    private void loadDefaultImage() {
-        try {
-            InputStream defaultStream = getClass().getResourceAsStream("/images/medic/medic.png");
-            if (defaultStream == null) {
-                defaultStream = getClass().getResourceAsStream("/images/medic.png");
-            }
-            if (defaultStream != null) {
-                imagePreview.setImage(new Image(defaultStream));
-            }
-        } catch (Exception e) {
-            System.err.println("Failed to load default image");
-        }
-    }
 
     @FXML
-    private void handleImageUpload() {      //telecharger
+    private void handleImageUpload() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Select Medication Image");
         fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg"),
-                new FileChooser.ExtensionFilter("All Files", "*.*")
+                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg")
         );
 
         File selectedFile = fileChooser.showOpenDialog(uploadImageBtn.getScene().getWindow());
 
         if (selectedFile != null) {
             try {
-                Path targetDir = Paths.get("src/main/resources/tn/esprit/images/medicaments/");
-                if (!Files.exists(targetDir)) {
-                    Files.createDirectories(targetDir);
-                }
-
-                String uniqueName = System.currentTimeMillis() + "_" + selectedFile.getName();
-                Path destination = targetDir.resolve(uniqueName);
+                // Copy the file to the target directory
+                Path destination = Paths.get("src/main/resources/images/medicaments/" + selectedFile.getName());
                 Files.copy(selectedFile.toPath(), destination, StandardCopyOption.REPLACE_EXISTING);
 
-                imagePath = uniqueName;
+                // Update the image path and display
+                imagePath = selectedFile.getName();
                 imagePreview.setImage(new Image(destination.toUri().toString()));
             } catch (IOException e) {
                 showAlert("Error", "Failed to upload image: " + e.getMessage(), Alert.AlertType.ERROR);
@@ -139,9 +95,8 @@ public class EditMedicament {
             }
         }
     }
-
     @FXML
-    private void handleSubmit() {
+    private void handleSubmit(ActionEvent event) {
         if (!validateInputs()) return;
 
         try {
@@ -162,7 +117,8 @@ public class EditMedicament {
                 refreshCallback.run();
             }
 
-            closeWindow();
+            Node source = (Node) event.getSource(); // get the source of the event
+            source.getScene().getWindow().hide();
         } catch (Exception e) {
             showAlert("Error", "Failed to update medication: " + e.getMessage(), Alert.AlertType.ERROR);
             e.printStackTrace();

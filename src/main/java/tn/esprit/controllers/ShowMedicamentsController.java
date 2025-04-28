@@ -8,6 +8,8 @@ import tn.esprit.entities.Medicament;
 import tn.esprit.services.FournisseurService;
 
 import java.io.InputStream;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class ShowMedicamentsController {
     @FXML private Label titleLabel;
@@ -49,57 +51,15 @@ public class ShowMedicamentsController {
     }
 
     private void loadMedicamentImage(String imageName) {
-        try {
-            if (imageName == null || imageName.isEmpty()) {
-                imageName = "default-medicament.png";
-            }
 
-            // Try multiple possible locations
-            InputStream imageStream = tryImageLocations(imageName);
 
-            if (imageStream != null) {
-                medicamentImage.setImage(new Image(imageStream));
-            } else {
-                System.err.println("Could not load image: " + imageName);
-                loadDefaultImage();
-            }
-        } catch (Exception e) {
-            System.err.println("Error loading image: " + e.getMessage());
-            loadDefaultImage();
-        }
+            Path imagePath = Paths.get("src/main/resources/images/medicaments/" + imageName);
+            medicamentImage.setImage(new Image(imagePath.toUri().toString()));
+
+
     }
 
-    private InputStream tryImageLocations(String imageName) {
-        // Try multiple possible paths
-        String[] possiblePaths = {
-                "/tn/esprit/images/medicaments/" + imageName,
-                "/images/medicaments/" + imageName,
-                "/tn/esprit/images/medic.png",
-                "/images/medic.png"
-        };
 
-        for (String path : possiblePaths) {
-            InputStream stream = getClass().getResourceAsStream(path);
-            if (stream != null) {
-                return stream;
-            }
-        }
-        return null;
-    }
-
-    private void loadDefaultImage() {
-        try {
-            InputStream defaultStream = getClass().getResourceAsStream("/tn/esprit/images/medic.png");
-            if (defaultStream == null) {
-                defaultStream = getClass().getResourceAsStream("/images/medic.png");
-            }
-            if (defaultStream != null) {
-                medicamentImage.setImage(new Image(defaultStream));
-            }
-        } catch (Exception e) {
-            System.err.println("Failed to load default image");
-        }
-    }
 
     @FXML
     private void handleBack() {

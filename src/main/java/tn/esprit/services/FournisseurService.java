@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 public class FournisseurService implements IService<Fournisseur>{
 
-        private Connection connection = MyDataBase.getInstance().getMyConnection();
+    private Connection connection  = MyDataBase.getInstance().getMyConnection();
 
     public void ajouter(Fournisseur fournisseur) {
         String query = "INSERT INTO fournisseur(nom_fournisseur, adresse, telephone, email) VALUES (?, ?, ?, ?)";

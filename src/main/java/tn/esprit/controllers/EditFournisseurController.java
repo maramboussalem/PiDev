@@ -12,7 +12,6 @@ public class EditFournisseurController {
     @FXML private TextField emailField;
     @FXML private TextField addressField;
     @FXML private TextField phoneField;
-    @FXML private Button updateBtn;
     @FXML private Button cancelBtn;
 
     private Fournisseur supplier;
@@ -71,9 +70,6 @@ public class EditFournisseurController {
     }
 
     @FXML
-    private void handleCancel() {
-        closeWindow();
-    }
 
     private void closeWindow() {
         Stage stage = (Stage) cancelBtn.getScene().getWindow();

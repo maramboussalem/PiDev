@@ -10,9 +10,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane style="-fx-background-color: #f5f5f5;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.IndexFournisseur">
+<BorderPane style="-fx-background-color: #00b8bb;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.IndexFournisseur">
     <top>
-        <VBox style="-fx-background-color: #2c3e50; -fx-padding: 15;">
+        <VBox style="-fx-background-color: #00b8bb; -fx-padding: 15;">
             <HBox alignment="CENTER" spacing="20">
                 <Label style="-fx-text-fill: white; -fx-font-size: 24; -fx-font-weight: bold;" text="Gestion des fournisseurs" />
                 <Button fx:id="addBtn" style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8 15; -fx-background-radius: 5;" text="Ajouter un fournisseur" />
@@ -27,8 +27,8 @@
     </top>
 
     <center>
-        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefHeight="650.0" prefWidth="1050.0" style="-fx-background: transparent;">
-            <FlowPane fx:id="cardsContainer" alignment="TOP_CENTER" hgap="20" prefHeight="81.0" prefWidth="1049.0" style="-fx-padding: 20; -fx-background-color: transparent;" vgap="20" />
+        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefHeight="650.0" prefWidth="1050.0" style="-fx-background-color: transparent;">
+            <FlowPane fx:id="cardsContainer" alignment="TOP_CENTER" hgap="20" style="-fx-padding: 20; -fx-background-color: transparent;" vgap="20" />
         </ScrollPane>
     </center>
 </BorderPane>

@@ -33,10 +33,7 @@ public class IndexMedicament implements Initializable {
     @FXML private FlowPane cardsContainer;
     @FXML private TextField searchField;
     @FXML private ComboBox<String> sortComboBox;
-
-    @FXML
-    private ComboBox<String> filterComboBox;
-
+    @FXML private ComboBox<String> filterComboBox;
     private final MedicamentService service = new MedicamentService();
 
     @Override
@@ -84,7 +81,20 @@ public class IndexMedicament implements Initializable {
         }
 
         // Apply additional filters
-
+        String filter = filterComboBox.getValue();
+        if (filter != null) {
+            switch (filter) {
+                case "Expiring Soon (7 days)":
+                    break;
+                case "Expiring Soon (30 days)":
+                    break;
+                case "Low Stock (<10)":
+                    medications = medications.stream()
+                            .filter(m -> m.getQuantite() < 10)
+                            .toList();
+                    break;
+            }
+        }
 
         // Apply sorting
         String sort = sortComboBox.getValue();
@@ -276,7 +286,7 @@ public class IndexMedicament implements Initializable {
                     imageName = "default-medicament.png";
                 }
 
-                Path imagePath = Paths.get("src/main/resources/images/medicaments/" + imageName);
+                Path imagePath = Paths.get("src/main/resources/tn/esprit/images/medicaments/" + imageName);
                 if (Files.exists(imagePath)) {
                     imageView.setImage(new Image(imagePath.toUri().toString()));
                 } else {
@@ -299,5 +309,20 @@ public class IndexMedicament implements Initializable {
         }
     }
 
+    @FXML
+    void gotopage(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fournisseur/index.fxml"));
+            Parent root = loader.load();
 
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setScene(new Scene(root));
+            stage.setTitle("Fournisseur Management");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert("Error", "Failed to open fournisseur page: " + e.getMessage(), Alert.AlertType.ERROR);
+        }
+    }
 }
