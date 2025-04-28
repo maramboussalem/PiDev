@@ -97,9 +97,9 @@ public class EditMedicament {
 
     private void loadDefaultImage() {
         try {
-            InputStream defaultStream = getClass().getResourceAsStream("/tn/esprit/images/default-medicament.png");
+            InputStream defaultStream = getClass().getResourceAsStream("/images/medic/medic.png");
             if (defaultStream == null) {
-                defaultStream = getClass().getResourceAsStream("/images/default-medicament.png");
+                defaultStream = getClass().getResourceAsStream("/images/medic.png");
             }
             if (defaultStream != null) {
                 imagePreview.setImage(new Image(defaultStream));
@@ -110,7 +110,7 @@ public class EditMedicament {
     }
 
     @FXML
-    private void handleImageUpload() {
+    private void handleImageUpload() {      //telecharger
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Select Medication Image");
         fileChooser.getExtensionFilters().addAll(

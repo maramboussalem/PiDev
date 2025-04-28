@@ -62,7 +62,7 @@ public class AddMedicament {
     private void loadDefaultImage() {
         try {
             // Try multiple possible locations for the default image
-            InputStream defaultStream = getClass().getResourceAsStream("/images/medicaments.png");
+            InputStream defaultStream = getClass().getResourceAsStream("/images/medic.png");
             if (defaultStream == null) {
                 defaultStream = getClass().getResourceAsStream("/images/medicaments.png");
             }

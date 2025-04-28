@@ -87,7 +87,7 @@ public class ShowFournisseurController implements Initializable {
 
     private void loadFournisseurDetails() {
         try {
-            supplierImage.setImage(new Image(getClass().getResourceAsStream("/images/supplier.png")));
+            supplierImage.setImage(new Image(getClass().getResourceAsStream("/images/medic/supplier.png")));
         } catch (Exception e) {
             System.err.println("Error loading supplier image: " + e.getMessage());
         }
@@ -95,14 +95,14 @@ public class ShowFournisseurController implements Initializable {
         nameLabel.setText(fournisseur.getNom_fournisseur());
         emailLabel.setText("Email: " + fournisseur.getEmail());
         addressLabel.setText("Adresse: " + fournisseur.getAdresse());
-        phoneLabel.setText("Téléphone: " + fournisseur.getTelephone());
+        phoneLabel.setText("Telephone: " + fournisseur.getTelephone());
     }
 
     private void loadMedicaments() {
 
         List<Medicament> medicaments = medicamentService.getMedicamentsByFournisseur(fournisseur.getId());
         medicamentsListView.getItems().setAll(medicaments);
-        medicamentCountLabel.setText("Nombre de médicaments: " + medicaments.size());
+        medicamentCountLabel.setText("Nombre de medicaments: " + medicaments.size());
         System.out.println(medicaments);
         System.out.println(fournisseur.getId());
 

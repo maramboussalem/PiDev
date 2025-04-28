@@ -22,22 +22,22 @@
                   <Font name="Bell MT" size="20.0" />
                </font>
             </Button>
-            <Button alignment="TOP_LEFT" layoutX="57.0" layoutY="413.0" mnemonicParsing="false" onAction="#medicament" prefHeight="35.0" prefWidth="75.0" style="-fx-background-color: #00b8bb;" text="Stock" textFill="WHITE">
+            <Button alignment="TOP_LEFT" layoutX="48.0" layoutY="413.0" mnemonicParsing="false" onAction="#medicament" prefHeight="46.0" prefWidth="78.0" style="-fx-background-color: #00b8bb;" text="Stock" textFill="WHITE">
                <font>
                   <Font name="Bell MT" size="20.0" />
                </font>
             </Button>
-            <Button alignment="TOP_LEFT" layoutX="53.0" layoutY="508.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="280.0" style="-fx-background-color: #00b8bb;" text="Reclamation" textFill="WHITE">
+            <Button alignment="TOP_LEFT" layoutX="53.0" layoutY="529.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="280.0" style="-fx-background-color: #00b8bb;" text="Reclamation" textFill="WHITE">
                <font>
                   <Font name="Bell MT" size="20.0" />
                </font>
             </Button>
-            <Button alignment="TOP_LEFT" layoutX="53.0" layoutY="557.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="280.0" style="-fx-background-color: #00b8bb;" text="Service Medicale" textFill="WHITE">
+            <Button alignment="TOP_LEFT" layoutX="53.0" layoutY="585.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="280.0" style="-fx-background-color: #00b8bb;" text="Service Medicale" textFill="WHITE">
                <font>
                   <Font name="Bell MT" size="20.0" />
                </font>
             </Button>
-            <Button alignment="TOP_LEFT" layoutX="53.0" layoutY="617.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="280.0" style="-fx-background-color: #00b8bb;" text="Compagne" textFill="WHITE">
+            <Button alignment="TOP_LEFT" layoutX="53.0" layoutY="638.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="280.0" style="-fx-background-color: #00b8bb;" text="Compagne" textFill="WHITE">
                <font>
                   <Font name="Bell MT" size="20.0" />
                </font>
@@ -67,17 +67,17 @@
                   <Image url="@images/stock.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="36.0" fitWidth="32.0" layoutX="13.0" layoutY="531.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="36.0" fitWidth="32.0" layoutX="13.0" layoutY="535.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/reclamation.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="30.0" fitWidth="34.0" layoutX="8.0" layoutY="580.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="30.0" fitWidth="34.0" layoutX="8.0" layoutY="593.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/service.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="30.0" fitWidth="34.0" layoutX="12.0" layoutY="626.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="30.0" fitWidth="34.0" layoutX="12.0" layoutY="654.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/comm.jpg" />
                </image>
@@ -109,7 +109,7 @@
                   <Image url="@images/logodach.jpg" />
                </image>
             </ImageView>
-            <Button alignment="TOP_LEFT" layoutX="57.0" layoutY="461.0" mnemonicParsing="false" onAction="#Fournisseur" prefHeight="35.0" prefWidth="92.0" style="-fx-background-color: #00b8bb;" text="Fournisseur" textFill="WHITE">
+            <Button alignment="TOP_LEFT" layoutX="48.0" layoutY="464.0" mnemonicParsing="false" onAction="#Fournisseur" prefHeight="46.0" prefWidth="112.0" style="-fx-background-color: #00b8bb;" text="fournisseur" textFill="WHITE">
                <font>
                   <Font name="Bell MT" size="20.0" />
                </font>
