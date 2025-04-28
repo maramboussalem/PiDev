@@ -36,7 +36,6 @@ public class HistoriqueController {
     }
 
     private void initializeTable() {
-        // Configurer les colonnes
         timestampColumn.setCellValueFactory(new PropertyValueFactory<>("timestamp"));
         eventTypeColumn.setCellValueFactory(new PropertyValueFactory<>("eventType"));
 
@@ -91,8 +90,7 @@ public class HistoriqueController {
                 }
             }
         });
-
-        // Charger les données
+        
         loadHistory();
     }
 
