@@ -1,5 +1,6 @@
 package tn.esprit.services;
 
+import tn.esprit.entities.ConnectionHistory;
 import tn.esprit.entities.Utilisateur;
 import tn.esprit.utils.MyDataBase;
 import org.json.JSONArray;
@@ -15,9 +16,35 @@ public class ServiceUtilisateur implements IService<Utilisateur> {
     public ServiceUtilisateur() {
     }
 
+    // Méthode privée pour sauvegarder un événement dans connection_history
+    private void saveHistory(int utilisateurId, String eventType) throws SQLException {
+        String sql = "INSERT INTO `connection_history` (`utilisateur_id`, `timestamp`, `event_type`) VALUES (?, NOW(), ?)";
+        PreparedStatement pst = connection.prepareStatement(sql);
+        pst.setInt(1, utilisateurId);
+        pst.setString(2, eventType);
+        pst.executeUpdate();
+    }
+    public List<ConnectionHistory> getConnectionHistory(int utilisateurId) throws SQLException {
+        List<ConnectionHistory> history = new ArrayList<>();
+        String sql = "SELECT * FROM connection_history WHERE utilisateur_id = ? ORDER BY timestamp DESC";
+        PreparedStatement pst = connection.prepareStatement(sql);
+        pst.setInt(1, utilisateurId);
+        ResultSet rs = pst.executeQuery();
+
+        while (rs.next()) {
+            ConnectionHistory entry = new ConnectionHistory();
+            entry.setId(rs.getInt("id"));
+            entry.setUtilisateurId(rs.getInt("utilisateur_id"));
+            entry.setTimestamp(rs.getTimestamp("timestamp"));
+            entry.setEventType(rs.getString("event_type"));
+            history.add(entry);
+        }
+
+        return history;
+    }
     public void ajouter(Utilisateur utilisateur) throws SQLException {
         String sql = "INSERT INTO `utilisateur`(`nom`, `prenom`, `email`, `sexe`, `adresse`, `telephone`, `role`, `roles`, `antecedents_medicaux`, `specialite`, `hopital`, `motdepasse`, `verification_code`, `captcha`, `img_url`, `activation_token`, `is_active`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        PreparedStatement pst = connection.prepareStatement(sql);
+        PreparedStatement pst = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
         String hashedPassword = BCrypt.hashpw(utilisateur.getMotdepasse(), BCrypt.gensalt());
 
@@ -54,6 +81,14 @@ public class ServiceUtilisateur implements IService<Utilisateur> {
         pst.setBoolean(17, utilisateur.isIs_active());
         System.out.println("Ajout dans la BD, img_url = " + utilisateur.getImg_url());
         pst.executeUpdate();
+
+
+        // Récupérer l'ID généré pour enregistrer l'événement d'inscription
+        ResultSet rs = pst.getGeneratedKeys();
+        if (rs.next()) {
+            int utilisateurId = rs.getInt(1);
+            saveHistory(utilisateurId, "INSCRIPTION");
+        }
     }
 
     public void modifier(Utilisateur utilisateur) throws SQLException {
@@ -188,6 +223,9 @@ public class ServiceUtilisateur implements IService<Utilisateur> {
                 if (!utilisateur.isIs_active()) {
                     throw new SQLException("Votre compte n'est pas activé.");
                 }
+
+                // Enregistrer l'événement de connexion
+                saveHistory(utilisateur.getId(), "CONNEXION");
                 return utilisateur; // Retourne l'utilisateur pour gérer la redirection
             } else {
                 throw new SQLException("Mot de passe incorrect.");
@@ -251,7 +289,6 @@ public class ServiceUtilisateur implements IService<Utilisateur> {
             throw new SQLException("Utilisateur non trouvé avec l'ID : " + id);
         }
     }
-
 
     public List<Utilisateur> getPatients() throws SQLException {
         List<Utilisateur> patients = new ArrayList<>();
@@ -333,9 +370,55 @@ public class ServiceUtilisateur implements IService<Utilisateur> {
 
         return medecins;
     }
+    public void updateStatus(int id, boolean isActive) throws SQLException {
+        String sql = "UPDATE `utilisateur` SET `is_active`=? WHERE `id`=?";
+        PreparedStatement pst = connection.prepareStatement(sql);
+        pst.setBoolean(1, isActive);
+        pst.setInt(2, id);
+        pst.executeUpdate();
+    }
 
 
+    public Utilisateur getUserByEmail(String email) throws SQLException {
+        String sql = "SELECT * FROM utilisateur WHERE email = ?";
+        PreparedStatement pst = connection.prepareStatement(sql);
+        pst.setString(1, email);
+        ResultSet rs = pst.executeQuery();
 
+        if (rs.next()) {
+            Utilisateur utilisateur = new Utilisateur();
+            utilisateur.setId(rs.getInt("id"));
+            utilisateur.setNom(rs.getString("nom"));
+            utilisateur.setPrenom(rs.getString("prenom"));
+            utilisateur.setEmail(rs.getString("email"));
+            utilisateur.setSexe(rs.getString("sexe"));
+            utilisateur.setAdresse(rs.getString("adresse"));
+            utilisateur.setTelephone(rs.getString("telephone"));
+            utilisateur.setRole(rs.getString("role"));
+            utilisateur.setAntecedents_medicaux(rs.getString("antecedents_medicaux"));
+            utilisateur.setSpecialite(rs.getString("specialite"));
+            utilisateur.setHopital(rs.getString("hopital"));
+            utilisateur.setMotdepasse(rs.getString("motdepasse"));
+            utilisateur.setIs_active(rs.getBoolean("is_active"));
+            utilisateur.setImg_url(rs.getString("img_url"));
+            utilisateur.setVerification_code(rs.getString("verification_code"));
+
+            // Gérer les roles si nécessaire
+            String rolesString = rs.getString("roles");
+            if (rolesString != null && !rolesString.isEmpty()) {
+                JSONArray rolesArray = new JSONArray(rolesString);
+                List<String> rolesList = new ArrayList<>();
+                for (int i = 0; i < rolesArray.length(); i++) {
+                    rolesList.add(rolesArray.getString(i));
+                }
+                utilisateur.setRoles(rolesList);
+            }
+
+            return utilisateur;
+        }
+
+        return null;
+    }
 
 
 }

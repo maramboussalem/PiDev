@@ -8,6 +8,8 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -22,9 +24,9 @@
                         <Image url="@../images/logo.jpg" />
                      </image>
                   </ImageView>
-                  <Text fill="#00b8bb" layoutX="371.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liste des Utilisateurs" textAlignment="CENTER" wrappingWidth="345.253173828125">
+                  <Text fill="#00b8bb" layoutX="340.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liste des Utilisateurs" textAlignment="CENTER" wrappingWidth="453.253173828125">
                      <font>
-                        <Font name="Bell MT" size="35.0" />
+                        <Font name="Bell MT" size="40.0" />
                      </font>
                   </Text>
                   <Label layoutX="567.0" layoutY="507.0" prefHeight="18.0" prefWidth="487.0" />
@@ -45,6 +47,31 @@
                         <Font name="Bell MT" size="16.0" />
                      </font>
                   </Button>
+                  <HBox layoutX="52.0" layoutY="220.0" prefHeight="99.0" prefWidth="742.0">
+                     <children>
+                        <ImageView fx:id="image" fitHeight="123.0" fitWidth="154.0" pickOnBounds="true" preserveRatio="true" />
+                        <VBox prefHeight="150.0" prefWidth="365.0">
+                           <children>
+                              <Label fx:id="nom" />
+                              <Label fx:id="prenom" />
+                              <Label fx:id="sexe" />
+                              <Label fx:id="email" />
+                              <Label fx:id="adresse" />
+                              <Label fx:id="tel" />
+                              <Label fx:id="role" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <Button layoutX="776.0" layoutY="617.0" mnemonicParsing="false" onAction="#btnToggleStatus" prefHeight="26.0" prefWidth="277.0" style="-fx-background-color: #ba0000;" text="Activer/Désactiver" textFill="WHITE">
+                     <font>
+                        <Font name="Bell MT" size="16.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="480.0" layoutY="617.0" mnemonicParsing="false" onAction="#repondreDemande" prefHeight="33.0" prefWidth="278.0" style="-fx-background-color: #0005ff;" text="Répondre à la demande" textFill="WHITE">
+                     <font>
+                        <Font name="Bell MT" size="16.0" />
+                     </font></Button>
                </children>
             </AnchorPane>
          </children>

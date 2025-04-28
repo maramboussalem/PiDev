@@ -71,7 +71,7 @@ public class DashboardMedecin {
     }
     // Méthode pour charger l'image de profil
     private void loadProfileImage() {
-        if (utilisateurConnecte != null && utilisateurConnecte.getImg_url() != null && !utilisateurConnecte.getImg_url().isEmpty() && !"null".equals(utilisateurConnecte.getImg_url()) && !"default.png".equals(utilisateurConnecte.getImg_url())) {
+        if (utilisateurConnecte != null && utilisateurConnecte.getImg_url() != null && !utilisateurConnecte.getImg_url().isEmpty() && !"null".equals(utilisateurConnecte.getImg_url()) && !"default.jpg".equals(utilisateurConnecte.getImg_url())) {
             try {
                 // Chemin vers le répertoire des images
                 String imagePath = "src/main/resources/images/profiles/" + utilisateurConnecte.getImg_url();
@@ -99,7 +99,7 @@ public class DashboardMedecin {
     private void loadDefaultImage() {
         try {
             // Charger l'image par défaut depuis les ressources
-            Image defaultImage = new Image(getClass().getResourceAsStream("/images/default.png"));
+            Image defaultImage = new Image(getClass().getResourceAsStream("/images/default.jpg"));
             if (defaultImage != null) {
                 imageProfil.setImage(defaultImage);
                 System.out.println("Image par défaut chargée avec succès");

@@ -1,13 +1,11 @@
 package tn.esprit.controllers;
-
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-
 import javafx.collections.FXCollections;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -18,20 +16,16 @@ import javafx.stage.Stage;
 import tn.esprit.entities.Utilisateur;
 import tn.esprit.services.ServiceUtilisateur;
 import org.mindrot.jbcrypt.BCrypt;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
-
 import javafx.stage.FileChooser;
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
-
-
 import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
 import java.awt.image.BufferedImage;
@@ -39,14 +33,12 @@ import javax.imageio.ImageIO;
 import java.io.ByteArrayOutputStream;
 import java.io.ByteArrayInputStream;
 import java.util.Random;
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import java.util.Properties;
 
 public class Adduser implements Initializable {
-
-    @FXML
-    private TextField adresseUser;
-
-    @FXML
-    private TextField antecedentsUser;
 
     @FXML
     private TextField captchaUser;
@@ -56,9 +48,6 @@ public class Adduser implements Initializable {
 
     @FXML
     private TextField emailUser;
-
-    @FXML
-    private TextField hopitaleUser;
 
     @FXML
     private PasswordField motdepasseUser;
@@ -73,28 +62,13 @@ public class Adduser implements Initializable {
     private ComboBox<String> roleUser;
 
     @FXML
-    private ComboBox<String> sexeUser;
-
-    @FXML
-    private TextField specialiteUser;
-
-    @FXML
     private TextField telephoneUser;
-
-    @FXML
-    private Label validationAdresse;
-
-    @FXML
-    private Label validationAntecedents;
 
     @FXML
     private Label validationConfirmation;
 
     @FXML
     private Label validationEmail;
-
-    @FXML
-    private Label validationHopital;
 
     @FXML
     private Label validationMotdepasse;
@@ -106,19 +80,10 @@ public class Adduser implements Initializable {
     private Label validationPrenom;
 
     @FXML
-    private Label validationSpecialite;
-
-    @FXML
     private Label validationTelephone;
 
     @FXML
     private Label validationRole;
-
-    @FXML
-    private Label validationSexe;
-
-    @FXML
-    private Label validationImage;
 
     @FXML
     private ImageView captchaImage;
@@ -128,16 +93,13 @@ public class Adduser implements Initializable {
 
     private String captchaText;
 
-    private String imagePath = "default.png";
+    private String imagePath = "default.jpg";
 
     private ServiceUtilisateur ps = new ServiceUtilisateur();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        sexeUser.setItems(FXCollections.observableArrayList("Femme", "Homme"));
         roleUser.setItems(FXCollections.observableArrayList("patient", "medecin"));
-        roleUser.setOnAction(e -> manageRoleFields());
-        manageRoleFields();
         generateCaptcha();
     }
 
@@ -211,71 +173,6 @@ public class Adduser implements Initializable {
         validationCaptcha.setText("");
     }
 
-    private void manageRoleFields() {
-        String selectedRole = roleUser.getValue();
-        if ("patient".equals(selectedRole)) {
-            antecedentsUser.setDisable(false);
-            hopitaleUser.setDisable(true);
-            specialiteUser.setDisable(true);
-            antecedentsUser.setPromptText("Entrez vos antécédents médicaux");
-
-            validationAntecedents.setText("Champs disponibles pour le patient");
-            validationHopital.setText("Champ désactivé pour le patient");
-            validationSpecialite.setText("Champ désactivé pour le patient");
-
-        } else if ("medecin".equals(selectedRole)) {
-            antecedentsUser.setDisable(true);
-            hopitaleUser.setDisable(false);
-            specialiteUser.setDisable(false);
-            antecedentsUser.setPromptText("Champ non disponible pour un médecin");
-
-            validationAntecedents.setText("Champ désactivé pour le médecin");
-            validationHopital.setText("Champs disponibles pour le médecin");
-            validationSpecialite.setText("Champs disponibles pour le médecin");
-
-        } else {
-            antecedentsUser.setDisable(false);
-            hopitaleUser.setDisable(false);
-            specialiteUser.setDisable(false);
-        }
-    }
-
-    @FXML
-    void imageUser(ActionEvent event) {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Choisir une image de profil");
-
-        fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("Images", "*.png", "*.jpg", "*.jpeg")
-        );
-
-        File selectedFile = fileChooser.showOpenDialog(nomUser.getScene().getWindow());
-
-        if (selectedFile != null) {
-            try {
-                String destinationDir = "src/main/resources/images/profiles/";
-                File dir = new File(destinationDir);
-                if (!dir.exists()) {
-                    dir.mkdirs();
-                }
-                String fileName = System.currentTimeMillis() + "_" + selectedFile.getName();
-                File destinationFile = new File(destinationDir + fileName);
-
-                Files.copy(selectedFile.toPath(), destinationFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
-                imagePath = fileName;
-                validationImage.setText("Image sélectionnée : " + fileName);
-                System.out.println("Image sélectionnée, imagePath mis à jour : " + imagePath);
-
-            } catch (IOException e) {
-                validationImage.setText("Erreur lors du chargement de l'image");
-                System.err.println("Erreur lors de la copie de l'image : " + e.getMessage());
-                e.printStackTrace();
-            }
-        } else {
-            System.out.println("Aucune image sélectionnée, imagePath reste : " + imagePath);
-        }
-    }
-
     @FXML
     void SinscrireUser(ActionEvent event) {
         if (!validateForm()) return;
@@ -291,8 +188,13 @@ public class Adduser implements Initializable {
             }
 
             ps.ajouter(user);
-            showAlert("Succès", "Votre compte a été créé avec succès !");
-
+            if (user.getRole().equals("medecin")) {
+                // Modification : Envoyer un e-mail au médecin pour indiquer que son compte est désactivé
+                sendDeactivationEmail(user);
+                showAlert("Succès", "Compte médecin créé avec succès, mais actuellement désactivé. Un e-mail a été envoyé pour vous informer. Veuillez patienter jusqu'à ce qu'un administrateur procède à son activation.");
+            } else {
+                showAlert("Succès", "Votre compte a été créé avec succès !");
+            }
             // Fermer la fenêtre actuelle
             Stage stage = (Stage) nomUser.getScene().getWindow();
             stage.close();
@@ -315,27 +217,116 @@ public class Adduser implements Initializable {
     }
 
 
+    // Nouvelle méthode : Envoyer un e-mail de désactivation au médecin
+    private void sendDeactivationEmail(Utilisateur utilisateur) {
+        // Paramètres du serveur SMTP (identiques à ceux de ListeUser)
+        String host = "smtp.gmail.com";
+        String port = "587";
+        String mailFrom = "boussalem18faouzi@gmail.com"; // Votre adresse e-mail
+        String password = "hxhkiarhhbiytexv"; // Votre mot de passe d'application Gmail
+
+        // Adresse e-mail du médecin
+        String mailTo = utilisateur.getEmail();
+
+        // Configurer les propriétés du serveur SMTP
+        Properties properties = new Properties();
+        properties.put("mail.smtp.auth", "true");
+        properties.put("mail.smtp.starttls.enable", "true");
+        properties.put("mail.smtp.host", host);
+        properties.put("mail.smtp.port", port);
+
+        // Créer une session avec authentification
+        Session session = Session.getInstance(properties, new Authenticator() {
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(mailFrom, password);
+            }
+        });
+
+        try {
+            // Créer un message MIME
+            MimeMessage message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(mailFrom));
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(mailTo));
+            message.setSubject("Votre compte médecin a été créé mais est désactivé");
+
+            // Corps du message HTML
+            String htmlContent = "<!DOCTYPE html>" +
+                    "<html lang='fr'>" +
+                    "<head>" +
+                    "  <meta charset='UTF-8'>" +
+                    "  <meta name='viewport' content='width=device-width, initial-scale=1.0'>" +
+                    "  <style>" +
+                    "    body { margin: 0; padding: 20px; background-color: #f2f2f2; font-family: Arial, sans-serif; }" +
+                    "    .container { background-color: #ffffff; margin: 0 auto; padding: 30px 20px; border-radius: 12px; max-width: 600px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }" +
+                    "    .header { background-color: #003366; color: white; text-align: center; padding: 30px 20px; border-top-left-radius: 12px; border-top-right-radius: 12px; }" +
+                    "    .header img { max-width: 80px; margin-bottom: 10px; }" +
+                    "    .header h1 { margin: 10px 0 0 0; font-size: 24px; }" +
+                    "    .content { padding: 20px; text-align: left; color: #333333; font-size: 16px; line-height: 1.6; }" +
+                    "    .button { display: inline-block; background-color: #007acc; color: white; padding: 12px 24px; margin: 20px 0; text-decoration: none; font-weight: bold; border-radius: 6px; }" +
+                    "    .footer { font-size: 13px; color: #777777; text-align: center; margin-top: 30px; }" +
+                    "    .separator { border-top: 2px solid #007acc; margin: 30px 0; }" +
+                    "    a { color: #007acc; text-decoration: none; }" +
+                    "  </style>" +
+                    "</head>" +
+                    "<body>" +
+                    "  <div class='container'>" +
+                    "    <div class='header'>" +
+                    "      <h1>Merci pour votre inscription</h1>" +
+                    "    </div>" +
+                    "    <div class='content'>" +
+                    "      <p>Bonjour <strong>" + utilisateur.getPrenom() + " " + utilisateur.getNom() + "</strong>,</p>" +
+                    "      <p>Votre compte médecin a été <strong>créé avec succès</strong> mais est actuellement <strong>désactivé</strong>.</p>" +
+                    "      <div style='text-align:center;'>" +
+                    "        <a href='#' class='button'>Statut : Désactivé</a>" +
+                    "      </div>" +
+                    "      <p>Veuillez patienter jusqu'à ce qu'un administrateur active votre compte.</p>" +
+                    "      <div class='separator'></div>" +
+                    "      <p>Pour toute question, contactez-nous à : <a href='mailto:admin@BrightMind.com'>admin@BrightMind.com</a></p>" +
+                    "    </div>" +
+                    "    <div class='footer'>" +
+                    "      <p>© 2025 Bright Mind. Tous droits réservés.</p>" +
+                    "    </div>" +
+                    "  </div>" +
+                    "</body>" +
+                    "</html>";
+            // Spécifier que le contenu est en HTML
+            message.setContent(htmlContent, "text/html; charset=utf-8");
+
+            // Envoyer le message
+            Transport.send(message);
+            System.out.println("E-mail de désactivation envoyé à : " + mailTo);
+
+        } catch (MessagingException e) {
+            System.err.println("Erreur lors de l'envoi de l'e-mail : " + e.getMessage());
+            showAlert("Erreur", "Échec de l'envoi de l'e-mail de désactivation : " + e.getMessage());
+        }
+    }
+
+
     private Utilisateur createUserFromForm() {
         List<String> roles = new ArrayList<>();
         roles.add(roleUser.getValue()); // Ajouter le rôle sélectionné
+
+        boolean isActive = !roleUser.getValue().equals("medecin");
 
         return new Utilisateur(
                 nomUser.getText(),
                 prenomUser.getText(),
                 emailUser.getText(),
-                sexeUser.getValue(),
-                adresseUser.getText(),
+                "Non Rempli",
+                "Non Rempli",
                 telephoneUser.getText(),
                 roleUser.getValue(),
-                antecedentsUser.getText(),
-                specialiteUser.getText(),
-                hopitaleUser.getText(),
+                "Non Rempli",
+                "Non Rempli",
+                "Non Rempli",
                 motdepasseUser.getText(), // Le hachage est géré dans setMotdepasse de Utilisateur
                 "1234",
                 captchaUser.getText(),
-                imagePath,
+                "default.jpg",
                 "activation123",
-                true,
+                isActive,
                 roles
         );
     }
@@ -349,27 +340,14 @@ public class Adduser implements Initializable {
         isValid &= validateEmail();
         isValid &= validatePhone();
         isValid &= validatePassword();
-        isValid &= validateFieldCombo(sexeUser, validationSexe, "Sexe requis");
         isValid &= validateFieldCombo(roleUser, validationRole, "Rôle requis");
-        isValid &= validateField(adresseUser, validationAdresse, "Adresse requise");
         isValid &= validateField(telephoneUser, validationTelephone, "Téléphone requis");
-
-        // Champs optionnels (non obligatoires, mais validés si remplis)
-        validateField(antecedentsUser, validationAntecedents, "Antécédents invalides");
-        validateField(specialiteUser, validationSpecialite, "Spécialité invalide");
-        validateField(hopitaleUser, validationHopital, "Hôpital invalide");
-        validateField(captchaUser, null, ""); // Pas de validation stricte pour captcha ici
-
+        validateField(captchaUser, null, "");
         if (!captchaUser.getText().equals(captchaText)) {
             validationCaptcha.setText("CAPTCHA incorrect");
             isValid = false;
         } else {
             validationCaptcha.setText("");
-        }
-
-        if ("default.png".equals(imagePath)) {
-            validationImage.setText("Veuillez sélectionner une image");
-            isValid = false;
         }
         return isValid;
     }
@@ -451,15 +429,6 @@ public class Adduser implements Initializable {
         if (validationMotdepasse != null) validationMotdepasse.setText("");
         if (validationConfirmation != null) validationConfirmation.setText("");
         if (validationRole != null) validationRole.setText("");
-        if (validationSexe != null) validationSexe.setText("");
-        if (validationAdresse != null) validationAdresse.setText("");
-        if (validationAntecedents != null) validationAntecedents.setText("");
-        if (validationSpecialite != null) validationSpecialite.setText("");
-        if (validationHopital != null) validationHopital.setText("");
-    }
-
-    private String hashPassword(String password) {
-        return BCrypt.hashpw(password, BCrypt.gensalt(12));
     }
 
     private void showAlert(String title, String message) {
@@ -470,22 +439,6 @@ public class Adduser implements Initializable {
         alert.showAndWait();
     }
 
-    private void clearForm() {
-        nomUser.clear();
-        prenomUser.clear();
-        emailUser.clear();
-        sexeUser.setValue(null);
-        adresseUser.clear();
-        telephoneUser.clear();
-        roleUser.setValue(null);
-        antecedentsUser.clear();
-        specialiteUser.clear();
-        hopitaleUser.clear();
-        motdepasseUser.clear();
-        confirmationUser.clear();
-        captchaUser.clear();
-    }
-
     private boolean isValidEmail(String email) {
         return Pattern.matches("^[\\w.-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$", email);
     }
@@ -494,4 +447,20 @@ public class Adduser implements Initializable {
         return Pattern.matches("^\\d{8}$", phone);
     }
 
+    @FXML
+    void login(ActionEvent event) {
+        try {
+            // Chargement du fichier login.fxml
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Utilisateur/login.fxml"));
+            Parent root = loader.load();
+
+            // Récupérer la scène actuelle et changer son contenu
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

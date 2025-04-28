@@ -32,7 +32,7 @@ public class Home {
     public void initialize() {
         if (utilisateurConnecte != null) {
             userConnecteH.setText(utilisateurConnecte.getNom() + " " + utilisateurConnecte.getPrenom());
-        loadProfileImage();
+            loadProfileImage();
         }
     }
 
@@ -45,7 +45,7 @@ public class Home {
     }
 
     private void loadProfileImage() {
-        if (utilisateurConnecte != null && utilisateurConnecte.getImg_url() != null && !utilisateurConnecte.getImg_url().isEmpty() && !"null".equals(utilisateurConnecte.getImg_url()) && !"default.png".equals(utilisateurConnecte.getImg_url())) {
+        if (utilisateurConnecte != null && utilisateurConnecte.getImg_url() != null && !utilisateurConnecte.getImg_url().isEmpty() && !"null".equals(utilisateurConnecte.getImg_url()) && !"default.jpg".equals(utilisateurConnecte.getImg_url())) {
             try {
                 // Chemin vers le répertoire des images
                 String imagePath = "src/main/resources/images/profiles/" + utilisateurConnecte.getImg_url();
@@ -72,7 +72,7 @@ public class Home {
     private void loadDefaultImage() {
         try {
             // Charger l'image par défaut depuis les ressources
-            Image defaultImage = new Image(getClass().getResourceAsStream("/images/default.png"));
+            Image defaultImage = new Image(getClass().getResourceAsStream("/images/default.jpg"));
             if (defaultImage != null) {
                 imageProfil.setImage(defaultImage);
                 System.out.println("Image par défaut chargée avec succès");
@@ -140,6 +140,22 @@ public class Home {
         }
     }
     @FXML
+    void diagnostic(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ParametresVitaux/AddParametresVitaux.fxml"));
+            Parent root = loader.load();
+
+            // If AddConsultationController needs the utilisateurConnecte, you can do:
+            // AddConsultationController controller = loader.getController();
+            // controller.setUtilisateur(utilisateurConnecte);
+
+            contentArea.getChildren().clear();
+            contentArea.getChildren().add(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
     void medicament(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/client/IndexMedicaments.fxml"));
@@ -156,5 +172,4 @@ public class Home {
         }
 
     }
-    }
-
+}

@@ -34,6 +34,7 @@ public class DashboardAdmin {
         }
     }
 
+    // Méthode pour définir l'utilisateur connecté
     public void setUtilisateurConnecte(Utilisateur utilisateur) {
         this.utilisateurConnecte = utilisateur;
         System.out.println("Utilisateur connecté : " + utilisateur); // Vérification
@@ -45,7 +46,7 @@ public class DashboardAdmin {
     }
 
     private void loadProfileImage() {
-        if (utilisateurConnecte != null && utilisateurConnecte.getImg_url() != null && !utilisateurConnecte.getImg_url().isEmpty() && !"null".equals(utilisateurConnecte.getImg_url()) && !"default.png".equals(utilisateurConnecte.getImg_url())) {
+        if (utilisateurConnecte != null && utilisateurConnecte.getImg_url() != null && !utilisateurConnecte.getImg_url().isEmpty() && !"null".equals(utilisateurConnecte.getImg_url()) && !"default.jpg".equals(utilisateurConnecte.getImg_url())) {
             try {
                 // Chemin vers le répertoire des images
                 String imagePath = "src/main/resources/images/profiles/" + utilisateurConnecte.getImg_url();
@@ -68,7 +69,7 @@ public class DashboardAdmin {
             loadDefaultImage();
         }
     }
-
+    // Méthode pour charger l'image par défaut
     private void loadDefaultImage() {
         try {
             // Charger l'image par défaut depuis les ressources
@@ -93,6 +94,7 @@ public class DashboardAdmin {
                 return;
             }
 
+            // Vérifier les valeurs des attributs avant d'ouvrir la fenêtre
             System.out.println("Utilisateur connecté : " + utilisateurConnecte);
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Utilisateur/DetailsUser.fxml"));
@@ -123,22 +125,26 @@ public class DashboardAdmin {
     @FXML
     void logOut(ActionEvent event) {
         try {
+            // Fermer la fenêtre actuelle
             Stage currentStage = (Stage) contentArea.getScene().getWindow();
             currentStage.close();
 
+            // Charger la page de connexion (login.fxml)
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Utilisateur/login.fxml"));
             Parent root = loader.load();
 
+            // Créer une nouvelle scène et une nouvelle fenêtre
             Stage stage = new Stage();
             stage.setTitle("Connexion");
             stage.setScene(new Scene(root));
+
+            // Afficher la nouvelle fenêtre
             stage.show();
 
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
     @FXML
     void refreshPage(ActionEvent event) {
         if (utilisateurConnecte != null) {
@@ -149,6 +155,20 @@ public class DashboardAdmin {
             loadDefaultImage();
         }
     }
+    @FXML
+    void showListPost(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Compagne/ListPost.fxml"));
+            Parent root = loader.load();
+            // Remplacer le contenu actuel par celui de la liste des utilisateurs
+            contentArea.getChildren().clear();  // Supprimer tout contenu existant dans contentArea
+            contentArea.getChildren().add(root);  // Ajouter la nouvelle vue (Liste des utilisateurs)
+        } catch (IOException e) {
+            e.printStackTrace();  // Afficher une erreur si le chargement échoue
+        }
+    }
+
+
     @FXML
     void medicament(ActionEvent event) {
 

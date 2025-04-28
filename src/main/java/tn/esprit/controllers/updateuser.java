@@ -9,6 +9,10 @@ import tn.esprit.services.ServiceUtilisateur;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.stage.FileChooser;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Window;
 
 import java.io.File;
 import java.io.IOException;
@@ -138,7 +142,6 @@ public class updateuser implements Initializable {
         generateCaptcha();
     }
 
-    // Méthode pour passer l'utilisateur dans ce contrôleur
     public void setUtilisateur(Utilisateur utilisateur) {
         this.utilisateur = utilisateur;
         this.imagePath = utilisateur.getImg_url();
@@ -160,7 +163,6 @@ public class updateuser implements Initializable {
             antecedentsUserM.setText(utilisateur.getAntecedents_medicaux());
             specialiteUserM.setText(utilisateur.getSpecialite());
             hopitaleUserM.setText(utilisateur.getHopital());
-            // Gestion de l'image : vérifier si imagePath est null
             if (imagePath == null) {
                 validationImageM.setText("Aucune image sélectionnée");
             } else {
@@ -171,18 +173,11 @@ public class updateuser implements Initializable {
 
     private void generateCaptcha() {
         try {
-            // Générer un texte aléatoire
             captchaText = generateRandomText(6);
-
-            // Créer une image avec le texte
             BufferedImage bufferedImage = new BufferedImage(150, 50, BufferedImage.TYPE_INT_RGB);
             java.awt.Graphics2D g2d = bufferedImage.createGraphics();
-
-            // Fond blanc
             g2d.setColor(java.awt.Color.WHITE);
             g2d.fillRect(0, 0, 150, 50);
-
-            // Ajouter du bruit
             Random random = new Random();
             for (int i = 0; i < 50; i++) {
                 int x = random.nextInt(150);
@@ -190,13 +185,9 @@ public class updateuser implements Initializable {
                 g2d.setColor(new java.awt.Color(random.nextInt(255), random.nextInt(255), random.nextInt(255)));
                 g2d.fillRect(x, y, 1, 1);
             }
-
-            // Dessiner le texte
             g2d.setColor(java.awt.Color.BLACK);
             g2d.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 20));
             g2d.drawString(captchaText, 20, 35);
-
-            // Ajouter des lignes de distorsion
             g2d.setColor(java.awt.Color.GRAY);
             for (int i = 0; i < 3; i++) {
                 int x1 = random.nextInt(150);
@@ -205,16 +196,12 @@ public class updateuser implements Initializable {
                 int y2 = random.nextInt(50);
                 g2d.drawLine(x1, y1, x2, y2);
             }
-
             g2d.dispose();
-
-            // Convertir en Image JavaFX
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             ImageIO.write(bufferedImage, "png", baos);
             ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
             Image fxImage = new Image(bais);
             captchaImageM.setImage(fxImage);
-
         } catch (Exception e) {
             e.printStackTrace();
             validationCaptchaM.setText("Erreur lors de la génération du CAPTCHA");
@@ -273,13 +260,10 @@ public class updateuser implements Initializable {
     public void imageUserM(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choisir une image de profil");
-
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("Images", "*.png", "*.jpg", "*.jpeg")
         );
-
         File selectedFile = fileChooser.showOpenDialog(nomUserM.getScene().getWindow());
-
         if (selectedFile != null) {
             try {
                 String destinationDir = "src/main/resources/images/profiles/";
@@ -287,12 +271,10 @@ public class updateuser implements Initializable {
                 if (!dir.exists()) {
                     dir.mkdirs();
                 }
-
                 String fileName = System.currentTimeMillis() + "_" + selectedFile.getName();
                 File destinationFile = new File(destinationDir + fileName);
-
                 Files.copy(selectedFile.toPath(), destinationFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
-                imagePath = fileName; // Mettre à jour imagePath uniquement si une nouvelle image est sélectionnée
+                imagePath = fileName;
                 validationImageM.setText("Image sélectionnée : " + fileName);
                 System.out.println("Image mise à jour : " + imagePath);
             } catch (IOException e) {
@@ -302,12 +284,16 @@ public class updateuser implements Initializable {
             }
         }
     }
-    // Méthode pour mettre à jour l'utilisateur
+
     @FXML
     void MettreAjourUser(ActionEvent event) {
         if (!validerChamps()) {
             return;
         }
+
+        // Vérifier si le rôle a été modifié
+        boolean roleChanged = !roleUserM.getValue().equalsIgnoreCase(utilisateur.getRole());
+
         utilisateur.setNom(nomUserM.getText());
         utilisateur.setPrenom(prenomUserM.getText());
         utilisateur.setEmail(emailUserM.getText());
@@ -318,11 +304,9 @@ public class updateuser implements Initializable {
         utilisateur.setAntecedents_medicaux(antecedentsUserM.getText());
         utilisateur.setSpecialite(specialiteUserM.getText());
         utilisateur.setHopital(hopitaleUserM.getText());
-        // Gestion de l'image : utiliser imagePath si modifié, sinon conserver l'image actuelle
         if (imagePath != null) {
             utilisateur.setImg_url(imagePath);
         }
-        // Mettre à jour la liste des roles
         List<String> rolesList = new ArrayList<>();
         rolesList.add(roleUserM.getValue());
         utilisateur.setRoles(rolesList);
@@ -336,21 +320,50 @@ public class updateuser implements Initializable {
         } else {
             utilisateur.setMotdepasse(utilisateur.getMotdepasse());
         }
+
         try {
             serviceUtilisateur.modifier(utilisateur);
-            showAlert("Succès", "Les informations de votre compte ont été modifiées avec succès.");
-
-            // Actualiser les détails dans DetailsUser si le contrôleur est disponible
-            if (detailsUserController != null) {
-                detailsUserController.refreshDetails();
+            if (roleChanged) {
+                showAlert("Succès", "Votre rôle a été modifié. Vous allez être déconnecté pour appliquer les changements.");
+                // Déconnexion automatique avec fermeture de toutes les fenêtres
+                logOut();
+            } else {
+                showAlert("Succès", "Les informations de votre compte ont été modifiées avec succès.");
+                if (detailsUserController != null) {
+                    detailsUserController.refreshDetails();
+                }
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.close();
             }
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.close();
         } catch (SQLException e) {
             showAlert("Erreur", "Erreur lors de la mise à jour de l'utilisateur : " + e.getMessage());
             e.printStackTrace();
         }
     }
+
+    private void logOut() {
+        try {
+            // Récupérer la liste des fenêtres avant de commencer à les fermer
+            List<Window> windows = new ArrayList<>(Window.getWindows());
+            // Fermer toutes les fenêtres existantes
+            for (Window window : windows) {
+                if (window instanceof Stage) {
+                    ((Stage) window).close();
+                }
+            }
+            // Ouvrir la fenêtre de connexion
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Utilisateur/login.fxml"));
+            Parent root = loader.load();
+            Stage loginStage = new Stage();
+            loginStage.setTitle("Connexion");
+            loginStage.setScene(new Scene(root));
+            loginStage.show();
+        } catch (IOException e) {
+            showAlert("Erreur", "Erreur lors du chargement de la fenêtre de connexion : " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
@@ -382,7 +395,7 @@ public class updateuser implements Initializable {
         } else {
             validationEmailM.setText("");
         }
-        if (!motdepasseUserM.getText().isEmpty()) {  // On vérifie uniquement si l'utilisateur a saisi un nouveau mot de passe
+        if (!motdepasseUserM.getText().isEmpty()) {
             String password = motdepasseUserM.getText();
             StringBuilder errorMessage = new StringBuilder();
             if (password.length() < 8) {
@@ -405,14 +418,13 @@ public class updateuser implements Initializable {
                 errorMessage.append("Le mot de passe doit contenir au moins un caractère spécial .\n");
                 isValid = false;
             }
-            // Affichage du message d'erreur combiné
             if (errorMessage.length() > 0) {
                 validationMotdepasseM.setText(errorMessage.toString().trim());
             } else {
                 validationMotdepasseM.setText("");
             }
         } else {
-            validationMotdepasseM.setText(""); // Pas de message si le champ est vide (on conserve l'ancien mot de passe)
+            validationMotdepasseM.setText("");
         }
 
         if (adresseUserM.getText().isEmpty()) {
