@@ -8,7 +8,6 @@ import java.util.Random;
 
 public class TwilioSMS {
 
-    // Remplace ces valeurs par tes vraies identifiants Twilio
     public static final String ACCOUNT_SID = "";
     public static final String AUTH_TOKEN = "";
     public static final String TWILIO_PHONE_NUMBER = ""; // Ton numéro Twilio
@@ -16,8 +15,7 @@ public class TwilioSMS {
     static {
         Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
     }
-
-    // Méthode pour envoyer le SMS
+    
     public static void sendSMS(String to, String messageBody) {
         // Vérification et formatage du numéro de téléphone
         String formattedTo = formatPhoneNumber(to);
