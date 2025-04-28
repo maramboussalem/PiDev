@@ -35,36 +35,16 @@ public class ListeUser implements Initializable {
     @FXML
     private ComboBox<String> sortComboBox;
 
-    @FXML
-    private Label adresse;
-
-    @FXML
-    private Label email;
-
-    @FXML
-    private ImageView image;
-
-    @FXML
-    private Label nom;
-
-    @FXML
-    private Label prenom;
-
-    @FXML
-    private Label role;
-
-    @FXML
-    private Label sexe;
-
-    @FXML
-    private Label tel;
-
-    @FXML
-    private Button btnToggleStatus; // Le bouton global
-    @FXML
-    private Label statutLabel; // Le label qui affiche le statut de l'utilisateur
-
-
+    @FXML private Label adresse;
+    @FXML private Label email;
+    @FXML private ImageView image;
+    @FXML private Label nom;
+    @FXML private Label prenom;
+    @FXML private Label role;
+    @FXML private Label sexe;
+    @FXML private Label tel;
+    @FXML private Button btnToggleStatus;
+    @FXML private Label statutLabel;
 
     private Utilisateur utilisateurSelectionne;
 
@@ -86,6 +66,7 @@ public class ListeUser implements Initializable {
         sortComboBox.setOnAction(event -> trierUtilisateurs(sortComboBox.getValue()));
 
     }
+
     @FXML
     private void btnToggleStatus(ActionEvent event) {
         Utilisateur selectedUser = listeUser.getSelectionModel().getSelectedItem();
@@ -110,6 +91,7 @@ public class ListeUser implements Initializable {
             }
         }
     }
+
     private void filtrerUtilisateurs(String critere) {
         try {
             List<Utilisateur> utilisateurs = serviceUtilisateur.afficher();
@@ -264,6 +246,7 @@ public class ListeUser implements Initializable {
             System.err.println("Erreur lors de l'affichage des utilisateurs : " + e.getMessage());
         }
     }
+
     private void updateStatusLabel() {
         if (utilisateurSelectionne != null) {
             statutLabel.setText(utilisateurSelectionne.isIs_active() ? "Statut: Actif" : "Statut: Désactivé");
@@ -297,6 +280,7 @@ public class ListeUser implements Initializable {
             );
         }
     }
+    
     @FXML
     void btnStats(ActionEvent event) {
         try {
