@@ -1,7 +1,9 @@
 package tn.esprit.controllers;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.web.WebEngine;
@@ -11,14 +13,14 @@ import tn.esprit.entities.Utilisateur;
 import tn.esprit.services.GitHubSignInService;
 import tn.esprit.services.ServiceUtilisateur;
 
+import java.io.IOException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.sql.SQLException;
 
 public class GitHubLogin {
 
-    @FXML
-    private WebView webView;
+    @FXML  private WebView webView;
 
     @FXML
     public void initialize() {
@@ -104,6 +106,23 @@ public class GitHubLogin {
             stage.setScene(scene);
             stage.show();
         } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void login(ActionEvent event) {
+        try {
+            // Chargement du fichier login.fxml
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Utilisateur/login.fxml"));
+            Parent root = loader.load();
+
+            // Récupérer la scène actuelle et changer son contenu
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
