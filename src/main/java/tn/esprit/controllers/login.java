@@ -85,7 +85,7 @@ public class login {
                 stage.setScene(scene);
                 stage.setTitle("Tableau de Bord de l'Admin");
             }
-            
+
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("Connexion Réussie");
             alert.setHeaderText(null);
