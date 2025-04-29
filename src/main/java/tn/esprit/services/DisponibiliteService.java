@@ -9,10 +9,10 @@ import java.util.List;
 
 public class DisponibiliteService {
 
-    private Connection cnx = MyDataBase.getInstance().getMyConnection();
+    private final Connection cnx;
 
     public DisponibiliteService() {
-
+        cnx = MyDataBase.getInstance().getMyConnection();
     }
 
     public void ajouter(Disponibilite dispo) throws SQLException {
@@ -21,6 +21,17 @@ public class DisponibiliteService {
             pst.setTimestamp(1, Timestamp.valueOf(dispo.getDateHeure()));
             pst.setBoolean(2, dispo.isEstReserve());
             pst.setInt(3, dispo.getServiceMedId());
+            pst.executeUpdate();
+        }
+    }
+
+    public void update(Disponibilite dispo) throws SQLException {
+        String sql = "UPDATE disponibilite SET date_heure = ?, est_reserve = ?, service_med_id = ? WHERE id = ?";
+        try (PreparedStatement pst = cnx.prepareStatement(sql)) {
+            pst.setTimestamp(1, Timestamp.valueOf(dispo.getDateHeure()));
+            pst.setBoolean(2, dispo.isEstReserve());
+            pst.setInt(3, dispo.getServiceMedId());
+            pst.setInt(4, dispo.getId());
             pst.executeUpdate();
         }
     }
@@ -42,4 +53,13 @@ public class DisponibiliteService {
         }
         return list;
     }
+
+    public void supprimer(int id) throws SQLException {
+        String sql = "DELETE FROM disponibilite WHERE id = ?";
+        try (PreparedStatement stmt = cnx.prepareStatement(sql)) {
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+        }
+    }
+
 }

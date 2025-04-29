@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 
 <VBox spacing="15.0" alignment="CENTER"
@@ -31,12 +31,18 @@
     <DatePicker fx:id="dpDateAchat"
                 style="-fx-background-radius: 8;"/>
 
-    <TextField fx:id="tfImg" promptText="Chemin de l'image"
+    <!-- Champ pour afficher le chemin de l'image -->
+    <TextField fx:id="tfImg" promptText="Aucune image sélectionnée" editable="false"
                style="-fx-background-radius: 8; -fx-padding: 10;"/>
+
+    <!-- Aperçu de l'image -->
+    <ImageView fx:id="imgPreview" fitWidth="120" fitHeight="120" preserveRatio="true" style="-fx-border-radius: 8;"/>
+
+    <Button text="Choisir une image" onAction="#handleImageSelect"
+            style="-fx-background-radius: 8; -fx-padding: 8 12;"/>
 
     <Button text="Ajouter" onAction="#ajouterEquipement"
             style="-fx-background-color: #4CAF50; -fx-text-fill: white;
                    -fx-background-radius: 10; -fx-padding: 8 16;
                    -fx-font-weight: bold;"/>
-
 </VBox>

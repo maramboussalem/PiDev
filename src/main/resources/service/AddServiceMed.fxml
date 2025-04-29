@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.image.ImageView?>
 
-<VBox xmlns="http://javafx.com/javafx/8"
-      xmlns:fx="http://javafx.com/fxml"
-      fx:controller="tn.esprit.controllers.AddServiceMed"
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="tn.esprit.controllers.AddServiceMed"
       spacing="15" alignment="CENTER"
       style="-fx-background-color: #f9f9f9; -fx-padding: 30;
              -fx-border-radius: 12; -fx-background-radius: 12;
@@ -16,18 +14,37 @@
            style="-fx-font-size: 18px; -fx-font-weight: bold;
                   -fx-text-fill: #1e3a8a;" />
 
-    <TextField fx:id="tfNomService" promptText="Nom du service"
+    <TextField fx:id="tfNomService"
+               promptText="Nom du service"
                style="-fx-background-radius: 8; -fx-padding: 10;" />
 
-    <TextField fx:id="tfDescriptionMed" promptText="Prix consultation"
+    <TextField fx:id="tfDescriptionMed"
+               promptText="Description du service"
                style="-fx-background-radius: 8; -fx-padding: 10;" />
 
-    <TextField fx:id="tfImageM" promptText="Chemin de l'image"
-               style="-fx-background-radius: 8; -fx-padding: 10;" />
+    <!-- Zone de sélection d'image -->
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Button text="Choisir Image…" onAction="#selectImage"
+                style="-fx-background-radius: 8; -fx-padding: 8 12;" />
+        <TextField fx:id="tfImageM"
+                   promptText="Chemin de l’image"
+                   editable="false"
+                   prefWidth="300"
+                   style="-fx-background-radius: 8; -fx-padding: 10;" />
+    </HBox>
 
-    <Button text="Ajouter" onAction="#handleAjouterServiceMed"
-            style="-fx-background-color: #4CAF50; -fx-text-fill: white;
-                   -fx-font-weight: bold; -fx-background-radius: 10;
+    <!-- Aperçu de l'image sélectionnée -->
+    <ImageView fx:id="previewImage"
+               fitWidth="120" fitHeight="120"
+               preserveRatio="true"
+               style="-fx-border-color: #cbd5e1; -fx-border-radius: 8;" />
+
+    <Button text="Enregistrer"
+            onAction="#handleAjouterServiceMed"
+            style="-fx-background-color: #4CAF50;
+                   -fx-text-fill: white;
+                   -fx-font-weight: bold;
+                   -fx-background-radius: 10;
                    -fx-padding: 8 16;" />
 
 </VBox>

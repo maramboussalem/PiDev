@@ -11,10 +11,6 @@ import java.util.List;
 public class ServiceMedService {
     private Connection cnx = MyDataBase.getInstance().getMyConnection();
 
-    public ServiceMedService() {
-
-    }
-
     public void ajouter(ServiceMed serviceMed) throws SQLException {
         String sql = "INSERT INTO service_med (nom_service, description_med, image_m) VALUES (?, ?, ?)";
         try (PreparedStatement ps = cnx.prepareStatement(sql)) {
@@ -22,7 +18,6 @@ public class ServiceMedService {
             ps.setString(2, serviceMed.getDescriptionMed());
             ps.setString(3, serviceMed.getImageM());
             ps.executeUpdate();
-            System.out.println("Service médical ajouté avec succès !");
         }
     }
 
@@ -48,6 +43,7 @@ public class ServiceMedService {
         }
         return list;
     }
+
     public void modifier(ServiceMed s) throws SQLException {
         String sql = "UPDATE service_med SET nom_service = ?, description_med = ?, image_m = ? WHERE id = ?";
         try (PreparedStatement ps = cnx.prepareStatement(sql)) {
@@ -56,14 +52,14 @@ public class ServiceMedService {
             ps.setString(3, s.getImageM());
             ps.setInt(4, s.getId());
             ps.executeUpdate();
-            System.out.println("Service médical modifié avec succès !");
         }
     }
 
     public void supprimer(int id) throws SQLException {
         String sql = "DELETE FROM service_med WHERE id=?";
-        PreparedStatement ps = cnx.prepareStatement(sql);
-        ps.setInt(1, id);
-        ps.executeUpdate();
+        try (PreparedStatement ps = cnx.prepareStatement(sql)) {
+            ps.setInt(1, id);
+            ps.executeUpdate();
+        }
     }
 }

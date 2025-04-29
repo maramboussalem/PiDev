@@ -1,6 +1,7 @@
 package tn.esprit.entities;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 public class Equipement {
     private int id;

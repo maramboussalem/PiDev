@@ -19,7 +19,7 @@
                         <Font name="Bell MT" size="20.0" />
                      </font>
                   </Button>
-                  <Button alignment="TOP_LEFT" layoutX="59.0" layoutY="415.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="280.0" style="-fx-background-color: #00b8bb;" text="Service Medicale" textFill="WHITE">
+                  <Button alignment="TOP_LEFT" layoutX="59.0" layoutY="415.0" mnemonicParsing="false" onAction="#Service" prefHeight="46.0" prefWidth="280.0" style="-fx-background-color: #00b8bb;" text="Service Medicale" textFill="WHITE">
                      <font>
                         <Font name="Bell MT" size="20.0" />
                      </font>
@@ -79,6 +79,16 @@
                   <ImageView fitHeight="105.0" fitWidth="243.0" layoutX="69.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/logodach.jpg" />
+                     </image>
+                  </ImageView>
+                  <Button alignment="TOP_LEFT" layoutX="59.0" layoutY="461.0" mnemonicParsing="false" onAction="#equipement" prefHeight="46.0" prefWidth="280.0" style="-fx-background-color: #00b8bb;" text="Equipement" textFill="WHITE">
+                     <font>
+                        <Font name="Bell MT" size="20.0" />
+                     </font>
+                  </Button>
+                  <ImageView fitHeight="30.0" fitWidth="34.0" layoutX="23.0" layoutY="469.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/service.jpg" />
                      </image>
                   </ImageView>
                </children>

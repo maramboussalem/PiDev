@@ -9,10 +9,11 @@ import java.util.List;
 
 public class EquipementService implements IService<Equipement> {
 
-   // private Connection cnx;
-    private Connection cnx = MyDataBase.getInstance().getMyConnection();
+    private Connection cnx;
+
     public EquipementService() {
 
+        cnx = MyDataBase.getInstance().getMyConnection();
     }
 
     @Override
@@ -24,7 +25,7 @@ public class EquipementService implements IService<Equipement> {
             pst.setInt(3, equipement.getQuantiteStock());
             pst.setDouble(4, equipement.getPrixUnitaire());
             pst.setString(5, equipement.getEtatEquipement());
-            pst.setDate(6, Date.valueOf(equipement.getDateAchat()));
+            pst.setDate(6, java.sql.Date.valueOf(equipement.getDateAchat()));
             pst.setString(7, equipement.getImg());
             pst.executeUpdate();
             System.out.println("Équipement ajouté avec succès !");

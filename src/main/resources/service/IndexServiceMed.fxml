@@ -1,44 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox xmlns="http://javafx.com/javafx/8.0.171"
-      xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="tn.esprit.controllers.IndexServiceMed"
-      spacing="20" alignment="CENTER"
-      style="-fx-padding: 30; -fx-background-color: #f0f4f8;
-             -fx-border-radius: 15; -fx-background-radius: 15;">
+<BorderPane prefHeight="800.0" prefWidth="1100.0" style="-fx-background-color: #f5f5f5;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.IndexServiceMed">
 
-    <Label text="📋 Liste des Services Médicaux"
-           style="-fx-font-size: 20px; -fx-font-weight: bold;
-                  -fx-text-fill: #1e3a8a;" />
+    <!-- BARRE SUPÉRIEURE -->
+    <top>
+        <VBox style="-fx-background-color: #2c3e50; -fx-padding: 15;">
+            <HBox alignment="CENTER" spacing="20">
+                <Label style="-fx-text-fill: white; -fx-font-size: 24; -fx-font-weight: bold;" text="Gestion des Services Médicaux" />
+                <Button onAction="#ouvrirAjoutServiceMed" style="-fx-background-color: #10B981; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8; -fx-padding: 8 16;" text="➕ Ajouter Service Médical" />
+            </HBox>
 
-    <ListView fx:id="listViewServiceMed" prefHeight="200"
-              style="-fx-background-color: white; -fx-border-color: #cbd5e1;
-                     -fx-border-width: 1.5; -fx-border-radius: 10;
-                     -fx-background-radius: 10;" />
+            <!-- Barre de recherche -->
+            <HBox alignment="CENTER_LEFT" spacing="10" style="-fx-padding: 10 0 0 0;">
+                <Label style="-fx-text-fill: white; -fx-font-weight: bold;" text="🔍 Rechercher:" />
+                <TextField fx:id="searchField" onKeyReleased="#rechercherServiceMed" promptText="Nom du service..." style="-fx-pref-width: 300; -fx-background-radius: 5;" />
+            </HBox>
 
-    <Label text="🕒 Disponibilités du service sélectionné"
-           style="-fx-font-size: 16px; -fx-font-weight: bold;
-                  -fx-text-fill: #475569;" />
+            <!-- Boutons d'actions -->
+            <HBox alignment="CENTER_RIGHT" spacing="15" style="-fx-padding: 10 0 0 0;">
+                <Button onAction="#supprimerServiceMed" style="-fx-background-color: #ef4444; -fx-text-fill: white;                                -fx-font-weight: bold; -fx-background-radius: 8;                                -fx-padding: 8 16;" text="🗑 Supprimer" />
 
-    <ListView fx:id="listViewDisponibilites" prefHeight="200"
-              style="-fx-background-color: white; -fx-border-color: #cbd5e1;
-                     -fx-border-width: 1.5; -fx-border-radius: 10;
-                     -fx-background-radius: 10;" />
+                <Button onAction="#modifierServiceMed" style="-fx-background-color: #3b82f6; -fx-text-fill: white;                                -fx-font-weight: bold; -fx-background-radius: 8;                                -fx-padding: 8 16;" text="✏️ Modifier" />
+            </HBox>
+        </VBox>
+    </top>
 
-    <HBox spacing="15" alignment="CENTER">
-        <Button text="🗑 Supprimer" onAction="#supprimerServiceMed"
-                style="-fx-background-color: #ef4444; -fx-text-fill: white;
-                       -fx-font-weight: bold; -fx-background-radius: 8;
-                       -fx-padding: 8 16;"/>
+    <!-- CONTENU CENTRAL -->
+    <center>
+        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" style="-fx-background: transparent;">
+            <content>
+                <HBox alignment="CENTER" spacing="30" style="-fx-padding: 30; -fx-background-color: #f0f4f8; -fx-border-radius: 15; -fx-background-radius: 15;">
 
-        <Button text="✏️ Modifier" onAction="#modifierServiceMed"
-                style="-fx-background-color: #3b82f6; -fx-text-fill: white;
-                       -fx-font-weight: bold; -fx-background-radius: 8;
-                       -fx-padding: 8 16;"/>
-    </HBox>
+                    <!-- Liste Services -->
+                    <VBox alignment="TOP_CENTER" prefWidth="400" spacing="20">
+                        <Label style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #334155;" text="📋 Services Médicaux" />
+                        <ListView fx:id="listViewServiceMed" prefHeight="400.0" prefWidth="400.0"
+                                  style="-fx-background-color: white; -fx-border-color: #cbd5e1;
+                                         -fx-border-width: 1.5; -fx-border-radius: 10; -fx-background-radius: 10;" />
+                        <Pagination fx:id="pagination" maxPageIndicatorCount="5" pageCount="1" prefWidth="400.0" style="-fx-border-color: transparent;" />
+                    </VBox>
 
-</VBox>
+                    <!-- Disponibilités + Calendrier -->
+                    <VBox alignment="TOP_CENTER" prefWidth="600" spacing="20">
+                        <Label prefHeight="43.0" prefWidth="226.0" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #334155;" text="🕒 Disponibilités" />
+
+                        <GridPane fx:id="calendarGrid" hgap="10" vgap="10" style="-fx-padding: 20; -fx-background-color: transparent;">
+                            <!-- Cases dynamiques -->
+                        </GridPane>
+
+                        <ListView fx:id="listViewDisponibilites" managed="false" visible="false" prefHeight="150.0" prefWidth="600.0"
+                                  style="-fx-background-color: white; -fx-border-color: #cbd5e1;
+                                         -fx-border-width: 1.5; -fx-border-radius: 10; -fx-background-radius: 10;" />
+
+                        <HBox alignment="CENTER" spacing="15">
+                            <Button onAction="#afficherDisponibilitesDansCalendrier" style="-fx-background-color: #22c55e; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8; -fx-padding: 8 16;" text="📅 Afficher Disponibilités" />
+                        </HBox>
+                    </VBox>
+
+                </HBox>
+            </content>
+        </ScrollPane>
+    </center>
+
+</BorderPane>

@@ -3,10 +3,7 @@ package tn.esprit.controllers;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
+import javafx.scene.control.*;
 import tn.esprit.entities.Disponibilite;
 import tn.esprit.entities.ServiceMed;
 import tn.esprit.services.DisponibiliteService;
@@ -31,6 +28,9 @@ public class AddDisponibilite implements Initializable {
     private final DisponibiliteService dispoService = new DisponibiliteService();
     private final ServiceMedService serviceMedService = new ServiceMedService();
 
+    // Nouveau : Champ pour stocker un service sélectionné
+    private ServiceMed selectedServiceMed;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
@@ -43,6 +43,11 @@ public class AddDisponibilite implements Initializable {
                     IntStream.range(0, 24).boxed().toList()));
             cbMinute.setItems(FXCollections.observableArrayList(
                     IntStream.range(0, 60).boxed().toList()));
+
+            // Si un service a été passé avant l'initialisation, on le sélectionne
+            if (selectedServiceMed != null) {
+                cbServiceMed.setValue(selectedServiceMed);
+            }
 
         } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR, "Erreur chargement services : " + e.getMessage()).show();
@@ -81,6 +86,11 @@ public class AddDisponibilite implements Initializable {
         } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR, "Erreur lors de l'ajout : " + e.getMessage()).show();
         }
+    }
+
+    // Nouveau : Méthode pour recevoir un ServiceMed depuis l'extérieur
+    public void setServiceMed(ServiceMed serviceMed) {
+        this.selectedServiceMed = serviceMed;
     }
 
     // Méthode pour réinitialiser les champs
