@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
+
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="tn.esprit.controllers.EditDisponibilite"
+      alignment="CENTER" spacing="15" prefWidth="450" prefHeight="350"
+      style="-fx-background-color: #fefefe; -fx-padding: 30; -fx-border-radius: 10; -fx-background-radius: 10;">
+
+    <Label text="Modifier Disponibilité" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+
+    <DatePicker fx:id="dpDate" promptText="Date" />
+    <HBox spacing="10" alignment="CENTER">
+        <ComboBox fx:id="cbHeure" promptText="Heure" />
+        <ComboBox fx:id="cbMinute" promptText="Minute" />
+    </HBox>
+    <CheckBox fx:id="cbReserve" text="Est réservée" />
+    <ComboBox fx:id="cbServiceMed" promptText="Service médical" />
+
+    <Button text="Enregistrer" onAction="#modifierDisponibilite"
+            style="-fx-background-color: #3b82f6; -fx-text-fill: white; -fx-font-weight: bold;" />
+</VBox>

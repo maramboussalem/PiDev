@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Pagination?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="700.0" prefWidth="1100.0" style="-fx-background-color: #f5f5f5;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.IndexEquipement">
+
+    <top>
+        <VBox style="-fx-background-color: #2c3e50; -fx-padding: 15;">
+            <HBox alignment="CENTER" spacing="20">
+                <Label style="-fx-text-fill: white; -fx-font-size: 24; -fx-font-weight: bold;" text="Gestion des Équipements" />
+            </HBox>
+
+            <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-padding: 15 0 0 0;">
+                <TextField fx:id="searchField" promptText="Rechercher un équipement..." style="-fx-pref-width: 300; -fx-padding: 5; -fx-background-radius: 5;" />
+            </HBox>
+        </VBox>
+    </top>
+
+    <center>
+        <VBox alignment="TOP_CENTER" spacing="20" style="-fx-padding: 30;">
+            <Label style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #1e3a8a;" text="📦 Liste des Équipements" />
+            <ListView fx:id="listViewEquipements" prefHeight="550.0" prefWidth="722.0"
+                      style="-fx-background-color: white; -fx-border-color: #cbd5e1; -fx-border-width: 1.5; -fx-border-radius: 10; -fx-background-radius: 10;" />
+            <Pagination fx:id="pagination" />
+        </VBox>
+    </center>
+
+    <right>
+        <VBox alignment="TOP_CENTER" spacing="20" style="-fx-padding: 30;">
+            <Label style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #475569;" text="📊 Statistiques des États" />
+            <PieChart fx:id="etatPieChart" prefHeight="300" prefWidth="300"
+                      style="-fx-background-color: white; -fx-border-radius: 10; -fx-background-radius: 10;" />
+
+            <Label fx:id="abimeLabel" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #ef4444;" text="Équipements Abîmés:" visible="false"/>
+            <ListView fx:id="abimeListView" prefHeight="200" prefWidth="300"
+                      style="-fx-background-color: white; -fx-border-color: #ef4444; -fx-border-width: 1.5; -fx-border-radius: 10; -fx-background-radius: 10;"
+                      visible="false"/>
+        </VBox>
+    </right>
+
+</BorderPane>
