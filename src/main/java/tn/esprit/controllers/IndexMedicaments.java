@@ -94,15 +94,11 @@ public class IndexMedicaments implements Initializable {
                     .filter(m -> m.getNom().toLowerCase().contains(searchText))
                     .toList();
         }
-
-        // Apply sorting
         String sort = sortComboBox.getValue();
         if (sort != null && !sort.equals("Default")) {
             medications = sortMedications(medications, sort);
         }
-
-        // Create cards
-        for (Medicament medicament : medications) {
+ for (Medicament medicament : medications) {
             cardsContainer.getChildren().add(createMedicamentCard(medicament));
         }
     }
