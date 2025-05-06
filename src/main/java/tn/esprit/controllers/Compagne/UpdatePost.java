@@ -54,14 +54,13 @@ public class UpdatePost {
             Image image = new Image("file:" + post.getImageUrl(), true);
             imageView.setImage(image);
         } else {
-            // Optionally, set a placeholder image if the URL is missing
             imageView.setImage(new Image("file:images/placeholder.jpg"));
         }
     }
 
     private String handleImageUpload() {
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Choose an Image");
+        fileChooser.setTitle("Choisissez une image");
         fileChooser.getExtensionFilters().add(
                 new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif")
         );
@@ -70,15 +69,15 @@ public class UpdatePost {
 
         if (selectedFile != null) {
             try {
-                // Create /images folder if it doesn't exist
+
                 File destFolder = new File("images");
                 if (!destFolder.exists()) destFolder.mkdirs();
 
-                // Copy the file into the /images folder
+
                 File destFile = new File(destFolder, selectedFile.getName());
                 Files.copy(selectedFile.toPath(), destFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
 
-                // Display the image in the ImageView
+
                 Image image = new Image(destFile.toURI().toString());
                 imageView.setImage(image);
 
@@ -128,7 +127,7 @@ public class UpdatePost {
             ServicePost servicePost = new ServicePost(); // Adjust if you're using dependency injection
             servicePost.modifier(currentPost);
             showAlert(Alert.AlertType.INFORMATION, "Succès", "Le post a été modifié avec succès.");
-            // ✅ Call the callback if it's set
+            //  Call the callback if it's set
             if (onPostUpdated != null) {
                 onPostUpdated.run();
             }

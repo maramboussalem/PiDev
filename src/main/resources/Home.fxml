@@ -9,7 +9,7 @@
 
 <AnchorPane prefHeight="698.0" prefWidth="1269.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.Home">
    <children>
-      <ImageView fx:id="imageProfil" fitHeight="700.0" fitWidth="1524.0" layoutY="106.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="700.0" fitWidth="1524.0" layoutY="106.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/1.jpg" />
          </image>
@@ -36,12 +36,12 @@
                   <Font name="Bell MT" size="18.0" />
                </font>
             </Button>
-            <Button layoutX="763.0" layoutY="29.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="138.0" style="-fx-background-color: #00b8bb;" text="COMPAGNE" textFill="WHITE">
+            <Button layoutX="763.0" layoutY="29.0" mnemonicParsing="false" onAction="#showPublicListPost" prefHeight="46.0" prefWidth="138.0" style="-fx-background-color: #00b8bb;" text="COMPAGNE" textFill="WHITE">
                <font>
                   <Font name="Bell MT" size="18.0" />
                </font>
             </Button>
-            <Button layoutX="911.0" layoutY="29.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="186.0" style="-fx-background-color: #00b8bb;" text="SUBMIT A TICKET" textFill="WHITE">
+            <Button fx:id="Reclamation" layoutX="911.0" layoutY="29.0" mnemonicParsing="false" onAction="#Reclamation" prefHeight="46.0" prefWidth="186.0" style="-fx-background-color: #00b8bb;" text="SUBMIT A TICKET" textFill="WHITE">
                <font>
                   <Font name="Bell MT" size="18.0" />
                </font>
@@ -75,5 +75,15 @@
          </font>
       </Button>
       <AnchorPane fx:id="contentArea" layoutX="23.0" layoutY="127.0" prefHeight="181.0" prefWidth="228.0" />
+      <Button fx:id="localisationButton" layoutX="539.0" layoutY="554.0" mnemonicParsing="false" onAction="#showLocalisation" prefHeight="55.0" prefWidth="411.0" style="-fx-background-color: #00b8bb;" text="LOCALISATION" textFill="WHITE">
+         <font>
+            <Font name="Bodoni MT" size="20.0" />
+         </font>
+      </Button>
+      <Button layoutX="1228.0" layoutY="127.0" mnemonicParsing="false" onAction="#openAddRdvForm" prefHeight="46.0" prefWidth="186.0" style="-fx-background-color: #00b8bb;" text="Prendre un RDV" textFill="WHITE">
+         <font>
+            <Font name="Bell MT" size="18.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

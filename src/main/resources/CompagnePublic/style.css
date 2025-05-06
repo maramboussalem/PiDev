@@ -1,0 +1,105 @@
+.search-box{
+    -fx-background-color:#FFFFFF;
+    -fx-background-radius: 100;
+}
+
+.transparent{
+    -fx-background-color: rgba(0,0,0,0);
+}
+
+.search-button{
+    -fx-background-color: #828282;
+    -fx-background-radius: 30;
+}
+
+.right-bar{
+    -fx-background-color: #D3D3D3;
+}
+
+.shadow{
+    -fx-effect: dropShadow(three-pass-box,rgba(0,0,0,0.1), 10.0 , 0.0 , 0.0 ,10.0);
+}
+
+.chosen-fruit-card{
+    -fx-background-color: #00b8bb;
+    -fx-background-radius: 30;
+}
+
+.comboBox{
+    -fx-background-color: rgba(255,255,255,0.3);
+    -fx-background-radius: 30;
+}
+
+.add-btn{
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 100;
+}
+
+.free-delivery-card{
+    -fx-background-color: #D3D3D3;
+    -fx-background-radius: 30;
+}
+
+.shopping-online-card{
+    -fx-background-color: #BAEAC3;
+    -fx-background-radius: 30;
+}
+
+.fruit-item{
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 30;
+}
+.post-background{
+    -fx-background-color: #fff;
+    -fx-background-radius: 15;
+    -fx-effect: dropShadow(three-pass-box,rgba(0,0,0,0.1) , 5.0, 0.0, 0.0, 5.0);
+}
+
+.reactions-container{
+    -fx-background-color: #fff;
+    -fx-background-radius: 50;
+    -fx-effect: dropShadow(three-pass-box,rgba(0,0,0,0.1) , 5.0, 0.0, 0.0, 5.0);
+    -fx-border-width: 1;
+    -fx-border-color:#B8B9BB;
+    -fx-border-radius: 50;
+}
+
+.top-border{
+    -fx-border-width: 1 0 0 0;
+    -fx-border-color: #606266;
+}
+
+.submit-button {
+    -fx-background-color: #4CAF50; /* A nice green */
+    -fx-text-fill: white;          /* White text */
+    -fx-font-size: 14px;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-padding: 8 16;              /* Top/Bottom 8px, Left/Right 16px */
+    -fx-background-radius: 8px;     /* Rounded corners */
+    -fx-cursor: hand;               /* Cursor changes to hand on hover */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0, 0, 1); /* Soft shadow */
+}
+
+.submit-button:hover {
+    -fx-background-color: #45a049; /* Darker green on hover */
+}
+
+.submit-button:pressed {
+    -fx-background-color: #3e8e41; /* Even darker when pressed */
+}
+.comment-input {
+    -fx-background-color: #f9f9f9; /* Light background */
+    -fx-text-fill: #333333;         /* Dark text */
+    -fx-font-size: 14px;
+    -fx-font-family: "Segoe UI";
+    -fx-padding: 8;
+    -fx-background-radius: 8px;
+    -fx-border-color: #cccccc;       /* Light gray border */
+    -fx-border-width: 1px;
+    -fx-border-radius: 8px;
+}
+
+.comment-input:focused {
+    -fx-border-color: #4CAF50;      /* Green border when focused */
+    -fx-background-color: #ffffff;  /* White background when focused */
+}

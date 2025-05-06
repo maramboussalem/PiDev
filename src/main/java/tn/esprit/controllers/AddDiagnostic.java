@@ -8,6 +8,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import tn.esprit.entities.Diagnostic;
 import tn.esprit.entities.Utilisateur;
@@ -17,9 +18,16 @@ import tn.esprit.services.ServiceUtilisateur;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
-import java.util.*;
+import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.ResourceBundle;
 
 public class AddDiagnostic implements Initializable {
+
+    @FXML
+    private AnchorPane contentArea;
 
     @FXML
     private DatePicker date_diagnostic;
@@ -79,7 +87,7 @@ public class AddDiagnostic implements Initializable {
     }
 
     @FXML
-    void add_diagnostic(ActionEvent event) {
+    void addButton(ActionEvent event) {
         if (validateInputs()) {
             try {
                 Diagnostic diagnostic = new Diagnostic();
@@ -92,25 +100,47 @@ public class AddDiagnostic implements Initializable {
                 diagnosticService service = new diagnosticService();
                 service.ajouter(diagnostic);
 
-                System.out.println("Diagnostic ajouté avec succès !");
-                goToList(event);
+                // ✅ Alerte de confirmation
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Succès");
+                alert.setHeaderText(null);
+                alert.setContentText("Le diagnostic a été ajouté avec succès !");
+
+                // ✅ Attendre confirmation utilisateur puis aller à la liste
+                alert.showAndWait().ifPresent(response -> {
+                    if (response == ButtonType.OK) {
+                        goToList(event);
+                    }
+                });
+
             } catch (Exception e) {
                 System.err.println("Erreur lors de l'ajout du diagnostic : " + e.getMessage());
             }
         }
     }
 
+
     @FXML
-    void goToList(ActionEvent event) {
+    void retourButton(ActionEvent event) {
+        // ✅ Demande de confirmation avant retour
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation");
+        alert.setHeaderText("Annuler l'ajout ?");
+        alert.setContentText("Êtes-vous sûr de vouloir quitter sans enregistrer ?");
+
+        if (alert.showAndWait().get() == ButtonType.OK) {
+            goToList(event);
+        }
+    }
+
+    private void goToList(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Diagnostic/indexDiagnostic.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Diagnostic/ListeDiagnostic.fxml"));
             Parent root = loader.load();
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setTitle("Liste des Diagnostics");
-            stage.setScene(new Scene(root));
-            stage.show();
+            contentArea.getChildren().clear();
+            contentArea.getChildren().add(root);
         } catch (IOException e) {
-            System.err.println("Erreur lors du chargement de la page : " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -131,11 +161,17 @@ public class AddDiagnostic implements Initializable {
         if (description.getText().isEmpty()) {
             isValid = false;
             descriptionError.setText("Description requise.");
+        } else if (description.getText().length() < 16) {
+            isValid = false;
+            descriptionError.setText("Minimum 16 caractères requis.");
         }
 
         if (date_diagnostic.getValue() == null) {
             isValid = false;
             dateError.setText("Date requise.");
+        } else if (date_diagnostic.getValue().isAfter(LocalDate.now())) {
+            isValid = false;
+            dateError.setText("La date ne peut pas être dans le futur.");
         }
 
         if (patientName.getValue() == null || !patientMap.containsKey(patientName.getValue())) {

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="tn.esprit.controllers.RespondReclamation"
+            prefHeight="400.0" prefWidth="600.0">
+
+    <VBox alignment="CENTER" spacing="20" AnchorPane.topAnchor="20" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20">
+
+        <!-- TextArea for entering the response -->
+        <TextArea fx:id="responseText" promptText="Enter your response here..." wrapText="true" prefHeight="150" />
+
+        <!-- ComboBox for selecting the status -->
+        <ComboBox fx:id="statusCombo" promptText="Select Status">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="Resolved"/>
+                    <String fx:value="Pending"/>
+                    <String fx:value="In Progress"/>
+                </FXCollections>
+            </items>
+        </ComboBox>
+
+        <!-- Button to submit the response -->
+        <Button text="Submit Response" onAction="#handleSubmit" />
+
+    </VBox>
+
+</AnchorPane>

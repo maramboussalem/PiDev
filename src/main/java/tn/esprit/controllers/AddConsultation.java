@@ -12,10 +12,12 @@ import javafx.stage.Stage;
 import tn.esprit.entities.Consultation;
 import tn.esprit.entities.Utilisateur;
 import tn.esprit.services.ConsultationService;
+import tn.esprit.services.GoogleCalendarService;
 import tn.esprit.services.ServiceUtilisateur;
 
 import java.io.IOException;
 import java.net.URL;
+import java.security.GeneralSecurityException;
 import java.sql.Date;
 import java.util.*;
 
@@ -52,10 +54,22 @@ public class AddConsultation implements Initializable {
     private Label userError;
 
     private Map<String, Integer> patientNameToIdMap = new HashMap<>();
+    private GoogleCalendarService calendarService;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ServiceUtilisateur serviceUtilisateur = new ServiceUtilisateur();
+
+        try {
+            calendarService = new GoogleCalendarService();
+        } catch (GeneralSecurityException | IOException e) {
+            e.printStackTrace();
+            Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+            errorAlert.setTitle("Erreur");
+            errorAlert.setHeaderText(null);
+            errorAlert.setContentText("Impossible de se connecter à Google Calendar: " + e.getMessage());
+            errorAlert.showAndWait();
+        }
 
         try {
             List<Utilisateur> patients = serviceUtilisateur.getPatients();
@@ -85,10 +99,26 @@ public class AddConsultation implements Initializable {
                 ConsultationService service = new ConsultationService();
                 service.ajouter(consultation);
 
-                System.out.println("Consultation ajoutée avec succès !");
+                // Create Google Calendar event
+                if (calendarService != null) {
+                    calendarService.createEvent(consultation);
+                }
+
+                // Show success message
+                Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
+                successAlert.setTitle("Succès");
+                successAlert.setHeaderText(null);
+                successAlert.setContentText("Consultation ajoutée avec succès !");
+                successAlert.showAndWait();
+
                 goToList(event);
             } catch (Exception e) {
                 System.err.println("Erreur lors de l'ajout de la consultation : " + e.getMessage());
+                Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+                errorAlert.setTitle("Erreur");
+                errorAlert.setHeaderText(null);
+                errorAlert.setContentText("Erreur lors de l'ajout de la consultation : " + e.getMessage());
+                errorAlert.showAndWait();
             }
         }
     }

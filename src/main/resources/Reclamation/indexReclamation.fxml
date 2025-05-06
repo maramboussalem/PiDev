@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="616.0" prefWidth="1007.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.IndexReclamation">
+    <children>
+        <!-- Card Background -->
+        <AnchorPane layoutX="20.0" layoutY="20.0" prefHeight="660.0" prefWidth="1087.0" style="-fx-background-color: #ffffff; -fx-background-radius: 30; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 5);">
+            <children>
+                <!-- Title -->
+                <Text fill="#00b8bb" layoutX="58.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liste des réclamations">
+                    <font>
+                        <Font name="Bell MT" size="33.0" />
+                    </font>
+                </Text>
+
+                <!-- ListView of Reclamations -->
+                <ListView fx:id="listview" layoutX="58.0" layoutY="80.0" prefHeight="490.0" prefWidth="970.0" style="-fx-background-radius: 10; -fx-border-radius: 10;" />
+            </children>
+        </AnchorPane>
+    </children>
+</AnchorPane>

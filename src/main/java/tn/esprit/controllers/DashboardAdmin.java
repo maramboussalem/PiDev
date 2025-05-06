@@ -155,19 +155,6 @@ public class DashboardAdmin {
             loadDefaultImage();
         }
     }
-    @FXML
-    void showListPost(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Compagne/ListPost.fxml"));
-            Parent root = loader.load();
-            // Remplacer le contenu actuel par celui de la liste des utilisateurs
-            contentArea.getChildren().clear();  // Supprimer tout contenu existant dans contentArea
-            contentArea.getChildren().add(root);  // Ajouter la nouvelle vue (Liste des utilisateurs)
-        } catch (IOException e) {
-            e.printStackTrace();  // Afficher une erreur si le chargement échoue
-        }
-    }
-
 
     @FXML
     void medicament(ActionEvent event) {
@@ -228,6 +215,16 @@ public class DashboardAdmin {
 
             contentArea.getChildren().clear();
             contentArea.getChildren().add(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void openReclamation(ActionEvent event) {
+        try {
+            AnchorPane reclamationPage = FXMLLoader.load(getClass().getResource("/Reclamation/adminReclamation.fxml"));
+            contentArea.getChildren().setAll(reclamationPage);
         } catch (IOException e) {
             e.printStackTrace();
         }

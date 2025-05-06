@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.UpdateReclamation" prefWidth="600.0" prefHeight="400.0">
+    <children>
+        <VBox spacing="20" layoutX="50" layoutY="40">
+            <Label text="Modifier Réclamation" style="-fx-font-size: 20; -fx-text-fill: #00b8bb;" />
+
+            <Label text="Sujet :" />
+            <ComboBox fx:id="sujetComboBox" promptText="Choisir un sujet" />
+
+            <Label text="Description :" />
+            <TextArea fx:id="descriptionField" promptText="Description..." prefHeight="120" wrapText="true" />
+
+            <Button fx:id="updateButton" text="Mettre à jour" onAction="#updateReclamation"
+                    style="-fx-background-color: #00b8bb; -fx-text-fill: white; -fx-background-radius: 5;" />
+        </VBox>
+    </children>
+</AnchorPane>

@@ -201,4 +201,84 @@ public class Home {
             e.printStackTrace();
         }
     }
+
+
+    @FXML
+    void Reclamation(ActionEvent event) {
+        try {
+            if (utilisateurConnecte == null) {
+                System.err.println("Home: utilisateurConnecte est null. Impossible de charger MakeRec.");
+                return;
+            }
+            System.out.println("Home: Chargement de MakeRec pour userId: " + utilisateurConnecte.getId());
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Reclamation/MakeRec.fxml"));
+            Parent reclamationView = loader.load();
+            MakeRec controller = loader.getController();
+            controller.setUserId(utilisateurConnecte.getId());
+            contentArea.getChildren().clear();
+            contentArea.getChildren().add(reclamationView);
+        } catch (IOException e) {
+            System.err.println("Erreur de chargement de l'interface Réclamation : " + e.getMessage());
+        }
+    }
+
+
+
+
+    @FXML
+    private void showLocalisation(ActionEvent event) {
+        try {
+            // Load MapView.fxml
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/MapView.fxml"));
+            Parent mapView = loader.load();
+
+            // Create a new stage (window) for the map
+            Stage mapStage = new Stage();
+            Scene mapScene = new Scene(mapView, 800.0, 600.0); // Set initial dimensions
+            mapStage.setScene(mapScene);
+            mapStage.setTitle("Hospitals in Tunisia");
+            // Removed: mapStage.setResizable(false); // Allow resizing
+            mapStage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.err.println("Error loading MapView.fxml: " + e.getMessage());
+        }
+    }
+
+
+
+
+    @FXML
+    private void openAddRdvForm(ActionEvent event) {
+        try {
+            // Load AddRdv.fxml
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Rdv/AddRdv.fxml"));
+            Parent addRdvView = loader.load();
+
+            // Create a new stage (window) for the AddRdv form
+            Stage stage = new Stage();
+            stage.setTitle("Ajouter un Rendez-vous");
+            stage.setScene(new Scene(addRdvView));
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.err.println("Erreur de chargement de l'interface Ajouter Rendez-vous : " + e.getMessage());
+        }
+    }
+
+    @FXML
+    void showPublicListPost(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/CompagnePublic/Posts.fxml"));
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setTitle("Post Details");
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();  // Afficher une erreur si le chargement échoue
+        }
+    }
 }

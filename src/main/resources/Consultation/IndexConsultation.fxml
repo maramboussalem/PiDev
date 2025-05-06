@@ -27,6 +27,12 @@
                         <Font name="Bell MT" size="18.0" />
                     </font>
                 </Button>
+                <Button fx:id="calendar" layoutX="510.0" layoutY="590.0" mnemonicParsing="false" onAction="#loadCalendar" prefHeight="40.0" prefWidth="248.0" style="-fx-background-color: #5c67f2; -fx-background-radius: 10;" text="📅 Voir Calendrier" textFill="WHITE">
+                    <font>
+                        <Font name="Bell MT" size="18.0" />
+                    </font>
+                </Button>
+
             </children>
         </AnchorPane>
     </children>

@@ -20,13 +20,11 @@ import tn.esprit.services.ParametresVitauxService;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ResourceBundle;
 
 public class UpdateParametresVitaux implements Initializable {
-
 
     @FXML
     private AnchorPane contentArea;
@@ -70,26 +68,6 @@ public class UpdateParametresVitaux implements Initializable {
     @FXML
     private ImageView image;
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        loadImage();
-    }
-
-    private void loadImage() {
-        URL imageUrl = getClass().getResource("/images/updateParametres.jpg");
-        if (imageUrl != null) {
-            image.setImage(new Image(imageUrl.toExternalForm()));
-        } else {
-            System.out.println("Fichier image introuvable dans le classpath !");
-            URL defaultImg = getClass().getResource("/images/default.png");
-            if (defaultImg != null) {
-                image.setImage(new Image(defaultImg.toExternalForm()));
-                System.out.println("Image par défaut chargée avec succès");
-            }
-        }
-
-    }
-
     @FXML
     private TextField name;
 
@@ -117,8 +95,27 @@ public class UpdateParametresVitaux implements Initializable {
     private ParametresVitaux selectedParametres;
     private final ParametresVitauxService pvService = new ParametresVitauxService();
 
-    // Called from Index or Liste screen to initialize values
-    public void initialize(ParametresVitaux pv) {
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        loadImage();
+    }
+
+    private void loadImage() {
+        URL imageUrl = getClass().getResource("/images/updateParametres.gif");
+        if (imageUrl != null) {
+            image.setImage(new Image(imageUrl.toExternalForm()));
+        } else {
+            System.out.println("Fichier image introuvable dans le classpath !");
+            URL defaultImg = getClass().getResource("/images/default.png");
+            if (defaultImg != null) {
+                image.setImage(new Image(defaultImg.toExternalForm()));
+                System.out.println("Image par défaut chargée avec succès");
+            }
+        }
+    }
+
+    // Called from DetaillesParametresVitaux to set the selectedParametres
+    public void setParametresVitaux(ParametresVitaux pv) {
         this.selectedParametres = pv;
 
         name.setText(pv.getName());
@@ -127,37 +124,78 @@ public class UpdateParametresVitaux implements Initializable {
         tas.setText(String.valueOf(pv.getTas()));
         tad.setText(String.valueOf(pv.getTad()));
         gad.setText(String.valueOf(pv.getGad()));
-        ecg.setText(String.valueOf(pv.getEcg()));
+        ecg.setText(pv.getEcg());
         spo2.setText(String.valueOf(pv.getSpo2()));
         gsc.setText(String.valueOf(pv.getGsc()));
-        created_at.setValue(pv.getCreated_at().toLocalDateTime().toLocalDate());
 
+        // Handling created_at
+        if (pv.getCreated_at() != null) {
+            created_at.setValue(pv.getCreated_at().toLocalDateTime().toLocalDate());
+        }
     }
 
     @FXML
     void saveButton(ActionEvent event) {
         if (validateForm()) {
-            try {
-                selectedParametres.setName(name.getText());
-                selectedParametres.setFc((int) Double.parseDouble(fc.getText()));
-                selectedParametres.setFr((int) Double.parseDouble(fr.getText()));
-                selectedParametres.setTas((int) Double.parseDouble(tas.getText()));
-                selectedParametres.setTad((int) Double.parseDouble(tad.getText()));
-                selectedParametres.setGad((float) Double.parseDouble(gad.getText()));
-                selectedParametres.setEcg(ecg.getText());
-                selectedParametres.setSpo2((int) Double.parseDouble(spo2.getText()));
-                selectedParametres.setGsc((int) Double.parseDouble(gsc.getText()));
-                selectedParametres.setCreated_at(Timestamp.valueOf(created_at.getValue().atStartOfDay()));
+            // Create a confirmation alert to check if user wants to navigate
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation");
+            alert.setHeaderText("Êtes-vous sûr de vouloir enregistrer les modifications et revenir à l'historique ?");
+            alert.setContentText("Les modifications seront enregistrées.");
+
+            // Show the alert and wait for the user's response
+            alert.showAndWait().ifPresent(response -> {
+                if (response == ButtonType.OK) {
+                    try {
+                        // Proceed with the modification
+                        selectedParametres.setName(name.getText());
+                        selectedParametres.setFc((int) Double.parseDouble(fc.getText()));
+                        selectedParametres.setFr((int) Double.parseDouble(fr.getText()));
+                        selectedParametres.setTas((int) Double.parseDouble(tas.getText()));
+                        selectedParametres.setTad((int) Double.parseDouble(tad.getText()));
+                        selectedParametres.setGad((float) Double.parseDouble(gad.getText()));
+                        if (ecg.getText() == null || ecg.getText().trim().isEmpty()) {
+                            ecgError.setText("ECG field is required.");
+                            return;
+                        } else if (ecg.getText().length() > 255) {
+                            ecgError.setText("ECG is too long.");
+                            return;
+                        }
+                        selectedParametres.setEcg(ecg.getText());
+                        selectedParametres.setSpo2((int) Double.parseDouble(spo2.getText()));
+                        selectedParametres.setGsc((int) Double.parseDouble(gsc.getText()));
+
+                        // Convert LocalDate to Timestamp
+                        selectedParametres.setCreated_at(new Timestamp(System.currentTimeMillis()));
 
 
-                pvService.modifier(selectedParametres);
+                        // Save the modifications to the database
+                        pvService.modifier(selectedParametres);
 
-                System.out.println("Paramètres vitaux mis à jour avec succès !");
-            } catch (SQLException e) {
-                System.err.println("Erreur lors de la mise à jour : " + e.getMessage());
-            }
+                        System.out.println("Paramètres vitaux mis à jour avec succès !");
+
+                        // Now navigate to the historique page
+                        try {
+                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ParametresVitaux/IndexParametresVitaux.fxml"));
+                            Parent root = loader.load();
+                            contentArea.getChildren().clear();
+                            contentArea.getChildren().add(root);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            System.out.println("❌ Erreur lors de la navigation vers l'historique.");
+                        }
+
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                        System.err.println("Erreur lors de la mise à jour : " + e.getMessage());
+                    }
+                } else {
+                    System.out.println("❗ Modifications annulées.");
+                }
+            });
         }
     }
+
 
     @FXML
     void historiqueButton(ActionEvent event) {

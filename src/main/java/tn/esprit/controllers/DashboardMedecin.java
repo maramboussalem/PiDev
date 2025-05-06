@@ -193,6 +193,19 @@ public class DashboardMedecin {
         }
 
     }
+    @FXML
+    void parametresVitaux(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ParametresVitauxM/AddParametresVitauxM.fxml"));
+            Parent root = loader.load();
+
+            contentArea.getChildren().clear();
+            contentArea.getChildren().add(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
 
     @FXML
     void Service(ActionEvent event) {
@@ -218,6 +231,19 @@ public class DashboardMedecin {
             contentArea.getChildren().add(root);
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void showListPost(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Compagne/ListPost.fxml"));
+            Parent root = loader.load();
+            // Remplacer le contenu actuel par celui de la liste des utilisateurs
+            contentArea.getChildren().clear();  // Supprimer tout contenu existant dans contentArea
+            contentArea.getChildren().add(root);  // Ajouter la nouvelle vue (Liste des utilisateurs)
+        } catch (IOException e) {
+            e.printStackTrace();  // Afficher une erreur si le chargement échoue
         }
     }
 }

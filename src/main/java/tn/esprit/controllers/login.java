@@ -19,6 +19,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import tn.esprit.entities.Utilisateur;
 import tn.esprit.services.ServiceUtilisateur;
+import tn.esprit.utils.SessionManager;
 
 import java.io.IOException;
 
@@ -53,6 +54,7 @@ public class login {
 
         try {
             Utilisateur utilisateur = serviceUtilisateur.login(email, motDePasse);
+            SessionManager.getInstance().setUtilisateur(utilisateur);
             failedAttempts = 0; // Réinitialiser les tentatives en cas de succès
             lockoutLabel.setVisible(false); // Cacher le label
 

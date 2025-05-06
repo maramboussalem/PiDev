@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="contentArea" prefHeight="763.0" prefWidth="1206.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.ParametresVitauxM.UpdateParametresVitauxM">
+   <children>
+      <AnchorPane layoutX="40.0" layoutY="20.0" prefHeight="725.0" prefWidth="1120.0" style="-fx-background-color: #ffffff; -fx-background-radius: 30; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 5);">
+         <children>
+            <TextField fx:id="name" layoutX="36.0" layoutY="174.0" prefHeight="38.0" prefWidth="260.0" promptText="👤 Nom et Prénom" style="-fx-background-radius: 10;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <Text fill="#00b8bb" layoutX="332.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="📝 Modifier les Paramètres Vitaux" textAlignment="CENTER" wrappingWidth="482.8531494140625">
+               <font>
+                  <Font name="Bell MT" size="33.0" />
+               </font>
+            </Text>
+            <Label fx:id="nameError" layoutX="36.0" layoutY="215.0" prefHeight="22.0" prefWidth="260.0" textFill="RED" />
+            <Text fill="#00b8bb" layoutX="36.0" layoutY="167.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Entrer le Nom et Prénom" wrappingWidth="260.0" />
+            <Text fill="#00b8bb" layoutX="36.0" layoutY="252.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Entrer la Date de Naissance &quot;jj/mm/aaaa&quot;" wrappingWidth="260.0" />
+            <DatePicker fx:id="created_at" layoutX="36.0" layoutY="259.0" prefHeight="38.0" prefWidth="260.0" promptText="📅 Date de Naissance" />
+            <Label fx:id="dateError" layoutX="36.0" layoutY="300.0" prefHeight="22.0" prefWidth="260.0" textFill="RED" />
+            <Text fill="#00b8bb" layoutX="36.0" layoutY="337.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Entrer la Fréquence Cardiaque &quot;bpm&quot;" wrappingWidth="260.0" />
+            <TextField fx:id="fc" layoutX="36.0" layoutY="343.0" prefHeight="38.0" prefWidth="260.0" promptText="❤ ( FC )" style="-fx-background-radius: 10;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <Label fx:id="fcError" layoutX="38.0" layoutY="384.0" prefHeight="22.0" prefWidth="260.0" textFill="RED" />
+            <Text fill="#00b8bb" layoutX="38.0" layoutY="421.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Entrer la Fréquence Respiratoire &quot;cycles/min&quot;" wrappingWidth="260.0" />
+            <TextField fx:id="fr" layoutX="38.0" layoutY="427.0" prefHeight="38.0" prefWidth="260.0" promptText="💨 ( FR )" style="-fx-background-radius: 10;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <Label fx:id="frError" layoutX="38.0" layoutY="465.0" prefHeight="22.0" prefWidth="260.0" textFill="RED" />
+            <Text fill="#00b8bb" layoutX="38.0" layoutY="503.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Entrer l'Électrocardiogramme &quot;Tracé&quot;" wrappingWidth="260.0" />
+            <TextField fx:id="ecg" layoutX="38.0" layoutY="509.0" prefHeight="38.0" prefWidth="260.0" promptText="⚕ ( E.C.G )" style="-fx-background-radius: 10;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <Label fx:id="ecgError" layoutX="38.0" layoutY="547.0" prefHeight="22.0" prefWidth="260.0" textFill="RED" />
+            <Text fill="#00b8bb" layoutX="373.0" layoutY="167.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Entrer la Tension Artérielle Systolique &quot;mmHg&quot;" wrappingWidth="260.0" />
+            <TextField fx:id="tas" layoutX="373.0" layoutY="174.0" prefHeight="38.0" prefWidth="260.0" promptText="⬆ ( TAS )" style="-fx-background-radius: 10;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <Label fx:id="tasError" layoutX="373.0" layoutY="215.0" prefHeight="22.0" prefWidth="260.0" textFill="RED" />
+            <Text fill="#00b8bb" layoutX="373.0" layoutY="252.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Entrer la Tension Artérielle Diastolique &quot;mmHg&quot;" wrappingWidth="260.0" />
+            <TextField fx:id="tad" layoutX="373.0" layoutY="259.0" prefHeight="38.0" prefWidth="260.0" promptText="⬇ ( TAD )" style="-fx-background-radius: 10;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <Label fx:id="tadError" layoutX="373.0" layoutY="300.0" prefHeight="22.0" prefWidth="260.0" textFill="RED" />
+            <Text fill="#00b8bb" layoutX="373.0" layoutY="337.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Entrer la Saturation en Oxygène &quot;%&quot;" wrappingWidth="260.0" />
+            <TextField fx:id="spo2" layoutX="373.0" layoutY="343.0" prefHeight="38.0" prefWidth="260.0" promptText="🌡 ( Spo2 )" style="-fx-background-radius: 10;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <Label fx:id="spo2Error" layoutX="375.0" layoutY="384.0" prefHeight="22.0" prefWidth="260.0" textFill="RED" />
+            <Text fill="#00b8bb" layoutX="375.0" layoutY="421.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Entrer le Score de Glasgow Coma  &quot;/15&quot;" wrappingWidth="260.0" />
+            <TextField fx:id="gsc" layoutX="375.0" layoutY="427.0" prefHeight="38.0" prefWidth="260.0" promptText="☁ ( GSC )" style="-fx-background-radius: 10;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <Label fx:id="gscError" layoutX="375.0" layoutY="465.0" prefHeight="22.0" prefWidth="260.0" textFill="RED" />
+            <Text fill="#00b8bb" layoutX="375.0" layoutY="503.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Entrer la Glycémie &quot;g/L&quot;" wrappingWidth="260.0" />
+            <TextField fx:id="gad" layoutX="375.0" layoutY="509.0" prefHeight="38.0" prefWidth="260.0" promptText="🍬 ( GAD )" style="-fx-background-radius: 10;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <Label fx:id="gadError" layoutX="375.0" layoutY="547.0" prefHeight="22.0" prefWidth="260.0" textFill="RED" />
+            <Button layoutX="88.0" layoutY="629.0" mnemonicParsing="false" onAction="#saveButton" prefHeight="46.0" prefWidth="382.0" style="-fx-background-color: #00b8bb; -fx-background-radius: 10;" text="✅ Enregistrer les données" textFill="WHITE">
+               <font>
+                  <Font name="Bell MT" size="20.0" />
+               </font>
+            </Button>
+            <Button layoutX="507.0" layoutY="629.0" mnemonicParsing="false" onAction="#historiqueButton" prefHeight="46.0" prefWidth="241.0" style="-fx-background-color: #2fb959; -fx-background-radius: 10;" text="📜 Afficher l’historique " textFill="WHITE">
+               <font>
+                  <Font name="Bell MT" size="20.0" />
+               </font>
+            </Button>
+            <ImageView fx:id="image" fitHeight="371.0" fitWidth="455.0" layoutX="640.0" layoutY="177.0" pickOnBounds="true" preserveRatio="true" />
+            <Button layoutX="768.0" layoutY="628.0" mnemonicParsing="false" onAction="#closeButton" prefHeight="46.0" prefWidth="241.0" style="-fx-background-color: #c91515; -fx-background-radius: 10;" text="❌ Fermer la fenêtre" textFill="WHITE">
+               <font>
+                  <Font name="Bell MT" size="20.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

@@ -419,6 +419,22 @@ public class ServiceUtilisateur implements IService<Utilisateur> {
 
         return null;
     }
+    public Utilisateur findById(int id) throws SQLException {
+        String req = "SELECT * FROM utilisateur WHERE id = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(req);
+        preparedStatement.setInt(1, id);
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        if (resultSet.next()) {
+            Utilisateur user = new Utilisateur();
+            user.setId(resultSet.getInt("id"));
+            user.setPrenom(resultSet.getString("prenom"));
+            user.setNom(resultSet.getString("nom"));
+            user.setImg_url(resultSet.getString("img_url"));
+            return user;
+        }
+        return null;
+    }
 
 
 }

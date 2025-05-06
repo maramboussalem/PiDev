@@ -55,7 +55,7 @@
                         <Font name="Bell MT" size="18.0" />
                     </font>
                 </Button>
-            <ComboBox fx:id="patientName" layoutX="100.0" layoutY="371.0" prefHeight="38.0" prefWidth="400.0" />
+                <ComboBox fx:id="patientName" layoutX="100.0" layoutY="371.0" prefHeight="38.0" prefWidth="400.0" />
 
             </children>
         </AnchorPane>

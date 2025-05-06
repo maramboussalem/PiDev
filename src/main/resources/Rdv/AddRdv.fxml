@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.*?>
+
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="tn.esprit.controllers.AddRdvController"
+      spacing="25" alignment="CENTER" style="-fx-padding: 40; -fx-background-color: linear-gradient(to bottom right, #f0f4ff, #fff7f0); -fx-background-radius: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 20, 0, 0, 5);">
+
+    <!-- GIF Animation -->
+    <ImageView fx:id="gifImageView" fitWidth="150" fitHeight="150" preserveRatio="true"/>
+
+    <!-- Title -->
+    <Label text="🩺 Créer un Rendez-vous"
+           style="-fx-font-size: 28; -fx-font-weight: bold; -fx-text-fill: #2c3e50; -fx-alignment: center;"/>
+
+    <!-- Subtitle -->
+    <Label text="Planifiez votre consultation médicale en quelques étapes"
+           style="-fx-font-size: 14; -fx-text-fill: #7f8c8d; -fx-alignment: center; -fx-padding: 0 0 20 0;"/>
+
+    <!-- Service Selection -->
+    <VBox spacing="8" style="-fx-pref-width: 350;">
+        <Label text="Service médical :" style="-fx-font-size: 15; -fx-font-weight: bold; -fx-text-fill: #34495e;"/>
+        <ComboBox fx:id="serviceComboBox" promptText="Sélectionner un service"
+                  style="-fx-pref-width: 350; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #cccccc; -fx-font-size: 14; -fx-background-color: #ffffff;"
+                  onMouseEntered="#onHover" onMouseExited="#onExit"/>
+    </VBox>
+
+    <!-- Disponibility Selection -->
+
+
+    <!-- Date and Time Selection -->
+    <HBox spacing="15" alignment="CENTER" style="-fx-pref-width: 350;">
+        <VBox spacing="8" style="-fx-pref-width: 170;">
+            <Label text="📅 Date :" style="-fx-font-size: 15; -fx-font-weight: bold; -fx-text-fill: #34495e;"/>
+            <DatePicker fx:id="datePicker"
+                        style="-fx-pref-width: 170; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #cccccc; -fx-font-size: 14; -fx-background-color: #ffffff;"
+                        onMouseEntered="#onHover" onMouseExited="#onExit"/>
+        </VBox>
+
+        <VBox spacing="8" style="-fx-pref-width: 170;">
+            <Label text="⏰ Heure :" style="-fx-font-size: 15; -fx-font-weight: bold; -fx-text-fill: #34495e;"/>
+            <ComboBox fx:id="timeComboBox" promptText="Sélectionner une heure"
+                      style="-fx-pref-width: 170; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #cccccc; -fx-font-size: 14; -fx-background-color: #ffffff;"
+                      onMouseEntered="#onHover" onMouseExited="#onExit"/>
+        </VBox>
+    </HBox>
+
+    <!-- Buttons Section -->
+    <HBox spacing="15" alignment="CENTER">
+        <Button fx:id="addButton" text="Ajouter" onAction="#addRdv"
+                style="-fx-background-color: linear-gradient(to right, #4CAF50, #45a049); -fx-text-fill: white; -fx-font-size: 14; -fx-font-weight: bold; -fx-padding: 10 30; -fx-background-radius: 30; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0, 0, 3);"
+                onMouseEntered="#onHoverButton" onMouseExited="#onExitButton"/>
+        <Button fx:id="calendarButton" text="Voir Calendrier" onAction="#openCalendar"
+                style="-fx-background-color: linear-gradient(to right, #2196F3, #1e88e5); -fx-text-fill: white; -fx-font-size: 14; -fx-font-weight: bold; -fx-padding: 10 30; -fx-background-radius: 30; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0, 0, 3);"
+                onMouseEntered="#onHoverButton" onMouseExited="#onExitButton"/>
+        <Button fx:id="cancelButton" text="Annuler" onAction="#cancel"
+                style="-fx-background-color: linear-gradient(to right, #f44336, #e53935); -fx-text-fill: white; -fx-font-size: 14; -fx-font-weight: bold; -fx-padding: 10 30; -fx-background-radius: 30; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0, 0, 3);"
+                onMouseEntered="#onHoverButton" onMouseExited="#onExitButton"/>
+    </HBox>
+
+</VBox>

@@ -14,12 +14,11 @@ public class ParametresVitaux {
     private int spo2;
     private int gsc;
     private double gad;
-    private int userId;
     private Timestamp created_at;
 
     public ParametresVitaux() {}
 
-    public ParametresVitaux(int id, String name, int fc, int fr, String ecg, int tas, int tad, int age, int spo2, int gsc, double gad, int userId, Timestamp created_at) {
+    public ParametresVitaux(int id, String name, int fc, int fr, String ecg, int tas, int tad, int age, int spo2, int gsc, double gad, Timestamp created_at) {
         this.id = id;
         this.name = name;
         this.fc = fc;
@@ -31,11 +30,10 @@ public class ParametresVitaux {
         this.spo2 = spo2;
         this.gsc = gsc;
         this.gad = gad;
-        this.userId = userId;
         this.created_at = created_at;
     }
 
-    public ParametresVitaux(String name, int fc, int fr, String ecg, int tas, int tad, int age, int spo2, int gsc, double gad, int userId, Timestamp created_at) {
+    public ParametresVitaux(String name, int fc, int fr, String ecg, int tas, int tad, int age, int spo2, int gsc, double gad, Timestamp created_at) {
         this.name = name;
         this.fc = fc;
         this.fr = fr;
@@ -46,7 +44,6 @@ public class ParametresVitaux {
         this.spo2 = spo2;
         this.gsc = gsc;
         this.gad = gad;
-        this.userId = userId;
         this.created_at = created_at;
     }
 
@@ -85,9 +82,6 @@ public class ParametresVitaux {
     public double getGad() { return gad; }
     public void setGad(double gad) { this.gad = gad; }
 
-    public int getUserId() { return userId; }
-    public void setUserId(int userId) { this.userId = userId; }
-
     public Timestamp getCreated_at() { return created_at; }
     public void setCreated_at(Timestamp created_at) { this.created_at = created_at; }
 
@@ -105,7 +99,6 @@ public class ParametresVitaux {
                 ", spo2=" + spo2 +
                 ", gsc=" + gsc +
                 ", gad=" + gad +
-                ", userId=" + userId +
                 ", created_at=" + created_at +
                 '}';
     }

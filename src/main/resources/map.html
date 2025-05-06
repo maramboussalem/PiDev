@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospitals in Tunisia</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            overflow: auto;
+        }
+        #map-container {
+            height: 70%;
+            width: 100%;
+        }
+        #map {
+            height: 100%;
+            width: 100%;
+        }
+        #hospital-list-container {
+            height: 30%;
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            overflow-y: auto;
+        }
+        #hospital-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        #hospital-list li {
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+            cursor: pointer; /* Indicate clickable items */
+            transition: background-color 0.3s;
+        }
+        #hospital-list li:hover {
+            background-color: #f0f0f0; /* Hover effect */
+        }
+        #hospital-list li:last-child {
+            border-bottom: none;
+        }
+    </style>
+
+</head>
+<body>
+<div id="map-container">
+    <div id="map"></div>
+</div>
+<div id="hospital-list-container">
+    <h3>Hospitals in Tunisia</h3>
+    <ul id="hospital-list"></ul>
+</div>
+<script>
+    let map;
+
+    function initMap() {
+        // Initialize map centered on Tunisia
+        map = new google.maps.Map(document.getElementById("map"), {
+            center: { lat: 34.0, lng: 9.0 },
+            zoom: 6,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        });
+
+        // Define hospital data with coordinates and names
+        const hospitals = [
+            { name: "Hopital Charles Nicolle", lat: 36.8613, lng: 10.1797, address: "Tunis, Tunisia" },
+            { name: "Hopital Aziza Othmana", lat: 36.8181, lng: 10.1658, address: "Tunis, Tunisia" },
+            { name: "Hopital La Rabta", lat: 36.8036, lng: 10.1707, address: "Tunis, Tunisia" },
+            { name: "Hopital Habib Bourguiba", lat: 34.7408, lng: 10.7600, address: "Sfax, Tunisia" },
+            { name: "Hopital Mongi Slim", lat: 36.8534, lng: 10.1799, address: "Tunis, Tunisia" },
+            { name: "Hopital de Tunis", lat: 36.8072, lng: 10.1835, address: "Tunis, Tunisia" },
+            { name: "Clinique El Manar", lat: 36.8564, lng: 10.1585, address: "Tunis, Tunisia" },
+            { name: "Clinique Pasteur", lat: 36.8322, lng: 10.1602, address: "Tunis, Tunisia" },
+            { name: "Clinique La Soukra", lat: 36.87046, lng: 10.283417, address: "La Soukra, Ariana, Tunisia" },
+            { name: "Hopital militaire de Tunis", lat: 36.8500, lng: 10.1667, address: "Tunis, Tunisia" },
+        ];
+
+        // Add hospital markers
+        hospitals.forEach(function(hospital) {
+            var marker = new google.maps.Marker({
+                position: { lat: hospital.lat, lng: hospital.lng },
+                map: map,
+                title: hospital.name
+            });
+
+            // On marker click, open Google Maps in a new tab
+            marker.addListener('click', function() {
+                var googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${hospital.lat},${hospital.lng}&query_place_id=${hospital.name}`;
+                window.open(googleMapsUrl, '_blank');
+            });
+        });
+
+        // Populate the hospital list with clickable items
+        const hospitalList = document.getElementById("hospital-list");
+        hospitals.forEach(function(hospital) {
+            const listItem = document.createElement("li");
+            listItem.textContent = `${hospital.name} - Lat: ${hospital.lat}, Lng: ${hospital.lng}`;
+            listItem.addEventListener('click', function() {
+                var googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${hospital.lat},${hospital.lng}&query_place_id=${hospital.name}`;
+                window.open(googleMapsUrl, '_blank');
+            });
+            hospitalList.appendChild(listItem);
+        });
+
+        // Force map to resize after load
+        function resizeMap() {
+            if (map) {
+                google.maps.event.trigger(map, "resize");
+            }
+        }
+        setTimeout(resizeMap, 100);
+        window.addEventListener("resize", resizeMap);
+    }
+</script>
+</body>
+</html>

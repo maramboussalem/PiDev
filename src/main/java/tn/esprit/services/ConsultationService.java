@@ -7,102 +7,144 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ConsultationService implements IService<Consultation> {
+public class ConsultationService {
 
     private final Connection cnx;
 
     public ConsultationService() {
-        this.cnx = MyDataBase.getInstance().getMyConnection(); // ✅ Changed to match your method
+        this.cnx = MyDataBase.getInstance().getMyConnection();
         if (cnx == null) {
-            System.err.println("Erreur: Connexion à la base de données échouée !");
+            System.err.println("ConsultationService: Erreur - Connexion à la base de données échouée !");
+        } else {
+            System.out.println("ConsultationService: Connexion à la base de données établie avec succès.");
         }
     }
 
-    @Override
-    public void ajouter(Consultation consultation) throws SQLException {
-        String req = "INSERT INTO consultation (nom_patient, date_consultation, diagnostic, user_id) VALUES (?, ?, ?, ?)";
+    public void ajouter(Consultation c) throws SQLException {
+        String req = "INSERT INTO consultation (user_id, nom_patient, date_consultation, diagnostic) VALUES (?, ?, ?, ?)";
 
         try (PreparedStatement pstmt = cnx.prepareStatement(req)) {
-            pstmt.setString(1, consultation.getNomPatient());
-            pstmt.setDate(2, new Date(consultation.getDateConsultation().getTime()));
-            pstmt.setString(3, consultation.getDiagnostic());
-            pstmt.setInt(4, consultation.getUserId());
+            pstmt.setInt(1, c.getUserId());
+            pstmt.setString(2, c.getNomPatient());
+            pstmt.setDate(3, c.getDateConsultation());
+            pstmt.setString(4, c.getDiagnostic());
 
-            int rowsInserted = pstmt.executeUpdate();
-            if (rowsInserted > 0) {
-                System.out.println("Consultation ajoutée avec succès !");
-            } else {
-                System.err.println("Erreur: La consultation n’a pas été ajoutée.");
-            }
-        } catch (SQLException e) {
-            System.err.println("Erreur SQL lors de l'ajout de la consultation: " + e.getMessage());
-            throw e; // Re-throw exception to maintain consistency with interface
+            pstmt.executeUpdate();
+            System.out.println("Consultation ajoutée avec succès !");
         }
     }
 
-    @Override
     public List<Consultation> afficher() throws SQLException {
-        List<Consultation> consultations = new ArrayList<>();
+        List<Consultation> list = new ArrayList<>();
         String req = "SELECT * FROM consultation";
 
-        try (PreparedStatement ps = cnx.prepareStatement(req)) {
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                Consultation consultation = new Consultation(
-                        rs.getInt("id"),
-                        rs.getString("nom_patient"),
-                        rs.getDate("date_consultation"),
-                        rs.getString("diagnostic"),
-                        rs.getInt("user_id")
-                );
-                consultations.add(consultation);
-            }
-        } catch (SQLException e) {
-            System.err.println("Erreur SQL lors de la récupération des consultations: " + e.getMessage());
-            throw e; // Re-throw exception to maintain consistency with interface
-        }
+        try (PreparedStatement pstmt = cnx.prepareStatement(req);
+             ResultSet rs = pstmt.executeQuery()) {
 
-        return consultations;
+            while (rs.next()) {
+                Consultation c = new Consultation();
+                c.setId(rs.getInt("id"));
+                c.setUserId(rs.getInt("user_id"));
+                c.setNomPatient(rs.getString("nom_patient"));
+                c.setDateConsultation(rs.getDate("date_consultation"));
+                c.setDiagnostic(rs.getString("diagnostic"));
+
+                list.add(c);
+            }
+        }
+        return list;
     }
 
-    @Override
+    public List<Consultation> afficherByUserId(int userId) throws SQLException {
+        if (cnx == null) {
+            throw new SQLException("Connexion à la base de données non établie.");
+        }
+
+        List<Consultation> list = new ArrayList<>();
+        String req = "SELECT * FROM consultation WHERE user_id = ?";
+
+        try (PreparedStatement pstmt = cnx.prepareStatement(req)) {
+            pstmt.setInt(1, userId);
+            System.out.println("ConsultationService: Executing query: " + req + " with userId: " + userId);
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                Consultation c = new Consultation();
+                c.setId(rs.getInt("id"));
+                c.setUserId(rs.getInt("user_id"));
+                c.setNomPatient(rs.getString("nom_patient"));
+                c.setDateConsultation(rs.getDate("date_consultation"));
+                c.setDiagnostic(rs.getString("diagnostic"));
+                list.add(c);
+                System.out.println("ConsultationService: Found consultation - " + c);
+            }
+            System.out.println("ConsultationService: Total consultations found for userId " + userId + ": " + list.size());
+        }
+        return list;
+    }
+
+    public Consultation getConsultationById(int id) throws SQLException {
+        if (cnx == null) {
+            throw new SQLException("Connexion à la base de données non établie.");
+        }
+
+        String req = "SELECT * FROM consultation WHERE id = ?";
+
+        try (PreparedStatement pstmt = cnx.prepareStatement(req)) {
+            pstmt.setInt(1, id);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                Consultation c = new Consultation();
+                c.setId(rs.getInt("id"));
+                c.setUserId(rs.getInt("user_id"));
+                c.setNomPatient(rs.getString("nom_patient"));
+                c.setDateConsultation(rs.getDate("date_consultation"));
+                c.setDiagnostic(rs.getString("diagnostic"));
+                return c;
+            }
+        }
+        return null;
+    }
+
+    public void modifier(Consultation c) throws SQLException {
+        if (cnx == null) {
+            throw new SQLException("Connexion à la base de données non établie.");
+        }
+
+        String req = "UPDATE consultation SET user_id = ?, nom_patient = ?, date_consultation = ?, diagnostic = ? WHERE id = ?";
+
+        try (PreparedStatement pstmt = cnx.prepareStatement(req)) {
+            pstmt.setInt(1, c.getUserId());
+            pstmt.setString(2, c.getNomPatient());
+            pstmt.setDate(3, c.getDateConsultation());
+            pstmt.setString(4, c.getDiagnostic());
+            pstmt.setInt(5, c.getId());
+
+            int updated = pstmt.executeUpdate();
+            if (updated > 0) {
+                System.out.println("Consultation mise à jour avec succès !");
+            } else {
+                System.err.println("Consultation non trouvée.");
+            }
+        }
+    }
+
     public void supprimer(int id) throws SQLException {
+        if (cnx == null) {
+            throw new SQLException("Connexion à la base de données non établie.");
+        }
+
         String req = "DELETE FROM consultation WHERE id = ?";
 
         try (PreparedStatement pstmt = cnx.prepareStatement(req)) {
             pstmt.setInt(1, id);
-            int rowsDeleted = pstmt.executeUpdate();
-            if (rowsDeleted > 0) {
+            int rows = pstmt.executeUpdate();
+            if (rows > 0) {
                 System.out.println("Consultation supprimée avec succès !");
             } else {
-                System.err.println("Erreur: Consultation non trouvée.");
+                System.err.println("Aucune consultation trouvée avec l'id donné.");
             }
-        } catch (SQLException e) {
-            System.err.println("Erreur SQL lors de la suppression de la consultation: " + e.getMessage());
-            throw e; // Re-throw exception to maintain consistency with interface
-        }
-    }
-
-    @Override
-    public void modifier(Consultation consultation) throws SQLException {
-        String req = "UPDATE consultation SET nom_patient = ?, date_consultation = ?, diagnostic = ?, user_id = ? WHERE id = ?";
-
-        try (PreparedStatement pstmt = cnx.prepareStatement(req)) {
-            pstmt.setString(1, consultation.getNomPatient());
-            pstmt.setDate(2, new Date(consultation.getDateConsultation().getTime()));
-            pstmt.setString(3, consultation.getDiagnostic());
-            pstmt.setInt(4, consultation.getUserId());
-            pstmt.setInt(5, consultation.getId());
-
-            int rowsUpdated = pstmt.executeUpdate();
-            if (rowsUpdated > 0) {
-                System.out.println("Consultation mise à jour avec succès !");
-            } else {
-                System.err.println("Erreur: Consultation non trouvée.");
-            }
-        } catch (SQLException e) {
-            System.err.println("Erreur SQL lors de la mise à jour de la consultation: " + e.getMessage());
-            throw e; // Re-throw exception to maintain consistency with interface
         }
     }
 }

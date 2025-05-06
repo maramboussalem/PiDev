@@ -4,19 +4,21 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
-<?import javafx.scene.control.Button?>
-<AnchorPane prefHeight="521.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.Compagne.PostDetails">
+<AnchorPane prefHeight="675.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.Compagne.PostDetails">
     <children>
-        <!-- Title Label -->
-        <Label fx:id="titleLabel" layoutX="150.0" layoutY="20.0" prefHeight="30.0" prefWidth="300.0" text="Post Title" textAlignment="CENTER" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #00b8bb;" />
-
-        <!-- Post Image -->
-        <ImageView fx:id="imageView" fitHeight="248.0" fitWidth="507.0" layoutX="48.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-radius: 10px;" />
-
-        <!-- Content Label -->
-        <Label fx:id="contentLabel" layoutX="20.0" layoutY="330.0" prefHeight="150.0" prefWidth="560.0" wrapText="true" style="-fx-font-size: 14px; -fx-text-fill: #333; -fx-font-family: 'Arial'; -fx-line-spacing: 5;" />
+      <VBox layoutX="46.0" layoutY="37.0" prefHeight="597.0" prefWidth="507.0" styleClass="vbox-container" stylesheets="@styles/listPost.css" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="50.0">
+         <children>
+              <!-- Title Label -->
+              <Label fx:id="titleLabel" alignment="CENTER" prefHeight="30.0" prefWidth="511.0" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #00b8bb;" text="Post Title" textAlignment="CENTER" />
+      
+              <!-- Post Image -->
+              <ImageView fx:id="imageView" fitHeight="286.0" fitWidth="507.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-radius: 10px;" styleClass="post-image" />
+      
+              <!-- Content Label -->
+              <Label fx:id="contentLabel" prefHeight="238.0" prefWidth="507.0" style="-fx-font-size: 14px; -fx-text-fill: #333; -fx-font-family: 'Arial'; -fx-line-spacing: 5;" styleClass="content-label" stylesheets="@styles/listPost.css" wrapText="true" />
+         </children>
+      </VBox>
 
 
     </children>

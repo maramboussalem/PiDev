@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.CalendarController"
+      spacing="20" style="-fx-padding: 40; -fx-background-color: linear-gradient(to bottom right, #f0f4ff, #fff7f0);">
+
+    <!-- Title -->
+    <HBox alignment="CENTER" spacing="10">
+        <Label text="📅 Liste des Rendez-vous" style="-fx-font-size: 28; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
+    </HBox>
+    <Label text="Visualisez vos rendez-vous médicaux par mois et jour de la semaine" style="-fx-font-size: 16; -fx-text-fill: #7f8c8d;" alignment="CENTER"/>
+
+    <!-- Search Bar -->
+    <HBox alignment="CENTER" spacing="10" style="-fx-padding: 0 0 20 0;">
+        <TextField fx:id="monthSearchField" promptText="Rechercher un mois" style="-fx-font-size: 14; -fx-pref-width: 250; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #3498db; -fx-border-width: 2;"/>
+        <Button fx:id="searchButton" onAction="#searchMonth" text="🔍" style="-fx-font-size: 14; -fx-background-color: linear-gradient(to bottom right, #3498db, #2980b9); -fx-text-fill: white; -fx-background-radius: 10; -fx-padding: 10 20 10 20;"/>
+    </HBox>
+
+    <!-- Calendar Content (will be populated dynamically for each month) -->
+    <ScrollPane fitToWidth="true">
+        <VBox fx:id="calendarContainer" spacing="40"/>
+    </ScrollPane>
+
+</VBox>

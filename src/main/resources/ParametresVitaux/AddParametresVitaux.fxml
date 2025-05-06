@@ -9,10 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="contentArea" prefHeight="662.0" prefWidth="753.0"
-            xmlns="http://javafx.com/javafx/23.0.1"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="tn.esprit.controllers.ParametresVitaux.AddParametresVitaux">
+<AnchorPane fx:id="contentArea" prefHeight="662.0" prefWidth="753.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.ParametresVitaux.AddParametresVitaux">
 
    <children>
       <AnchorPane layoutX="9.0" layoutY="10.0" prefHeight="622.0" prefWidth="1495.0">
@@ -105,7 +102,7 @@
                         <Font name="Bell MT" size="20.0" />
                      </font>
                   </Button>
-                  <ImageView fx:id="image" fitHeight="371.0" fitWidth="562.0" layoutX="774.0" layoutY="96.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="image" fitHeight="315.0" fitWidth="432.0" layoutX="841.0" layoutY="152.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </AnchorPane>
          </children>

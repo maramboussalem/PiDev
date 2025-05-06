@@ -9,7 +9,10 @@ import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import tn.esprit.entities.Post;
+import tn.esprit.entities.Utilisateur;
 import tn.esprit.services.ServicePost;
+import tn.esprit.services.ServiceUtilisateur;
+import tn.esprit.utils.EmailService;
 
 import java.io.File;
 import java.io.IOException;
@@ -50,7 +53,7 @@ public class AddPost {
 
     private String handleImageUpload() {
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Choose an Image");
+        fileChooser.setTitle("Choisissez une image");
         fileChooser.getExtensionFilters().add(
                 new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif")
         );
@@ -59,15 +62,14 @@ public class AddPost {
 
         if (selectedFile != null) {
             try {
-                // Create /images folder if it doesn't exist
+
                 File destFolder = new File("images");
                 if (!destFolder.exists()) destFolder.mkdirs();
 
-                // Copy the file into the /images folder
+
                 File destFile = new File(destFolder, selectedFile.getName());
                 Files.copy(selectedFile.toPath(), destFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
 
-                // Display the image in the ImageView
                 Image image = new Image(destFile.toURI().toString());
                 imageView.setImage(image);
 
@@ -97,31 +99,25 @@ public class AddPost {
     }
     public void addPost(ActionEvent actionEvent) {
         ServicePost servicePost = new ServicePost();
+        ServiceUtilisateur serviceUtilisateur = new ServiceUtilisateur();
         clearValidationLabels();
-        /*if (titre.getText().isEmpty() || contenu.getText().isEmpty() || uploadedImagePath.isEmpty()) {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Missing Information");
-            alert.setContentText("Please fill in all fields and upload an image.");
-            alert.showAndWait();
-            return;
-        }*/
         boolean isValid = true;
 
-        // Validate title
+
         if (titre.getText().trim().isEmpty()) {
-            validationTitre.setText("Title is required.");
+            validationTitre.setText("Le titre est requis");
             isValid = false;
         }
 
-        // Validate content
+
         if (contenu.getText().trim().isEmpty()) {
-            validationContenu.setText("Content is required.");
+            validationContenu.setText("Le contenu est requis");
             isValid = false;
         }
 
-        // Validate image
+
         if (uploadedImagePath.isEmpty()) {
-            validationImage.setText("Please upload an image.");
+            validationImage.setText("Veuillez télécharger une image");
             isValid = false;
         }
 
@@ -130,9 +126,13 @@ public class AddPost {
         Post post = new Post(titre.getText(), contenu.getText(), uploadedImagePath);
         try {
             servicePost.ajouter(post);
+            List<Utilisateur> allUserEmails = serviceUtilisateur.afficher();
+
+            //EmailService.sendPostCreatedToMultiple(allUserEmails, post.getTitle());
+
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Success");
-            alert.setContentText("Post added successfully!");
+            alert.setContentText("Message ajouté avec succès !");
             alert.showAndWait();
 
             // Optional: clear fields
@@ -140,12 +140,11 @@ public class AddPost {
             contenu.clear();
             imageView.setImage(null);
             uploadedImagePath = "";
-            // ✅ Call the callback
+
             if (onPostAdded != null) {
                 onPostAdded.run();
             }
 
-// ✅ Optional: Close the window after success
             ((Stage)((Node)actionEvent.getSource()).getScene().getWindow()).close();
 
         } catch (SQLException e) {

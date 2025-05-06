@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<VBox prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: #f0f2f5;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.ConversationController">
+    <!-- Header -->
+    <HBox alignment="CENTER_LEFT" style="-fx-background-color: #00b8bb; -fx-padding: 10; -fx-background-radius: 5 5 0 0;">
+        <Label fx:id="reclamationDetails" style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: white;" text="Reclamation Details" />
+        <Label fx:id="clockLabel" style="-fx-font-size: 14; -fx-text-fill: white; -fx-padding: 0 0 0 20;" text="Current Time" />
+    </HBox>
+
+    <!-- Chat Area -->
+    <ScrollPane fx:id="scrollPane" fitToWidth="true" prefHeight="400.0" style="-fx-background: transparent; -fx-background-color: transparent;">
+        <VBox fx:id="messageContainer" spacing="10" style="-fx-padding: 10; -fx-background-color: #f0f2f5;" />
+    </ScrollPane>
+
+    <!-- Message Input Area -->
+    <HBox alignment="CENTER" spacing="10" style="-fx-padding: 10; -fx-background-color: #ffffff; -fx-background-radius: 0 0 5 5; -fx-border-color: #d1d1d1; -fx-border-width: 1 0 0 0;">
+        <TextField fx:id="messageField" promptText="Type your message..." prefWidth="600.0" onAction="#sendMessage" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: #d1d1d1; -fx-background-color: #f9f9f9; -fx-padding: 10;" />
+        <Button fx:id="sendButton" onAction="#sendMessage" style="-fx-background-color: #00b8bb; -fx-text-fill: white; -fx-background-radius: 20; -fx-padding: 8 15;" text="Send" />
+    </HBox>
+</VBox>

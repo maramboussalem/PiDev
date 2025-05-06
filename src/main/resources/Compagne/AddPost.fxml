@@ -9,46 +9,43 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #ffffff; -fx-background-radius: 30; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 5);" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.Compagne.AddPost">
+<AnchorPane prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: #f9fafc; -fx-background-radius: 20; -fx-padding: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 20, 0, 0, 8);" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.Compagne.AddPost">
     <children>
-        <!-- Title Field -->
-        <TextField fx:id="titre" layoutX="67.0" layoutY="53.0" prefHeight="40.0" prefWidth="240.0" promptText="Titre" style="-fx-background-radius: 10; -fx-border-color: #00b8bb; -fx-border-radius: 10;">
+
+        <!-- Title -->
+        <TextField fx:id="titre" layoutX="40.0" layoutY="40.0" prefHeight="50.0" prefWidth="300.0" promptText="Titre du Post" style="-fx-background-color: white; -fx-background-radius: 15; -fx-border-color: #4ecdc4; -fx-border-width: 2; -fx-border-radius: 15; -fx-padding: 0 0 0 10;">
             <font>
-                <Font size="14.0" />
+                <Font size="16.0" />
             </font>
         </TextField>
 
-        <!-- Content Field (replaced with TextArea) -->
-        <TextArea fx:id="contenu" layoutX="67.0" layoutY="139.0" prefHeight="100.0" prefWidth="240.0" promptText="Contenu" style="-fx-background-radius: 10; -fx-border-color: #00b8bb; -fx-border-radius: 10;" wrapText="true">
+        <!-- Content -->
+        <TextArea fx:id="contenu" layoutX="40.0" layoutY="120.0" prefHeight="261.0" prefWidth="300.0" promptText="Contenu du Post" style="-fx-background-color: white; -fx-background-radius: 15; -fx-border-color: #4ecdc4; -fx-border-width: 2; -fx-border-radius: 15; -fx-padding: 10;">
             <font>
-                <Font size="14.0" />
+                <Font size="16.0" />
             </font>
+            <wrapText>true</wrapText>
         </TextArea>
 
         <!-- Image Preview -->
-        <ImageView fx:id="imageView" fitHeight="168.0" fitWidth="260.0" layoutX="339.0" layoutY="73.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-radius: 10;">
+        <ImageView fx:id="imageView" fitHeight="200.0" fitWidth="270.0" layoutX="380.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: #ffffff; -fx-background-radius: 15; -fx-border-color: #e0e0e0; -fx-border-width: 1.5; -fx-border-radius: 15;">
             <image>
                 <Image url="@../../../../images/placeholder.jpg" />
             </image>
         </ImageView>
 
         <!-- Upload Button -->
-        <Button fx:id="uploadButton" layoutX="67.0" layoutY="277.0" mnemonicParsing="false" style="-fx-background-color: #00b8bb; -fx-background-radius: 10;" text="Uploader une image" textFill="WHITE">
-            <font>
-                <Font name="Bell MT" size="14.0" />
-            </font>
+        <Button fx:id="uploadButton" layoutX="380.0" layoutY="260.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="270.0" style="-fx-background-color: #4ecdc4; -fx-background-radius: 15; -fx-text-fill: white; -fx-font-size: 15px; -fx-font-weight: bold;" text="Uploader une Image">
         </Button>
 
         <!-- Submit Button -->
-        <Button layoutX="244.0" layoutY="349.0" mnemonicParsing="false" onAction="#addPost" style="-fx-background-color: #00b8bb; -fx-background-radius: 10;" text="Ajouter le Post" textFill="WHITE">
-            <font>
-                <Font name="Bell MT" size="16.0" />
-            </font>
+        <Button layoutX="275.0" layoutY="400.0" mnemonicParsing="false" onAction="#addPost" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #1a535c; -fx-background-radius: 20; -fx-text-fill: white; -fx-font-size: 17px; -fx-font-weight: bold;" text="Ajouter Post">
         </Button>
 
         <!-- Validation Labels -->
-        <Label fx:id="validationTitre" layoutX="67.0" layoutY="105.0" prefHeight="18.0" prefWidth="240.0" textFill="RED" />
-        <Label fx:id="validationContenu" layoutX="67.0" layoutY="249.0" prefHeight="18.0" prefWidth="240.0" textFill="RED" />
-        <Label fx:id="validationImage" layoutX="67.0" layoutY="318.0" prefHeight="18.0" prefWidth="240.0" textFill="RED" />
+        <Label fx:id="validationTitre" layoutX="40.0" layoutY="95.0" prefWidth="300.0" style="-fx-font-size: 12px;" textFill="RED" />
+        <Label fx:id="validationContenu" layoutX="40.0" layoutY="330.0" prefWidth="300.0" style="-fx-font-size: 12px;" textFill="RED" />
+        <Label fx:id="validationImage" layoutX="380.0" layoutY="320.0" prefWidth="270.0" style="-fx-font-size: 12px;" textFill="RED" />
+
     </children>
 </AnchorPane>

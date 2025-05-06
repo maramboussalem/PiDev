@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.addReclamation">
+    <children>
+
+        <Text fill="#00b8bb" layoutX="50.0" layoutY="50.0" text="Ajouter une Réclamation">
+            <font>
+                <Font name="Bell MT" size="28" />
+            </font>
+        </Text>
+
+        <!-- Sujet ComboBox -->
+        <Label layoutX="108.0" layoutY="269.0" text="Sujet" />
+        <ComboBox fx:id="sujet" layoutX="200.0" layoutY="265.0" prefWidth="500.0">
+            <!-- ComboBox items will be populated in the controller -->
+        </ComboBox>
+
+        <!-- Description TextArea -->
+        <Label layoutX="80.0" layoutY="156.0" text="Description" />
+        <TextArea fx:id="description" layoutX="200.0" layoutY="145.0" prefHeight="100.0" prefWidth="500.0" />
+
+        <!-- Utilisateur ID TextField -->
+        <Label layoutX="76.0" layoutY="100.0" text="Nom et prenom" />
+        <TextField fx:id="utilisateurId" layoutX="200.0" layoutY="96.0" prefWidth="500.0" />
+
+        <!-- Consultation ID TextField -->
+        <Label layoutX="50.0" layoutY="320.0" text="Consultation de compte" />
+        <TextField fx:id="consultationId" layoutX="200.0" layoutY="315.0" prefWidth="500.0" editable="false" />
+
+        <!-- Error Message Label -->
+        <Label fx:id="errorMessage" layoutX="200.0" layoutY="360.0" textFill="red" />
+
+        <!-- Submit Button -->
+        <Button fx:id="submit" layoutX="550.0" layoutY="400.0" onAction="#submitReclamation" style="-fx-background-color: #00b8bb; -fx-text-fill: white;" text="Soumettre" />
+
+        <!-- Return to List Button -->
+        <Button layoutX="50.0" layoutY="400.0" onAction="#goToList" text="Retour à la liste" />
+    </children>
+</AnchorPane>
