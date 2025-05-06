@@ -100,10 +100,8 @@ public class Adduser implements Initializable {
 
     private void generateCaptcha() {
         try {
-            // Générer un texte aléatoire
             captchaText = generateRandomText(6);
-
-            // Créer une image avec le texte
+            
             BufferedImage bufferedImage = new BufferedImage(150, 50, BufferedImage.TYPE_INT_RGB);
             java.awt.Graphics2D g2d = bufferedImage.createGraphics();
 
