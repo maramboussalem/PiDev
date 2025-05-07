@@ -12,16 +12,16 @@
 <AnchorPane fx:id="contentArea" prefHeight="662.0" prefWidth="753.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.ParametresVitaux.AddParametresVitaux">
 
    <children>
-      <AnchorPane layoutX="9.0" layoutY="10.0" prefHeight="622.0" prefWidth="1495.0">
+      <AnchorPane layoutX="9.0" layoutY="10.0" prefHeight="622.0" prefWidth="1172.0">
          <children>
-            <AnchorPane layoutX="30.0" layoutY="10.0" prefHeight="602.0" prefWidth="1394.0" style="-fx-background-color: #ffffff; -fx-background-radius: 30; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 5);">
+            <AnchorPane layoutX="30.0" layoutY="10.0" prefHeight="602.0" prefWidth="1123.0" style="-fx-background-color: #ffffff; -fx-background-radius: 30; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 5);">
                <children>
                   <TextField fx:id="name" layoutX="36.0" layoutY="112.0" prefHeight="38.0" prefWidth="260.0" promptText="👤 Nom et Prénom" style="-fx-background-radius: 10;">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </TextField>
-                  <Text fill="#00b8bb" layoutX="487.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="📝 Saisie des Paramètres Vitaux" textAlignment="CENTER" wrappingWidth="482.8531494140625">
+                  <Text fill="#00b8bb" layoutX="328.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="📝 Saisie des Paramètres Vitaux" textAlignment="CENTER" wrappingWidth="482.8531494140625">
                      <font>
                         <Font name="Bell MT" size="33.0" />
                      </font>
@@ -87,22 +87,22 @@
                      </font>
                   </TextField>
                   <Label fx:id="gadError" layoutX="375.0" layoutY="485.0" prefHeight="22.0" prefWidth="260.0" textFill="RED" />
-                  <Button layoutX="88.0" layoutY="521.0" mnemonicParsing="false" onAction="#add_parametresVitaux" prefHeight="46.0" prefWidth="494.0" style="-fx-background-color: #00b8bb; -fx-background-radius: 10;" text="✅ Envoyer les données" textFill="WHITE">
+                  <Button layoutX="113.0" layoutY="521.0" mnemonicParsing="false" onAction="#add_parametresVitaux" prefHeight="46.0" prefWidth="405.0" style="-fx-background-color: #00b8bb; -fx-background-radius: 10;" text="✅ Envoyer les données" textFill="WHITE">
                      <font>
                         <Font name="Bell MT" size="20.0" />
                      </font>
                   </Button>
-                  <Button layoutX="755.0" layoutY="521.0" mnemonicParsing="false" onAction="#historiqueButton" prefHeight="46.0" prefWidth="290.0" style="-fx-background-color: #2fb959; -fx-background-radius: 10;" text="📜 Afficher l’historique " textFill="WHITE">
+                  <Button layoutX="533.0" layoutY="521.0" mnemonicParsing="false" onAction="#historiqueButton" prefHeight="46.0" prefWidth="234.0" style="-fx-background-color: #2fb959; -fx-background-radius: 10;" text="📜 Afficher l’historique " textFill="WHITE">
                      <font>
                         <Font name="Bell MT" size="20.0" />
                      </font>
                   </Button>
-                  <Button layoutX="1066.0" layoutY="521.0" mnemonicParsing="false" onAction="#closeButton" prefHeight="46.0" prefWidth="289.0" style="-fx-background-color: #c91515; -fx-background-radius: 10;" text="❌ Fermer la fenêtre" textFill="WHITE">
+                  <Button layoutX="780.0" layoutY="521.0" mnemonicParsing="false" onAction="#closeButton" prefHeight="46.0" prefWidth="216.0" style="-fx-background-color: #c91515; -fx-background-radius: 10;" text="❌ Fermer la fenêtre" textFill="WHITE">
                      <font>
                         <Font name="Bell MT" size="20.0" />
                      </font>
                   </Button>
-                  <ImageView fx:id="image" fitHeight="315.0" fitWidth="432.0" layoutX="841.0" layoutY="152.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="image" fitHeight="315.0" fitWidth="432.0" layoutX="672.0" layoutY="137.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </AnchorPane>
          </children>

@@ -21,29 +21,24 @@
                   <Font name="Bodoni MT" size="25.0" />
                </font>
             </Label>
-            <Button layoutX="309.0" layoutY="29.0" mnemonicParsing="false" onAction="#services" prefHeight="46.0" prefWidth="123.0" style="-fx-background-color: #00b8bb;" text="SERVICES" textFill="WHITE">
+            <Button blendMode="SCREEN" cache="true" layoutX="309.0" layoutY="29.0" mnemonicParsing="false" onAction="#services" prefHeight="46.0" prefWidth="123.0" style="-fx-background-color: #00b8bb;" text="SERVICES" textFill="WHITE">
                <font>
-                  <Font name="Bodoni MT" size="18.0" />
+                  <Font name="Bodoni MT Bold" size="18.0" />
                </font>
             </Button>
-            <Button layoutX="445.0" layoutY="29.0" mnemonicParsing="false" onAction="#diagnostic" prefHeight="46.0" prefWidth="138.0" style="-fx-background-color: #00b8bb;" text="DIAGNOSTIC" textFill="WHITE">
+            <Button blendMode="SCREEN" cache="true" layoutX="446.0" layoutY="29.0" mnemonicParsing="false" onAction="#medicament" prefHeight="46.0" prefWidth="154.0" style="-fx-background-color: #00b8bb;" text="MEDICAMENT" textFill="WHITE">
                <font>
-                  <Font name="Bell MT" size="18.0" />
+                  <Font name="Bodoni MT Bold" size="18.0" />
                </font>
             </Button>
-            <Button layoutX="596.0" layoutY="29.0" mnemonicParsing="false" onAction="#medicament" prefHeight="46.0" prefWidth="154.0" style="-fx-background-color: #00b8bb;" text="MEDICAMENT" textFill="WHITE">
+            <Button blendMode="SCREEN" cache="true" layoutX="613.0" layoutY="29.0" mnemonicParsing="false" onAction="#showPublicListPost" prefHeight="46.0" prefWidth="138.0" style="-fx-background-color: #00b8bb;" text="COMPAGNE" textFill="WHITE">
                <font>
-                  <Font name="Bell MT" size="18.0" />
+                  <Font name="Bodoni MT Bold" size="18.0" />
                </font>
             </Button>
-            <Button layoutX="763.0" layoutY="29.0" mnemonicParsing="false" onAction="#showPublicListPost" prefHeight="46.0" prefWidth="138.0" style="-fx-background-color: #00b8bb;" text="COMPAGNE" textFill="WHITE">
+            <Button fx:id="Reclamation" blendMode="SCREEN" cache="true" layoutX="761.0" layoutY="29.0" mnemonicParsing="false" onAction="#Reclamation" prefHeight="46.0" prefWidth="186.0" style="-fx-background-color: #00b8bb;" text="SUBMIT A TICKET" textFill="WHITE">
                <font>
-                  <Font name="Bell MT" size="18.0" />
-               </font>
-            </Button>
-            <Button fx:id="Reclamation" layoutX="911.0" layoutY="29.0" mnemonicParsing="false" onAction="#Reclamation" prefHeight="46.0" prefWidth="186.0" style="-fx-background-color: #00b8bb;" text="SUBMIT A TICKET" textFill="WHITE">
-               <font>
-                  <Font name="Bell MT" size="18.0" />
+                  <Font name="Bodoni MT Bold" size="18.0" />
                </font>
             </Button>
             <Button alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="1414.0" layoutY="6.0" mnemonicParsing="false" onAction="#monProfilH" prefHeight="94.0" prefWidth="103.0" style="-fx-background-color: #080c71;" textFill="WHITE">
@@ -67,22 +62,22 @@
                   <Image url="@images/logohome.jpg" />
                </image>
             </ImageView>
+            <Button blendMode="SCREEN" cache="true" layoutX="957.0" layoutY="29.0" mnemonicParsing="false" onAction="#openAddRdvForm" prefHeight="46.0" prefWidth="186.0" style="-fx-background-color: #00b8bb;" text="PRENDRE UN RDV" textFill="WHITE">
+               <font>
+                  <Font name="Bodoni MT Bold" size="18.0" />
+               </font>
+            </Button>
          </children>
       </AnchorPane>
-      <Button layoutX="539.0" layoutY="486.0" mnemonicParsing="false" onAction="#chatboot" prefHeight="55.0" prefWidth="411.0" style="-fx-background-color: #00b8bb;" text="CHATBOOT" textFill="WHITE">
+      <Button blendMode="SCREEN" cache="true" layoutX="539.0" layoutY="486.0" mnemonicParsing="false" onAction="#chatboot" prefHeight="55.0" prefWidth="411.0" style="-fx-background-color: #00b8bb;" text="CHATBOOT" textFill="WHITE">
          <font>
-            <Font name="Bodoni MT" size="20.0" />
+            <Font name="Bodoni MT Bold" size="18.0" />
          </font>
       </Button>
       <AnchorPane fx:id="contentArea" layoutX="23.0" layoutY="127.0" prefHeight="181.0" prefWidth="228.0" />
-      <Button fx:id="localisationButton" layoutX="539.0" layoutY="554.0" mnemonicParsing="false" onAction="#showLocalisation" prefHeight="55.0" prefWidth="411.0" style="-fx-background-color: #00b8bb;" text="LOCALISATION" textFill="WHITE">
+      <Button fx:id="localisationButton" blendMode="SCREEN" cache="true" layoutX="539.0" layoutY="554.0" mnemonicParsing="false" onAction="#showLocalisation" prefHeight="55.0" prefWidth="411.0" style="-fx-background-color: #00b8bb;" text="LOCALISATION" textFill="WHITE">
          <font>
-            <Font name="Bodoni MT" size="20.0" />
-         </font>
-      </Button>
-      <Button layoutX="1228.0" layoutY="127.0" mnemonicParsing="false" onAction="#openAddRdvForm" prefHeight="46.0" prefWidth="186.0" style="-fx-background-color: #00b8bb;" text="Prendre un RDV" textFill="WHITE">
-         <font>
-            <Font name="Bell MT" size="18.0" />
+            <Font name="Bodoni MT Bold" size="18.0" />
          </font>
       </Button>
    </children>

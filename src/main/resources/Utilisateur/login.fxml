@@ -24,6 +24,11 @@
                <font>
                   <Font size="14.0" />
                </font></TextField>
+            <PasswordField fx:id="motdepasseLogin" layoutX="33.0" layoutY="294.0" prefHeight="46.0" prefWidth="494.0" promptText="Mot de passe" style="-fx-background-radius: 10;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </PasswordField>
             <Button fx:id="SeConnecterb" layoutX="34.0" layoutY="375.0" mnemonicParsing="false" onAction="#SeConnecter" prefHeight="46.0" prefWidth="494.0" style="-fx-background-color: #00b8bb; -fx-background-radius: 10;" text="Se Connecter" textFill="WHITE">
                <font>
                   <Font size="16.0" />
@@ -58,11 +63,6 @@
                   <Font size="14.0" />
                </font>
             </Text>
-            <PasswordField fx:id="motdepasseLogin" layoutX="33.0" layoutY="294.0" prefHeight="46.0" prefWidth="494.0" promptText="Mot de passe" style="-fx-background-radius: 10;">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </PasswordField>
             <Label fx:id="lockoutLabel" layoutX="33.0" layoutY="348.0" prefHeight="18.0" prefWidth="494.0" textFill="RED">
                <font>
                   <Font name="Bell MT" size="14.0" />

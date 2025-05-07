@@ -6,11 +6,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="contentArea" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.ParametresVitaux.DetaillesParametresVitaux">
+<AnchorPane fx:id="contentArea" prefHeight="653.0" prefWidth="1208.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.ParametresVitaux.DetaillesParametresVitaux">
    <children>
-      <AnchorPane layoutX="40.0" layoutY="20.0" prefHeight="602.0" prefWidth="1394.0" style="-fx-background-color: #ffffff; -fx-background-radius: 30; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 5);">
+      <AnchorPane layoutX="40.0" layoutY="20.0" prefHeight="602.0" prefWidth="1137.0" style="-fx-background-color: #ffffff; -fx-background-radius: 30; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 5);">
          <children>
-            <Text fill="#00b8bb" layoutX="487.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="📋 Détails des Paramètres Vitaux" textAlignment="CENTER" wrappingWidth="482.8531494140625">
+            <Text fill="#00b8bb" layoutX="349.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="📋 Détails des Paramètres Vitaux" textAlignment="CENTER" wrappingWidth="482.8531494140625">
                <font>
                   <Font name="Bell MT" size="33.0" />
                </font>
@@ -75,22 +75,22 @@
                   <Font name="Bookman Old Style Bold Italic" size="22.0" />
                </font>
             </Text>
-            <Button layoutX="88.0" layoutY="521.0" mnemonicParsing="false" onAction="#updateButton" prefHeight="46.0" prefWidth="494.0" style="-fx-background-color: #00b8bb; -fx-background-radius: 10;" text="🛠 Modifier les données" textFill="WHITE">
+            <Button layoutX="64.0" layoutY="521.0" mnemonicParsing="false" onAction="#updateButton" prefHeight="46.0" prefWidth="494.0" style="-fx-background-color: #00b8bb; -fx-background-radius: 10;" text="🛠 Modifier les données" textFill="WHITE">
                <font>
                   <Font name="Bell MT" size="20.0" />
                </font>
             </Button>
-            <Button layoutX="755.0" layoutY="521.0" mnemonicParsing="false" onAction="#historiqueButton" prefHeight="46.0" prefWidth="290.0" style="-fx-background-color: #2fb959; -fx-background-radius: 10;" text="📜 Afficher l’historique " textFill="WHITE">
+            <Button layoutX="579.0" layoutY="521.0" mnemonicParsing="false" onAction="#historiqueButton" prefHeight="46.0" prefWidth="229.0" style="-fx-background-color: #2fb959; -fx-background-radius: 10;" text="📜 Afficher l’historique " textFill="WHITE">
                <font>
                   <Font name="Bell MT" size="20.0" />
                </font>
             </Button>
-            <Button layoutX="1066.0" layoutY="521.0" mnemonicParsing="false" onAction="#deleteButton" prefHeight="46.0" prefWidth="289.0" style="-fx-background-color: #c91515; -fx-background-radius: 10;" text="⚠ Supprimer les données" textFill="WHITE">
+            <Button layoutX="831.0" layoutY="521.0" mnemonicParsing="false" onAction="#deleteButton" prefHeight="46.0" prefWidth="251.0" style="-fx-background-color: #c91515; -fx-background-radius: 10;" text="⚠ Supprimer les données" textFill="WHITE">
                <font>
                   <Font name="Bell MT" size="20.0" />
                </font>
             </Button>
-            <ImageView fx:id="image" fitHeight="371.0" fitWidth="457.0" layoutX="879.0" layoutY="96.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="image" fitHeight="371.0" fitWidth="457.0" layoutX="617.0" layoutY="96.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </AnchorPane>
    </children>
