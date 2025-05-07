@@ -23,7 +23,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class ListPost {
-
+    //list
     @FXML
     private VBox pnItems;
     @FXML

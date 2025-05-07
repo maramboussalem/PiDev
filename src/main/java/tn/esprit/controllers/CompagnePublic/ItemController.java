@@ -11,6 +11,7 @@ import tn.esprit.test.MyListener;
 import java.io.InputStream;
 
 public class ItemController {
+    //item
     @FXML private Label title;
     @FXML private Label content;
     @FXML private ImageView img;

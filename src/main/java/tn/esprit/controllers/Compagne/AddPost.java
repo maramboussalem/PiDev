@@ -22,6 +22,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class AddPost {
+    //add
     @FXML
     private TextArea contenu;
 

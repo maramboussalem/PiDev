@@ -31,6 +31,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class ListPublicPosts implements Initializable {
+    //merge posts
     @FXML private VBox chosenFruitCard;
     @FXML private Label fruitNameLable;
     @FXML private Label content;

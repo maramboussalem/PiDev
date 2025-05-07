@@ -11,9 +11,6 @@ public class Comment {
     private Post post;
     private String audioPath;
 
-
-
-
     public Comment() {
         this.commentDate = LocalDateTime.now();
     }

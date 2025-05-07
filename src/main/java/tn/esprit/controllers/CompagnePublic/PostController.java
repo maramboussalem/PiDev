@@ -34,6 +34,7 @@ import java.util.ResourceBundle;
 import java.util.UUID;
 
 public class PostController {
+    //post
     @FXML
     private Label title;
 

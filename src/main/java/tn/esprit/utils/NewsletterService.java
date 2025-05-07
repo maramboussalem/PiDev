@@ -7,6 +7,7 @@ import java.net.URL;
 import java.util.Base64;
 
 public class NewsletterService {
+    //news
     private static final String API_KEY = "";
     private static final String LIST_ID = "";
     private static final String DATA_CENTER = ""; // Example: us21

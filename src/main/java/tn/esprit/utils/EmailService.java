@@ -7,7 +7,7 @@ import tn.esprit.entities.Utilisateur;
 import java.util.List;
 
 public class EmailService {
-
+    //email
     public static void sendPostCreatedToMultiple(List<Utilisateur> recipient, String postTitle) {
         for (Utilisateur email : recipient) {
             sendPostCreatedEmail(email.getEmail(), postTitle);

@@ -1,6 +1,7 @@
 package tn.esprit.entities;
 
 public enum Reactions {
+    //emoji
     NON(0,"Like","#606266","CompagnePublic/img/ic_like_outline.png"),
     LIKE(1,"Like","#056BE1","CompagnePublic/img/ic_like.png"),
     LOVE(2,"Love","#E12C4A","CompagnePublic/img/ic_love_.png"),

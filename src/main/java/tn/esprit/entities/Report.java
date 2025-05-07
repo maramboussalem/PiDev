@@ -3,6 +3,7 @@ package tn.esprit.entities;
 import java.time.LocalDateTime;
 
 public class Report {
+    //report
     private int id;
     private int commentId;
     private int userId;

@@ -21,6 +21,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class UpdatePost {
+    //update
     @FXML
     private TextArea contenu;
 

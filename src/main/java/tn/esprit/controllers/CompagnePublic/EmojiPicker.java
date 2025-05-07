@@ -50,7 +50,7 @@ public class EmojiPicker {
         popupStage.show();
     }
 
-    // Helper to convert HTML code like "&#128512;" into real emoji
+
     private String htmlToUnicode(String htmlCode) {
         try {
             int codePoint = Integer.parseInt(htmlCode.replaceAll("&#|;", ""));

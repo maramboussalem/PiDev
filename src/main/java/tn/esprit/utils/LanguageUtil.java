@@ -7,6 +7,7 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class LanguageUtil {
+    //using
     private static ObjectProperty<Locale> languageTrigger = new SimpleObjectProperty<>();
     private static ResourceBundle bundle;
 

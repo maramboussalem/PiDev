@@ -10,7 +10,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class EmojiService {
-
+    //emoji
     private static final String API_URL = "";
 
     public static List<String> fetchEmojis() {
