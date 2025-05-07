@@ -11,8 +11,6 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
 import tn.esprit.entities.Diagnostic;
 import tn.esprit.services.diagnosticService;
-
-import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -135,15 +133,27 @@ public class ListeDiagnostic implements Initializable {
 
     @FXML
     public void updateButton(javafx.event.ActionEvent actionEvent) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Diagnostic/UpdateDiagnostic.fxml"));
-            Parent root = loader.load();
-            contentArea.getChildren().clear();
-            contentArea.getChildren().add(root);
-        } catch (IOException e) {
-            e.printStackTrace();
+        Diagnostic selected = listview.getSelectionModel().getSelectedItem();
+
+        if (selected != null) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Diagnostic/UpdateDiagnostic.fxml"));
+                Parent root = loader.load();
+
+                // Get the controller and pass the selected diagnostic
+                UpdateDiagnostic controller = loader.getController();
+                controller.initialize(selected); // You must implement this method in UpdateDiagnostic
+
+                contentArea.getChildren().clear();
+                contentArea.getChildren().add(root);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("No diagnostic selected.");
         }
     }
+
 
     public void showButton(javafx.event.ActionEvent actionEvent) {
         // Get the selected diagnostic

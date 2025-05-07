@@ -15,6 +15,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import org.json.JSONObject;
 import tn.esprit.entities.ParametresVitaux;
 import tn.esprit.services.AIClient;
 import tn.esprit.services.ParametresVitauxService;
@@ -84,54 +85,64 @@ public class AddParametresVitauxM implements Initializable {
                 ParametresVitauxService service = new ParametresVitauxService();
                 service.ajouter(pv);
 
-                // Récupérer le diagnostic depuis l'IA après l'ajout des paramètres
-                String diagnostic = AIClient.getDiagnostic("Nom: " + name.getText() +
-                        ", FC: " + fc.getText() +
-                        ", FR: " + fr.getText() +
-                        ", ECG: " + ecg.getText() +
-                        ", SPO2: " + spo2.getText() +
-                        ", TAD: " + tad.getText() +
-                        ", TAS: " + tas.getText() +
-                        ", GSC: " + gsc.getText() +
-                        ", GAD: " + gad.getText());
+                // Create the input for the AI
+                String input = String.format(
+                        "Vital signs: Pulse Rate: %s BPM, Respiratory Rate: %s BPM, ECG: %s, SpO2: %s%%, Diastolic BP: %s mmHg, Systolic BP: %s mmHg, Glasgow Coma Scale: %s, Glasgow Assessment of Disability: %s",
+                        fc.getText(), fr.getText(), ecg.getText(), spo2.getText(), tad.getText(), tas.getText(), gsc.getText(), gad.getText()
+                );
+                String context = "Patient name: " + name.getText();
+                String task = "diagnose";
+                String outputFormat = "json";
+
+                // Generate a structured prompt
+                String prompt = AIClient.generatePrompt(task, input, context, outputFormat);
+
+                // Get the diagnostic from the AI
+                String diagnostic = AIClient.getDiagnostic(prompt);
 
                 // Print the raw diagnostic string to debug
                 System.out.println("Raw diagnostic: " + diagnostic);
 
-                // Supposons que l'IA retourne la pathologie et le diagnostic séparés par un ":"
-                String[] result = diagnostic.split(":");
-                String pathologie = result.length > 0 ? result[0].trim() : "Pathologie inconnue";
-                String diagnosticMessage = result.length > 1 ? result[1].trim() : "Diagnostic inconnu";
+                // Parse the JSON response
+                String pathologie = "Pathologie inconnue";
+                String diagnosticMessage = "Diagnostic inconnu";
+                try {
+                    JSONObject jsonResponse = new JSONObject(diagnostic);
+                    pathologie = jsonResponse.optString("pathologie", "Pathologie inconnue");
+                    diagnosticMessage = jsonResponse.optString("diagnostic", "Diagnostic inconnu");
+                } catch (Exception e) {
+                    System.err.println("Error parsing JSON response: " + e.getMessage());
+                }
 
-                // Print the result after splitting
+                // Print the result after parsing
                 System.out.println("Pathologie: " + pathologie);
                 System.out.println("Diagnostic: " + diagnosticMessage);
 
-                // Créer une alerte avec un TextArea pour afficher tout le message
+                // Créer une alerte avec un TextArea
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Résultat du Diagnostic");
                 alert.setHeaderText("Analyse du diagnostic par l'IA");
 
-                // Création d'un TextArea pour le message
-                TextArea textArea = new TextArea("Pathologie : \n" + pathologie + "\n\nDiagnostic : \n" + diagnosticMessage);
+                TextArea textArea = new TextArea(
+                        "Pathologie: \n" + (pathologie.isEmpty() ? "Non spécifiée" : pathologie) +
+                                "\n\nDiagnostic: \n" + (diagnosticMessage.isEmpty() ? "Aucun diagnostic disponible" : diagnosticMessage)
+                );
                 textArea.setWrapText(true);
                 textArea.setEditable(false);
-                textArea.setPrefHeight(400);  // Adjust this if needed for larger content
-                textArea.setPrefWidth(600);   // Adjust this if needed for larger content
+                textArea.setPrefHeight(400);
+                textArea.setPrefWidth(600);
 
-                // Ajouter le TextArea à l'alerte
                 alert.getDialogPane().setContent(textArea);
 
-                // Afficher l'alerte et attendre la réponse
+                // Afficher l'alerte
                 alert.showAndWait().ifPresent(response -> {
                     if (response == ButtonType.OK) {
-                        historiqueButton(event);  // Rediriger vers la page historique si l'utilisateur clique sur OK
+                        historiqueButton(event);
                     }
                 });
 
             } catch (Exception e) {
                 System.err.println("❌ Erreur lors de l'ajout des paramètres vitaux : " + e.getMessage());
-                // Afficher une erreur en cas d'échec
                 Alert errorAlert = new Alert(Alert.AlertType.ERROR);
                 errorAlert.setTitle("Erreur");
                 errorAlert.setHeaderText("Une erreur est survenue lors de l'ajout des paramètres.");
@@ -140,11 +151,6 @@ public class AddParametresVitauxM implements Initializable {
             }
         }
     }
-
-
-
-
-
 
     @FXML
     void closeButton(ActionEvent event) {
