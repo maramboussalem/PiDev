@@ -26,13 +26,18 @@
                   <Font name="Bell MT" size="20.0" />
                </font>
             </Button>
-            <Button layoutX="836.0" layoutY="630.0" mnemonicParsing="false" onAction="#closeButton" prefHeight="46.0" prefWidth="242.0" style="-fx-background-color: #c91515; -fx-background-radius: 10;" text="❌ Fermer la fenêtre" textFill="WHITE">
+            <Button layoutX="836.0" layoutY="630.0" mnemonicParsing="false" onAction="#diagButton" prefHeight="46.0" prefWidth="242.0" style="-fx-background-color: #d6c656; -fx-background-radius: 10;" text="🌡 Faire Diagnostic" textFill="WHITE">
                <font>
                   <Font name="Bell MT" size="20.0" />
                </font>
             </Button>
             <ImageView fx:id="image" fitHeight="371.0" fitWidth="468.0" layoutX="590.0" layoutY="149.0" pickOnBounds="true" preserveRatio="true" />
             <ListView fx:id="listview" layoutX="43.0" layoutY="76.0" prefHeight="518.0" prefWidth="518.0" style="-fx-background-radius: 10;" />
+            <Button layoutX="705.0" layoutY="571.0" mnemonicParsing="false" onAction="#assessRisk" prefHeight="46.0" prefWidth="242.0" style="-fx-background-color: #ff5e5e; -fx-background-radius: 10;" text="🚨 Risques Sanitaires" textFill="WHITE">
+               <font>
+                  <Font name="Bell MT" size="20.0" />
+               </font>
+            </Button>
          </children>
       </AnchorPane>
    </children>

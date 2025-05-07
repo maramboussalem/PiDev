@@ -21,7 +21,7 @@ public class ParametresVitauxService implements IService<ParametresVitaux> {
 
     @Override
     public void ajouter(ParametresVitaux pv) throws SQLException {
-        String req = "INSERT INTO parametres_vitaux (name, fc, fr, ecg, tas, tad, age, spo2, gsc, gad, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String req = "INSERT INTO parametres_viteaux (name, fc, fr, ecg, tas, tad, age, spo2, gsc, gad, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement pstmt = cnx.prepareStatement(req)) {
             pstmt.setString(1, pv.getName());

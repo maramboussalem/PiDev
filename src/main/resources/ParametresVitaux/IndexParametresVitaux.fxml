@@ -1,38 +1,113 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="contentArea" prefHeight="654.0" prefWidth="1234.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.ParametresVitaux.IndexParametresVitaux">
+<AnchorPane fx:id="contentArea" prefHeight="734.0" prefWidth="1112.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.ParametresVitaux.IndexParametresVitaux">
    <children>
-      <AnchorPane layoutX="14.0" layoutY="26.0" prefHeight="602.0" prefWidth="1139.0" style="-fx-background-color: #ffffff; -fx-background-radius: 30; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 5);">
+      <!-- Content Area (Main Section) -->
+      <AnchorPane layoutX="2.0" layoutY="1.0" prefHeight="727.0" prefWidth="1068.0" style="-fx-background-color: #ffffff; -fx-background-radius: 30; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 5);">
          <children>
-            <Text fill="#00b8bb" layoutX="300.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="📜 Historique des Paramètres Vitaux" textAlignment="CENTER" wrappingWidth="502.8531494140625">
+            <Text fill="#00b8bb" layoutX="337.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="📜 Historique des Paramètres Vitaux" textAlignment="CENTER" wrappingWidth="502.8531494140625">
                <font>
                   <Font name="Bell MT" size="33.0" />
                </font>
             </Text>
-            <Button layoutX="76.0" layoutY="521.0" mnemonicParsing="false" onAction="#actualiserButton" prefHeight="46.0" prefWidth="418.0" style="-fx-background-color: #00b8bb; -fx-background-radius: 10;" text="🔄 Actualiser" textFill="WHITE">
+            <Button layoutX="107.0" layoutY="661.0" mnemonicParsing="false" onAction="#actualiserButton" prefHeight="46.0" prefWidth="411.0" style="-fx-background-color: #00b8bb; -fx-background-radius: 10;" text="🔄 Actualiser" textFill="WHITE">
                <font>
                   <Font name="Bell MT" size="20.0" />
                </font>
             </Button>
-            <Button layoutX="614.0" layoutY="521.0" mnemonicParsing="false" onAction="#addButton" prefHeight="46.0" prefWidth="221.0" style="-fx-background-color: #2fb959; -fx-background-radius: 10;" text="➕ Ajouter Paramètres" textFill="WHITE">
+            <Button layoutX="539.0" layoutY="661.0" mnemonicParsing="false" onAction="#addButton" prefHeight="46.0" prefWidth="234.0" style="-fx-background-color: #2fb959; -fx-background-radius: 10;" text="➕ Ajouter Paramètres" textFill="WHITE">
                <font>
                   <Font name="Bell MT" size="20.0" />
                </font>
             </Button>
-            <Button layoutX="851.0" layoutY="521.0" mnemonicParsing="false" onAction="#closeButton" prefHeight="46.0" prefWidth="222.0" style="-fx-background-color: #c91515; -fx-background-radius: 10;" text="❌ Fermer la fenêtre" textFill="WHITE">
+            <Button layoutX="799.0" layoutY="661.0" mnemonicParsing="false" onAction="#closeButton" prefHeight="46.0" prefWidth="234.0" style="-fx-background-color: #c91515; -fx-background-radius: 10;" text="❌ Fermer la fenêtre" textFill="WHITE">
                <font>
                   <Font name="Bell MT" size="20.0" />
                </font>
             </Button>
-            <ImageView fx:id="image" fitHeight="371.0" fitWidth="468.0" layoutX="573.0" layoutY="96.0" pickOnBounds="true" preserveRatio="true" />
-            <ListView fx:id="listview" layoutX="43.0" layoutY="76.0" prefHeight="410.0" prefWidth="485.0" style="-fx-background-radius: 10;" />
+            <ListView fx:id="listview" layoutX="18.0" layoutY="76.0" prefHeight="562.0" prefWidth="470.0" style="-fx-background-radius: 10;" />
+            <Button layoutX="18.0" layoutY="31.0" mnemonicParsing="false" onAction="#statsButton" prefHeight="38.0" prefWidth="152.0" style="-fx-background-color: c9d455; -fx-background-radius: 10;" text="💹 Statistiques" textFill="WHITE">
+               <font>
+                  <Font name="Bell MT" size="20.0" />
+               </font>
+            </Button>
+            <LineChart fx:id="chartArea" layoutX="496.0" layoutY="149.0" prefHeight="435.0" prefWidth="618.0">
+              <xAxis>
+                <CategoryAxis side="BOTTOM" />
+              </xAxis>
+              <yAxis>
+                <NumberAxis side="LEFT" />
+              </yAxis>
+            </LineChart>
+            <Button layoutX="183.0" layoutY="31.0" mnemonicParsing="false" onAction="#filterButton" prefHeight="38.0" prefWidth="103.0" style="-fx-background-color: c9d455; -fx-background-radius: 10;" text="🔀 Filter" textFill="WHITE">
+               <font>
+                  <Font name="Bell MT" size="20.0" />
+               </font>
+            </Button>
+            <AnchorPane fx:id="filterArea" layoutX="509.0" layoutY="96.0" prefHeight="445.0" prefWidth="624.0">
+               <children>
+                  <TextField fx:id="nameFilter" layoutX="22.0" layoutY="26.0" prefHeight="38.0" prefWidth="260.0" promptText="👤 Nom et Prénom" style="-fx-background-radius: 10;">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+                  <Text fill="#00b8bb" layoutX="22.0" layoutY="17.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Filtrer par Nom et Prénom" wrappingWidth="260.0" />
+                  <Text fill="#00b8bb" layoutX="22.0" layoutY="272.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Filtrer par Fréquence Cardiaque &quot;bpm&quot;" wrappingWidth="260.0" />
+                  <TextField fx:id="fcFilter" layoutX="22.0" layoutY="282.0" prefHeight="38.0" prefWidth="260.0" promptText="❤ ( FC )" style="-fx-background-radius: 10;">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+                  <Text fill="#00b8bb" layoutX="22.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Filtrer par Fréquence Respiratoire &quot;cycles/min&quot;" wrappingWidth="260.0" />
+                  <TextField fx:id="frFilter" layoutX="22.0" layoutY="87.0" prefHeight="38.0" prefWidth="260.0" promptText="💨 ( FR )" style="-fx-background-radius: 10;">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+                  <Text fill="#00b8bb" layoutX="22.0" layoutY="337.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Filtrer par l'Électrocardiogramme &quot;Tracé&quot;" wrappingWidth="260.0" />
+                  <TextField fx:id="ecgFilter" layoutX="22.0" layoutY="345.0" prefHeight="38.0" prefWidth="260.0" promptText="⚕ ( E.C.G )" style="-fx-background-radius: 10;">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+                  <Text fill="#00b8bb" layoutX="29.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Filtrer par Tension Artérielle Systolique &quot;mmHg&quot;" wrappingWidth="260.0" />
+                  <TextField fx:id="tasFilter" layoutX="22.0" layoutY="153.0" prefHeight="38.0" prefWidth="260.0" promptText="⬆ ( TAS )" style="-fx-background-radius: 10;">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+                  <Text fill="#00b8bb" layoutX="22.0" layoutY="399.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Filtrer par Tension Artérielle Diastolique &quot;mmHg&quot;" wrappingWidth="260.0" />
+                  <TextField fx:id="tadFilter" layoutX="22.0" layoutY="410.0" prefHeight="38.0" prefWidth="260.0" promptText="⬇ ( TAD )" style="-fx-background-radius: 10;">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+                  <Text fill="#00b8bb" layoutX="22.0" layoutY="467.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Filtrer par Score de Glasgow Coma  &quot;/15&quot;" wrappingWidth="260.0" />
+                  <TextField fx:id="gscFilter" layoutX="22.0" layoutY="476.0" prefHeight="38.0" prefWidth="260.0" promptText="☁ ( GSC )" style="-fx-background-radius: 10;">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+                  <Text fill="#00b8bb" layoutX="22.0" layoutY="208.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Filtrer par Glycémie &quot;g/L&quot;" wrappingWidth="260.0" />
+                  <TextField fx:id="gadFilter" layoutX="22.0" layoutY="218.0" prefHeight="38.0" prefWidth="260.0" promptText="🍬 ( GAD )" style="-fx-background-radius: 10;">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+                  <ImageView fx:id="image" fitHeight="371.0" fitWidth="468.0" layoutX="72.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </AnchorPane>
          </children>
       </AnchorPane>
    </children>

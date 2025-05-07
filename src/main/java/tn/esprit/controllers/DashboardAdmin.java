@@ -230,4 +230,18 @@ public class DashboardAdmin {
         }
     }
 
+    @FXML
+    void diagnosticButton (ActionEvent event) {
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ParametresVitaux/IndexParametresVitaux.fxml"));
+            Parent root = loader.load();
+
+            contentArea.getChildren().clear();
+            contentArea.getChildren().add(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
