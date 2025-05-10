@@ -25,7 +25,7 @@ L'application **SIGH-JavaFX** est un système d'information hospitalier dévelop
 
 ## 🚀 Utilisation
 
-# Cloner le dépôt
+1.Cloner le dépôt
     ```bash
     git clone https://github.com/maramboussalem/PiDev.git
     cd PiDev
